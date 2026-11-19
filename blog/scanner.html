@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scanner Effect · John Batista</title>
+<meta name="description" content="Un filtro de escáner viejo para cualquier foto o PDF, hecho en el navegador y sin subir nada.">
+<link rel="icon" type="image/png" href="../assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body><div class="page">
+<div class="bar"><a class="brand" href="../"><img class="seal" src="../assets/logo.png" alt="" width="30" height="30">John Batista</a>
+<a href="../#experiencia">Experiencia</a><a href="../#proyectos">Proyectos</a><a href="../blog/" aria-current="page">Blog</a><a href="../#contacto">Contacto</a></div>
+<main class="post">
+  <div class="meta">Noviembre 2026 · Panamá</div>
+  <h1>Scanner Effect</h1>
+  <p class="lede">Una foto de un papel casi nunca se ve bien. Con un filtro de escáner, el mismo documento parece pasado por una máquina de oficina. Todo ocurre en tu navegador y nada se sube.</p>
+
+  <h2>El problema</h2>
+  <p>Una foto de un documento sale con sombras, el papel torcido y un fondo que no es blanco. Un escáner de verdad no siempre está a mano. Y los documentos, como recetas, recibos o contratos, no son algo que yo quiera subir a un servidor ajeno.</p>
+
+  <h2>Todo ocurre en el navegador</h2>
+  <p>Scanner Effect es una página estática. No tiene servidor que procese nada. Eliges una foto, una captura o un PDF (varios archivos y varias páginas a la vez) y el navegador hace todo el trabajo. Es la misma idea que el generador de facturas: lo que no sale de tu dispositivo no se puede filtrar.</p>
+  <p>Empezó como una herramienta dentro de mi servidor, detrás del acceso de mis otras apps. Después hice una copia genérica, sin nada mío, y la publiqué.</p>
+
+  <h2>El efecto: lo que hace que parezca un escáner</h2>
+  <p>Aplicar blanco y negro no basta. Lo que convence es el conjunto:</p>
+  <ul>
+    <li><strong>Siete filtros:</strong> blanco y negro (como fotocopia), blanco y negro suave con grises, escala de grises, color, color mágico (papel blanco y colores vivos), sepia y fax.</li>
+    <li><strong>Ajustes de brillo, contraste</strong> y cantidad de grano y polvo.</li>
+    <li><strong>El fondo del escáner:</strong> gris con manchas, sombra de la hoja y motas de polvo. Este siempre sale, porque es lo que hace creíble el resultado.</li>
+    <li><strong>Inclinación leve y bordes finos</strong>, opcionales, porque ningún documento real entra perfectamente recto.</li>
+    <li><strong>Otra variación:</strong> un botón que cambia la inclinación, las motas y las manchas, para que dos documentos no salgan idénticos.</li>
+  </ul>
+  <p>La hoja puede ser Carta, A4 o ajustada a la imagen. Se descarga como PDF de varias páginas o como JPG, y la salida está calibrada a 150 puntos por pulgada.</p>
+
+  <h2>Un error que me enseñó algo</h2>
+  <blockquote>Una zona negra grande no puede quedar blanca.</blockquote>
+  <p>En una versión anterior del filtro de blanco y negro, un logo o cualquier bloque negro grande salía con un hueco blanco en el centro. El filtro decidía qué era papel y qué era tinta mirando solo los alrededores, y una mancha grande confundía esa decisión.</p>
+  <p>Lo corregí en Scanner Effect para que las zonas negras grandes se queden negras. Esa herramienta tiene hermanas en mi servidor que todavía tienen el defecto, y está en mi lista de pendientes. Es un buen recordatorio de que cada copia de una herramienta es un lugar más donde un error puede quedarse escondido.</p>
+
+  <h2>Detalles técnicos que importan</h2>
+  <ul>
+    <li><strong>Sin dependencias que instalar.</strong> Usa jsPDF para armar el PDF y PDF.js para leer PDF existentes.</li>
+    <li><strong>Tiene que servirse por http.</strong> Los navegadores no dejan abrir un PDF desde <code>file://</code>, así que se prueba con <code>python3 -m http.server</code>.</li>
+    <li><strong>Funciona en cualquier hosting estático</strong>: GitHub Pages, Netlify o un servidor propio.</li>
+    <li><strong>Se personaliza fácil:</strong> los colores son variables CSS al inicio del archivo y el efecto vive en tres funciones.</li>
+  </ul>
+  <p>El código está en <a href="https://github.com/KleverBatista-max/scanner-effect">github.com/KleverBatista-max/scanner-effect</a>.</p>
+  <hr>
+  <p class="foot">Hecho en Panamá.</p>
+</main>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:(matchMedia("(prefers-color-scheme: light)").matches?"default":"dark"),themeVariables:{fontFamily:"Inter, Arial, sans-serif"}});</script>
+</body></html>

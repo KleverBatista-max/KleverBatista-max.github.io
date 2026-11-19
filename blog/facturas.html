@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Generador de facturas · John Batista</title>
+<meta name="description" content="Cómo hice un generador de facturas que no guarda los datos de tus clientes.">
+<link rel="icon" type="image/png" href="../assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body><div class="page">
+<div class="bar"><a class="brand" href="../"><img class="seal" src="../assets/logo.png" alt="" width="30" height="30">John Batista</a>
+<a href="../#experiencia">Experiencia</a><a href="../#proyectos">Proyectos</a><a href="../blog/" aria-current="page">Blog</a><a href="../#contacto">Contacto</a></div>
+<main class="post">
+  <div class="meta">Noviembre 2026 · Panamá</div>
+  <h1>Generador de facturas</h1>
+  <p class="lede">Una factura debería tomar un minuto y no dejar rastro de tus clientes en ningún servidor. Así nació esta herramienta, que primero hice para mi propia empresa.</p>
+
+  <h2>El problema</h2>
+  <p>Mi empresa de logística necesita emitir facturas, pro formas y cotizaciones. Yo quería algo simple: escribir los datos, ver la factura y bajar el PDF. Y quería que los datos de mis clientes no tuvieran que vivir en un servidor ajeno.</p>
+
+  <h2>La primera versión: para mi empresa</h2>
+  <p>La primera versión corría en mi propio servidor, detrás del mismo acceso de mis otras herramientas y con el logo de mi empresa. Resolvía mi caso y nada más. Después decidí hacer una versión genérica, para que cualquier emprendedor pudiera usarla.</p>
+
+  <h2>La decisión que lo cambió todo: nada de datos en el servidor</h2>
+  <p>Para convertirla en algo que otros pudieran usar, el cambio más importante fue de privacidad. El PDF se arma <strong>en el navegador</strong>, con la librería jsPDF. El servidor nunca recibe los clientes, los artículos ni los montos.</p>
+  <p>¿Qué guarda el servidor, entonces? Una sola cosa: la lista de números de factura que ya se usaron, para no repetirlos. Todo lo demás vive en el navegador de quien la usa: los datos del negocio, el logo, los términos de pago y el historial.</p>
+  <blockquote>Lo que no guardas no se puede filtrar.</blockquote>
+  <p>Esa decisión también simplificó el trabajo. Sin base de datos de clientes no hay nada que respaldar, que proteger ni que explicar en una política de privacidad.</p>
+  <p>El costo es real y lo digo en el propio repositorio: cada dispositivo tiene su propio historial, y si borras los datos del navegador, se pierde.</p>
+
+  <h2>Solo sale lo que usas</h2>
+  <p>La regla de diseño que más disfruté fue esta: un campo que no usas no aparece ni en la pantalla ni en el PDF. Descuento, impuesto, envío y «pagado» son botones opcionales («+ Descuento», «+ Impuesto»). Si no los tocas, la factura queda limpia.</p>
+  <ul>
+    <li><strong>El impuesto lo defines tú.</strong> En Panamá es ITBMS, en otros países IVA o IGV. El nombre y el porcentaje los pones tú.</li>
+    <li><strong>El número de factura es automático</strong> (por ejemplo <code>INV20261116</code>, y <code>INV20261116-2</code> si hay otra el mismo día), pero puedes escribirlo a mano.</li>
+    <li><strong>Funciona en español y en inglés.</strong></li>
+    <li><strong>Varias páginas</strong>, con encabezado repetido y numeración, para pedidos largos.</li>
+    <li><strong>Historial en el navegador</strong>: abres una factura anterior, la editas, la duplicas con número nuevo o la borras.</li>
+  </ul>
+
+  <h2>La fórmula para cada herramienta pequeña</h2>
+  <p>Al terminar esta, noté que ya tenía una receta repetible para cada mini app que hago:</p>
+  <ul>
+    <li>Una versión privada en mi servidor, con mi logo y mi acceso.</li>
+    <li>Una versión pública y genérica, con un logo propio y sin ningún dato mío.</li>
+    <li>Todo se procesa en el navegador y el historial no sale de ahí.</li>
+  </ul>
+  <p>La versión pública es una copia aparte, que no comparte historial con la privada. Antes de publicar cada cambio, busco que no se haya colado ningún nombre, número de registro ni teléfono. Esa revisión es aburrida, y es la que evita los problemas.</p>
+
+  <h2>Cómo usarlo</h2>
+  <p>Necesita Python 3.8 o más nuevo y no hay nada que instalar. Se descarga el repositorio, se ejecuta <code>python3 server.py</code> y se abre en el navegador. Si lo pones en internet, define una clave y ponlo detrás de HTTPS.</p>
+  <p>El código está en <a href="https://github.com/KleverBatista-max/generador-facturas">github.com/KleverBatista-max/generador-facturas</a>.</p>
+  <hr>
+  <p class="foot">Hecho en Panamá.</p>
+</main>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:(matchMedia("(prefers-color-scheme: light)").matches?"default":"dark"),themeVariables:{fontFamily:"Inter, Arial, sans-serif"}});</script>
+</body></html>

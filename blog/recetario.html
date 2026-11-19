@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recetario · John Batista</title>
+<meta name="description" content="La historia de una receta médica en PDF que se completa casi sola, y de por qué ningún dato clínico se escribe de memoria.">
+<link rel="icon" type="image/png" href="../assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body><div class="page">
+<div class="bar"><a class="brand" href="../"><img class="seal" src="../assets/logo.png" alt="" width="30" height="30">John Batista</a>
+<a href="../#experiencia">Experiencia</a><a href="../#proyectos">Proyectos</a><a href="../blog/" aria-current="page">Blog</a><a href="../#contacto">Contacto</a></div>
+<main class="post">
+  <div class="meta">Noviembre 2026 · Panamá</div>
+  <h1>Recetario</h1>
+  <p class="lede">Una receta médica en PDF que se completa casi sola, más rápida que escribirla a mano. Lo construí en dos días con un grupo de médicos probándolo, y casi todo lo que aprendí fue sobre datos.</p>
+
+  <h2>El problema</h2>
+  <p>Una receta bien hecha lleva el nombre del paciente, el diagnóstico con su código CIE-10, cada medicamento con su concentración y presentación, la frecuencia, la duración y la cantidad a dispensar. Escribirlo a mano es lento. Y para los seguros privados conviene que el diagnóstico lleve su código.</p>
+  <p>Yo quería llenar solamente el nombre del paciente, elegir el diagnóstico, cargar mi sello y poder imprimir. El resto debía completarse solo, en un formato de 10.5 × 16.5 cm.</p>
+
+  <h2>La regla que guió todo</h2>
+  <blockquote>Si no ahorra teclas, sobra.</blockquote>
+  <p>Esa es la filosofía del producto. El Recetario debe ser más rápido que escribir a mano, y con un toque tiene que completarse la línea del medicamento. Antes de agregar cualquier función me pregunto si ahorra teclas. Si solo agrega texto, no entra.</p>
+  <p>Por eso probé y quité un botón que mostraba información de referencia del formulario de medicamentos de la Caja de Seguro Social. Los médicos ya saben lo que recetan, y un texto de más solo estorba.</p>
+
+  <h2>La lección más importante: nada de datos clínicos de memoria</h2>
+  <p>En el primer día, mi asistente de IA llenó el catálogo con 43 medicamentos con sus dosis, escritos de memoria. Se veían razonables y estaban completos. Los borré todos.</p>
+  <p>Un dato clínico inventado, aunque sea casi correcto, es peligroso en una receta. Desde entonces la regla es: <strong>todo dato tiene una fuente</strong>, y lo que no tiene fuente se borra y se agrega a mano.</p>
+  <p>Estas son las fuentes reales con las que trabaja hoy:</p>
+  <ul>
+    <li><strong>Diagnósticos:</strong> la clasificación CIE-10 en español, unos 14 mil códigos.</li>
+    <li><strong>Medicamentos:</strong> CIMA, el registro de la agencia española de medicamentos (principio activo, concentración y forma), unido al registro de medicamentos del Minsa de Panamá, con marcas comerciales. Entre los dos forman un catálogo de unos 9,700 nombres, con inyectables y vitaminas, y con las marcas, porque el médico a veces receta la marca.</li>
+    <li><strong>Dosis y pautas:</strong> formularios oficiales (Panamá 2007, Uruguay 2012, Costa Rica 2008) y fichas técnicas. Lo que no está en una fuente no se inventa.</li>
+    <li><strong>Relación diagnóstico ↔ medicamento:</strong> Wikidata, que es de uso libre, más lo que cada médico va recetando.</li>
+  </ul>
+  <p>Hay un límite honesto. El Formulario de Panamá es de 2007 y no trae, por ejemplo, antivirales para la influenza. En esos casos la aplicación no inventa nada, y el vacío se llena con otras fuentes o con lo que aprende de cada médico.</p>
+  <p>Una decisión menos obvia: el catálogo de 14 mil diagnósticos <strong>no está en el repositorio público</strong>, porque su fuente no tiene una licencia que permita redistribuirlo. En su lugar hay un script que lo descarga a tu computadora.</p>
+
+  <h2>Una arquitectura pensada para la privacidad</h2>
+  <p>En la primera versión, el servidor guardaba pacientes, recetas y sellos. Después tuve una idea que cambió el diseño: el servidor no debería guardar nada de eso.</p>
+  <figure class="diagram">
+    <pre class="mermaid">
+flowchart LR
+  N[Navegador del médico<br/>pacientes, sello, historial] -->|solo diagnóstico y principio activo, anónimo| S[Servidor<br/>catálogos y correlaciones]
+  S -->|sugerencias| N
+    </pre>
+    <figcaption>Los datos del paciente nunca salen del dispositivo del médico.</figcaption>
+  </figure>
+  <p>Hoy los pacientes, el sello y el historial viven en el navegador de cada médico, con un respaldo descargable. Al servidor solo llega, al imprimir una receta, la relación anónima entre un diagnóstico y un principio activo. Con esas relaciones, la aplicación aprende qué se receta para qué, sin saber nunca a quién.</p>
+  <p>El límite es el mismo de mis otras herramientas: los datos están por dispositivo, y si se borra el navegador sin respaldo, se pierden.</p>
+
+  <h2>Sugerencias con humildad</h2>
+  <p>Con un diagnóstico, la aplicación propone medicamentos, y con un medicamento propone diagnósticos. Esas sugerencias salen plegadas por defecto, y las llamé «Medicamentos sugeridos» y «Diagnósticos sugeridos», no «recomendados». Es un detalle de texto con un motivo: los médicos ignoran lo que suena a una orden.</p>
+  <p>También hay cuidados que parecen pequeños. Una receta sin indicación o sin cantidad lanza un aviso. Los números se normalizan (<code>.5</code> pasa a <code>0.5</code> y <code>5.0</code> a <code>5</code>) y se usan siempre UI, mcg y mL, como recomiendan ISMP y FDA. Los antibióticos arrancan con una duración de 7 días por norma, salvo que la fuente indique otra.</p>
+
+  <h2>La frecuencia, rediseñada</h2>
+  <p>El campo que más tiempo me tomó fue el de «cada cuánto». Terminó siendo «Cada [N] [horas, días, semanas, meses o años]» o «Dosis única», más «Durante [N] [días, semanas o meses]». Con eso la indicación y la cantidad a dispensar se calculan solas: «1 tab VO c/6 h x 5 días» y «Disp: 20 tabletas». Un esquema por fases, como el del fluconazol en candidiasis recurrente, también cabe en la misma receta.</p>
+
+  <h2>Probarlo con colegas</h2>
+  <p>Lo puse a prueba con un grupo de médicos amigos. Les expliqué lo esencial: agiliza el diagnóstico y la posología, el diagnóstico sale con código para los seguros, el sello digitalizado es opcional, y los datos se quedan en el dispositivo. Un panel de administrador me deja aprobar o descartar los medicamentos y diagnósticos nuevos que proponen los usuarios (solo los nombres) y quitar relaciones mal aprendidas.</p>
+  <p>Un dato práctico: todo esto corre con unos 5 MB de memoria y casi nada de procesador en el servidor. Cuesta lo mismo que no tenerlo.</p>
+
+  <h2>Lo que sigue</h2>
+  <p>Faltan los talonarios, más cobertura de pautas con una fuente que el médico elija y poder tocar la concentración y la forma directamente en la pantalla.</p>
+  <p>El código está en <a href="https://github.com/KleverBatista-max/recetario-pdf">github.com/KleverBatista-max/recetario-pdf</a>.</p>
+  <hr>
+  <p class="foot">Hecho en Panamá.</p>
+</main>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:(matchMedia("(prefers-color-scheme: light)").matches?"default":"dark"),themeVariables:{fontFamily:"Inter, Arial, sans-serif"}});</script>
+</body></html>
