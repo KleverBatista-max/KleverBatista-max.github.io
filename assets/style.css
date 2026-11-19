@@ -7,10 +7,6 @@
   --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
   color-scheme: dark;
 }
-@media (prefers-color-scheme: light) {
-  :root { --paper: #f3f6f7; --raise: #e8eef0; --ink: #12191d; --mute: #55636c; --rule: #d3dcdf; --soft: #e8eef0; --accent: #0e8179; --accent-ink: #ffffff; color-scheme: light; }
-  .seal { filter: none; }
-}
 .seal { filter: invert(1); }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }

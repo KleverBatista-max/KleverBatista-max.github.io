@@ -1,67 +1,133 @@
 <!doctype html>
-<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>John Batista</title>
 <meta name="description" content="Constructor de sistemas con título de Doctor en Medicina. Apps de finanzas, facturas y recetas, en Panamá.">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/home.css">
 </head>
-<body><div class="page">
-<div class="bar"><a class="brand" href="./"><img class="seal" src="assets/logo.png" alt="" width="30" height="30">John Batista</a>
-<a href="#experiencia">Experiencia</a><a href="#proyectos">Proyectos</a><a href="blog/">Blog</a><a href="#contacto">Contacto</a></div>
-<header class="hero">
-  <div>
-    <h1>John Batista</h1>
-    <p>Construyo sistemas que hacen solos el trabajo aburrido: finanzas, facturas, recetas. Tengo título de Doctor en Medicina y Cirugía y una empresa de logística desde los 16 años. Vivo en Panamá.</p>
-  </div>
-  <img class="seal" src="assets/logo.png" alt="Sello con las letras J y K" width="200" height="200">
+<body>
+<header class="top">
+  <a class="brand" href="#inicio"><img src="assets/logo.png" alt="" width="34" height="34">John Batista</a>
+  <nav>
+    <a href="#sobre">Sobre mí</a><a href="#experiencia">Experiencia</a><a href="#proyectos">Proyectos</a><a href="#escritos">Escritos</a><a href="#contacto">Contacto</a>
+  </nav>
 </header>
+<div class="dots" aria-hidden="true">
+  <a href="#inicio" class="on"></a><a href="#sobre"></a><a href="#experiencia"></a><a href="#proyectos"></a><a href="#escritos"></a><a href="#contacto"></a>
+</div>
 
-<section class="row" id="sobre-mi"><h2>Sobre mí</h2><div>
-  <p>Soy emprendedor y tecnólogo. A los 16 años fundé una empresa de logística registrada que mueve carga entre Panamá, China y Estados Unidos.</p>
-  <p>Aprendí solo Python, Docker, administración de servidores Linux, sistemas embebidos y energía renovable. Mi inglés es C2 y he trabajado en entornos B2B internacionales.</p>
-</div></section>
+<main>
+<section class="panel" id="inicio">
+  <div class="inner">
+    <span class="label">Constructor de sistemas</span>
+    <h1><span>Hola,</span>soy John Batista</h1>
+    <p class="tag">Hago sistemas que hacen solos el trabajo aburrido: finanzas, facturas y recetas. Doctor en Medicina y empresario desde los 16 años.</p>
+    <div class="btns"><a class="btn main" href="#contacto">Contactar</a><a class="btn" href="#proyectos">Explorar →</a></div>
+  </div>
+  <div class="facts"><div class="inner">
+    <div class="fact"><b>2015</b><span>fundé mi empresa de logística</span></div>
+    <div class="fact"><b>4 bancos</b><span>cuadrando solos cada día</span></div>
+    <div class="fact"><b>C2</b><span>inglés, EF SET</span></div>
+  </div></div>
+</section>
 
-<section class="row" id="experiencia"><h2>Experiencia</h2><div>
-  <div class="entry"><div class="when">2015 – hoy</div><div><b>Fundador y CEO, empresa de logística</b><span>Aduana, flete y entrega final entre Panamá, China y Estados Unidos. Cuentas en varias monedas, proveedores y una red de clientes en Panamá. Desarrollé la plataforma financiera que automatiza transacciones, cuentas por cobrar y reportes.</span></div></div>
-  <div class="entry"><div class="when">2025 – 2026</div><div><b>Ventas de energía, remoto</b><span>Contratos de electricidad residenciales y comerciales para clientes de Texas, todo en inglés, con facturación, negociación y escalamientos en alto volumen.</span></div></div>
-  <div class="entry"><div class="when">2019 – 2021</div><div><b>Ventas de materiales de construcción</b><span>Cuentas de clientes y logística de distribución.</span></div></div>
-</div></section>
+<section class="panel" id="sobre">
+  <div class="inner">
+    <span class="label">Sobre mí</span>
+    <h2>Aprendí construyendo.</h2>
+    <div class="cols">
+      <div>
+        <p>Soy emprendedor y tecnólogo. A los 16 años fundé una empresa de logística registrada que mueve carga entre Panamá, China y Estados Unidos.</p>
+        <p>Aprendí solo Python, Docker, administración de servidores Linux, sistemas embebidos y energía renovable. En 2024 diseñé e instalé yo mismo un sistema solar híbrido en mi casa.</p>
+      </div>
+      <div class="side">
+        <h3>Formación</h3>
+        <div><b>Doctor en Medicina y Cirugía</b><span>Universidad Latina de Panamá, 2018 – 2023</span></div>
+        <div><b>Oracle ONE, programación</b><span>Alura y Oracle, 2024. JavaScript, HTML, CSS y Git</span></div>
+        <div><b>Idiomas</b><span>Español nativo. Inglés C2 (EF SET)</span></div>
+      </div>
+    </div>
+    <div class="skills">
+      <div><h3>Programación</h3><p>Python, JavaScript, Bash</p></div>
+      <div><h3>Infraestructura</h3><p>Docker, Linux, VPS, SSH, cron, APIs</p></div>
+      <div><h3>Hardware</h3><p>Arduino, Raspberry Pi, PCB, redes Ubiquiti, energía solar</p></div>
+    </div>
+  </div>
+</section>
 
-<section class="row" id="formacion"><h2>Formación</h2><div>
-  <div class="entry"><div class="when">2018 – 2023</div><div><b>Doctor en Medicina y Cirugía</b><span>Universidad Latina de Panamá.</span></div></div>
-  <div class="entry"><div class="when">2024</div><div><b>Oracle ONE, programación inicial</b><span>Alura y Oracle. JavaScript, HTML5/CSS3 y Git, 62 horas.</span></div></div>
-</div></section>
+<section class="panel" id="experiencia">
+  <div class="inner">
+    <span class="label">Experiencia</span>
+    <h2>Del puerto a los servidores.</h2>
+    <div class="tl">
+      <div class="e"><div class="w">2015 – hoy</div><div><b>Fundador y CEO, empresa de logística</b><p>Aduana, flete y entrega final entre Panamá, China y Estados Unidos. Cuentas en varias monedas, proveedores y una red de clientes. Desarrollé la plataforma financiera que automatiza transacciones, cuentas por cobrar y reportes.</p></div></div>
+      <div class="e"><div class="w">2025 – 2026</div><div><b>Ventas de energía, remoto</b><p>Contratos de electricidad para clientes de Texas, todo en inglés, con facturación, negociación y escalamientos en alto volumen.</p></div></div>
+      <div class="e"><div class="w">2019 – 2021</div><div><b>Ventas de materiales de construcción</b><p>Cuentas de clientes y logística de distribución.</p></div></div>
+    </div>
+  </div>
+</section>
 
-<section class="row" id="habilidades"><h2>Habilidades</h2><dl class="skills">
-  <div><dt>Programación</dt><dd>Python, JavaScript, Bash</dd></div>
-  <div><dt>Infraestructura</dt><dd>Docker, Linux, VPS, SSH, cron, APIs</dd></div>
-  <div><dt>Hardware</dt><dd>Arduino, Raspberry Pi, PCB y soldadura, redes Ubiquiti. En 2024 diseñé e instalé yo mismo un sistema solar híbrido residencial.</dd></div>
-  <div><dt>Idiomas</dt><dd>Español nativo. Inglés C2 (EF SET, 2023).</dd></div>
-</dl></section>
+<section class="panel" id="proyectos">
+  <div class="inner">
+    <span class="label">Proyectos</span>
+    <h2>Cuatro herramientas, cuatro historias.</h2>
+    <div class="big">
+      <a class="item" href="blog/cuadra.html"><span class="k">FINANZAS</span><span class="t">Cuadra</span><span class="go">→</span><span class="d">Mis cuatro bancos de Panamá cuadrando solos, con tarjetas, facturas y cuentas por cobrar.</span></a>
+      <a class="item" href="blog/recetario.html"><span class="k">SALUD</span><span class="t">Recetario</span><span class="go">→</span><span class="d">Recetas médicas en PDF con diagnóstico CIE-10, más rápidas que a mano.</span></a>
+      <a class="item" href="blog/facturas.html"><span class="k">NEGOCIO</span><span class="t">Generador de facturas</span><span class="go">→</span><span class="d">Facturas, proformas y cotizaciones sin guardar los datos de tus clientes.</span></a>
+      <a class="item" href="blog/scanner.html"><span class="k">UTILIDAD</span><span class="t">Scanner Effect</span><span class="go">→</span><span class="d">Efecto de escáner viejo para cualquier foto o PDF, sin subir nada.</span></a>
+    </div>
+    <p class="code">Código abierto en <a href="https://github.com/KleverBatista-max">github.com/KleverBatista-max</a></p>
+  </div>
+</section>
 
-<section class="row" id="proyectos"><h2>Proyectos</h2><ul class="list">
-  <li><small>FINANZAS</small><a href="blog/cuadra.html">Cuadra</a><span>Finanzas personales que se cuadran solas: concilia bancos panameños, tarjetas, adicionales, facturas y cuentas por cobrar. <a href="https://github.com/KleverBatista-max/cuadra">Código</a></span></li>
-  <li><small>SALUD</small><a href="blog/recetario.html">Recetario</a><span>Recetas médicas en PDF con diagnóstico CIE-10, medicamentos y sello, más rápidas que a mano. <a href="https://github.com/KleverBatista-max/recetario-pdf">Código</a></span></li>
-  <li><small>EMPRENDEDORES</small><a href="blog/facturas.html">Generador de facturas</a><span>Facturas, proformas y cotizaciones en PDF. No guarda clientes ni montos. <a href="https://github.com/KleverBatista-max/generador-facturas">Código</a></span></li>
-  <li><small>UTILIDAD</small><a href="blog/scanner.html">Scanner Effect</a><span>Efecto de escáner viejo para cualquier foto o PDF, sin subir nada. <a href="https://github.com/KleverBatista-max/scanner-effect">Código</a></span></li>
-</ul></section>
+<section class="panel" id="escritos">
+  <div class="inner">
+    <span class="label">Escritos</span>
+    <h2>Lo que salió bien y lo que no.</h2>
+    <div class="big">
+      <a class="item" href="blog/memoria.html"><span class="k">NOV 2026</span><span class="t">La memoria compartida</span><span class="go">→</span><span class="d">Cómo le di memoria a mi asistente de IA con archivos de texto.</span></a>
+      <a class="item" href="blog/recetario.html"><span class="k">NOV 2026</span><span class="t">Recetario</span><span class="go">→</span><span class="d">Por qué ningún dato clínico se escribe de memoria.</span></a>
+      <a class="item" href="blog/cuadra.html"><span class="k">NOV 2026</span><span class="t">Cuadra</span><span class="go">→</span><span class="d">Cuatro bancos, una sola cuenta que cuadra.</span></a>
+    </div>
+    <p class="code"><a href="blog/">Ver todos los escritos →</a></p>
+  </div>
+</section>
 
-<section class="row" id="blog"><h2>Escritos</h2><ul class="list">
-  <li><small>NOVIEMBRE 2026</small><a href="blog/memoria.html">La memoria compartida</a><span>Cómo le di memoria a mi asistente de IA con archivos de texto, y por qué sirve con cualquier otro.</span></li>
-  <li><small>NOVIEMBRE 2026</small><a href="blog/recetario.html">Recetario</a><span>Una receta médica que se completa casi sola, y por qué ningún dato clínico se escribe de memoria.</span></li>
-  <li><small>NOVIEMBRE 2026</small><a href="blog/cuadra.html">Cuadra</a><span>Cómo conecté cuatro bancos de Panamá en un solo cuadre diario.</span></li>
-  <li><small>NOVIEMBRE 2026</small><a href="blog/facturas.html">Generador de facturas</a><span>Una factura sin rastro de tus clientes en ningún servidor.</span></li>
-  <li><small>NOVIEMBRE 2026</small><a href="blog/scanner.html">Scanner Effect</a><span>Un filtro de escáner viejo que corre entero en tu navegador.</span></li>
-</ul></section>
+<section class="panel" id="contacto">
+  <div class="inner">
+    <span class="label">Contacto</span>
+    <h2>Hablemos.</h2>
+    <dl class="contact">
+      <a href="mailto:johnkleverbatista@gmail.com"><dt>Correo</dt><dd>johnkleverbatista@gmail.com</dd></a>
+      <a href="tel:+50767145233"><dt>Teléfono</dt><dd>+507 6714-5233</dd></a>
+      <a href="https://github.com/KleverBatista-max"><dt>GitHub</dt><dd>KleverBatista-max</dd></a>
+      <div><dt>Ubicación</dt><dd>Ciudad de Panamá</dd></div>
+    </dl>
+    <p class="foot">© 2026 John Batista</p>
+  </div>
+</section>
+</main>
 
-<section class="row" id="contacto"><h2>Contacto</h2><dl class="contact">
-  <div><dt>Correo</dt><dd><a href="mailto:johnkleverbatista@gmail.com">johnkleverbatista@gmail.com</a></dd></div>
-  <div><dt>Teléfono</dt><dd><a href="tel:+50767145233">+507 6714-5233</a></dd></div>
-  <div><dt>GitHub</dt><dd><a href="https://github.com/KleverBatista-max">KleverBatista-max</a></dd></div>
-  <div><dt>Ubicación</dt><dd>Ciudad de Panamá</dd></div>
-</dl></section>
-
-<div class="foot"><span>© 2026 John Batista</span><span>Panamá</span></div>
-</div></body></html>
+<script>
+(function () {
+  var dots = document.querySelectorAll('.dots a');
+  var panels = document.querySelectorAll('.panel');
+  if (!('IntersectionObserver' in window)) return;
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (e.isIntersecting) {
+        dots.forEach(function (d) { d.classList.toggle('on', d.getAttribute('href') === '#' + e.target.id); });
+      }
+    });
+  }, { threshold: 0.5 });
+  panels.forEach(function (p) { io.observe(p); });
+})();
+</script>
+</body>
+</html>
