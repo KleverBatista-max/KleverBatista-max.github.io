@@ -1,210 +1,64 @@
 <!doctype html>
-<html lang="es">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>John Batista</title>
-<meta name="description" content="Constructor de sistemas con título de Doctor en Medicina. Apps de finanzas, facturas y recetas hechas con Claude Code, en Panamá.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap">
-<style>
-:root {
-  --bg: #f6f7f9; --surface: #ffffff; --fg: #16202b; --muted: #5b6978;
-  --line: #dfe4ea; --accent: #0f7b5f; --accent-ink: #ffffff; --accent-soft: #e2f3ed;
-  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-head: "Space Grotesk", "Inter", system-ui, sans-serif;
-}
-@media (prefers-color-scheme: dark) {
-  :root { --bg: #0f151c; --surface: #172029; --fg: #e8edf2; --muted: #9aa8b6; --line: #26323e; --accent: #4cc9a2; --accent-ink: #0f151c; --accent-soft: #14312a; color-scheme: dark; }
-}
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-  margin: 0; background: var(--bg); color: var(--fg);
-  font-family: var(--font-body); font-size: 17px; line-height: 1.7;
-  padding: 0 max(16px, env(safe-area-inset-right, 0px)) 80px max(16px, env(safe-area-inset-left, 0px));
-}
-.wrap { max-width: 760px; margin: 0 auto; }
-a { color: var(--accent); }
-a:focus-visible, .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-
-header.top { position: sticky; top: 0; z-index: 5; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); margin: 0 calc(-1 * max(16px, env(safe-area-inset-left, 0px))); padding: 0 max(16px, env(safe-area-inset-left, 0px)); }
-header.top .wrap { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; padding: 12px 0; font-family: var(--font-head); font-size: 15px; }
-header.top a { color: var(--muted); text-decoration: none; }
-header.top a:hover { color: var(--accent); }
-header.top a.brand { color: var(--fg); font-weight: 700; margin-right: auto; }
-
-.hero { display: flex; gap: 28px; align-items: center; padding: 64px 0 40px; flex-wrap: wrap; }
-.mono { width: 104px; height: 104px; border-radius: 28px; background: var(--accent); color: var(--accent-ink); display: grid; place-items: center; font-family: var(--font-head); font-weight: 700; font-size: 40px; letter-spacing: -.03em; flex: none; }
-.hero-text { flex: 1 1 340px; min-width: 0; }
-h1 { font-family: var(--font-head); font-size: clamp(36px, 8vw, 54px); line-height: 1.04; letter-spacing: -.025em; margin: 0 0 14px; text-wrap: balance; }
-.lede { font-size: 20px; color: var(--muted); line-height: 1.55; margin: 0 0 24px; text-wrap: pretty; }
-.btns { display: flex; gap: 12px; flex-wrap: wrap; }
-.btn { display: inline-block; padding: 10px 18px; border-radius: 10px; font-weight: 600; font-size: 15px; text-decoration: none; border: 1px solid var(--accent); }
-.btn.primary { background: var(--accent); color: var(--accent-ink); }
-.btn.ghost { color: var(--accent); }
-
-.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 8px 0 8px; }
-.stat { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
-.stat b { display: block; font-family: var(--font-head); font-size: 28px; line-height: 1.1; color: var(--accent); }
-.stat span { display: block; font-size: 14px; color: var(--muted); line-height: 1.35; margin-top: 4px; }
-
-section { padding-top: 56px; }
-h2 { font-family: var(--font-head); font-size: 24px; letter-spacing: -.01em; margin: 0 0 18px; display: flex; align-items: center; gap: 14px; }
-h2::after { content: ""; flex: 1; height: 1px; background: var(--line); }
-p { margin: 0 0 16px; }
-
-.timeline { list-style: none; margin: 0; padding: 0 0 0 22px; border-left: 2px solid var(--line); display: grid; gap: 26px; }
-.timeline li { position: relative; }
-.timeline li::before { content: ""; position: absolute; left: -29px; top: 9px; width: 12px; height: 12px; border-radius: 50%; background: var(--bg); border: 3px solid var(--accent); }
-.when { font-size: 13px; letter-spacing: .05em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
-.timeline b { display: block; font-family: var(--font-head); font-size: 19px; line-height: 1.3; }
-.timeline span.d { display: block; color: var(--muted); font-size: 16px; line-height: 1.6; margin-top: 4px; }
-
-.grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
-.card { display: block; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; text-decoration: none; color: var(--fg); min-width: 0; }
-a.card:hover { border-color: var(--accent); transform: translateY(-1px); }
-.card { transition: border-color .15s, transform .15s; }
-.card small { color: var(--accent); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; font-weight: 600; }
-.card b { font-family: var(--font-head); font-size: 19px; display: block; line-height: 1.3; }
-.card span { color: var(--muted); font-size: 15px; line-height: 1.55; display: block; margin-top: 4px; }
-
-.chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 18px; }
-.chip { background: var(--accent-soft); color: var(--accent); font-size: 14px; font-weight: 500; padding: 4px 12px; border-radius: 999px; }
-.skill-title { font-family: var(--font-head); font-weight: 700; font-size: 15px; margin: 0 0 8px; }
-
-.contact { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 22px 24px; display: grid; gap: 10px; }
-.contact div { display: flex; gap: 12px; flex-wrap: wrap; align-items: baseline; }
-.contact dt { color: var(--muted); font-size: 14px; min-width: 84px; }
-.contact dd { margin: 0; font-weight: 500; overflow-wrap: anywhere; }
-.foot { margin-top: 56px; padding-top: 22px; border-top: 1px solid var(--line); font-size: 14px; color: var(--muted); }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .card { transition: none; } }
-</style>
+<meta name="description" content="Constructor de sistemas con título de Doctor en Medicina. Apps de finanzas, facturas y recetas, en Panamá.">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/style.css">
 </head>
-<body>
-<header class="top">
-  <div class="wrap">
-    <a class="brand" href="./">John Batista</a>
-    <a href="#experiencia">Experiencia</a>
-    <a href="#proyectos">Proyectos</a>
-    <a href="blog/">Blog</a>
-    <a href="#contacto">Contacto</a>
+<body><div class="page">
+<div class="bar"><a class="brand" href="./"><img class="seal" src="assets/logo.png" alt="" width="30" height="30">John Batista</a>
+<a href="#experiencia">Experiencia</a><a href="#proyectos">Proyectos</a><a href="blog/">Blog</a><a href="#contacto">Contacto</a></div>
+<header class="hero">
+  <div>
+    <h1>John Batista</h1>
+    <p>Construyo sistemas que hacen solos el trabajo aburrido: finanzas, facturas, recetas. Tengo título de Doctor en Medicina y Cirugía y una empresa de logística desde los 16 años. Vivo en Panamá.</p>
   </div>
+  <img class="seal" src="assets/logo.png" alt="Sello con las letras J y K" width="200" height="200">
 </header>
 
-<main class="wrap">
-  <div class="hero">
-    <div class="mono" aria-hidden="true">JB</div>
-    <div class="hero-text">
-      <h1>Hola, soy John Batista</h1>
-      <p class="lede">Constructor de sistemas con título de Doctor en Medicina y Cirugía. Me apasionan la programación y la automatización, y hago apps de finanzas, facturas y recetas con Claude Code. Vivo en Panamá.</p>
-      <div class="btns">
-        <a class="btn primary" href="blog/">Leer el blog</a>
-        <a class="btn ghost" href="#contacto">Contactarme</a>
-      </div>
-    </div>
-  </div>
+<section class="row" id="sobre-mi"><h2>Sobre mí</h2><div>
+  <p>Soy emprendedor y tecnólogo. A los 16 años fundé una empresa de logística registrada que mueve carga entre Panamá, China y Estados Unidos.</p>
+  <p>Aprendí solo Python, Docker, administración de servidores Linux, sistemas embebidos y energía renovable. Mi inglés es C2 y he trabajado en entornos B2B internacionales.</p>
+</div></section>
 
-  <div class="stats" aria-label="En cifras">
-    <div class="stat"><b>2015</b><span>fundé mi empresa de logística a los 16 años</span></div>
-    <div class="stat"><b>3 países</b><span>Panamá, China y Estados Unidos</span></div>
-    <div class="stat"><b>C2</b><span>nivel de inglés, EF SET</span></div>
-    <div class="stat"><b>4</b><span>apps públicas en GitHub</span></div>
-  </div>
+<section class="row" id="experiencia"><h2>Experiencia</h2><div>
+  <div class="entry"><div class="when">2015 – hoy</div><div><b>Fundador y CEO, empresa de logística</b><span>Aduana, flete y entrega final entre Panamá, China y Estados Unidos. Cuentas en varias monedas, proveedores y una red de clientes en Panamá. Desarrollé la plataforma financiera que automatiza transacciones, cuentas por cobrar y reportes.</span></div></div>
+  <div class="entry"><div class="when">2025 – 2026</div><div><b>Ventas de energía, remoto</b><span>Contratos de electricidad residenciales y comerciales para clientes de Texas, todo en inglés, con facturación, negociación y escalamientos en alto volumen.</span></div></div>
+  <div class="entry"><div class="when">2019 – 2021</div><div><b>Ventas de materiales de construcción</b><span>Cuentas de clientes y logística de distribución.</span></div></div>
+</div></section>
 
-  <section id="sobre-mi">
-    <h2>Sobre mí</h2>
-    <p>Soy emprendedor y tecnólogo, con título de Doctor en Medicina y Cirugía. A los 16 años fundé una empresa de logística registrada que mueve carga entre Panamá, China y Estados Unidos.</p>
-    <p>Aprendí solo Python, Docker, administración de servidores Linux, sistemas embebidos y energía renovable. Mi inglés es C2 y he trabajado en entornos B2B internacionales.</p>
-  </section>
+<section class="row" id="formacion"><h2>Formación</h2><div>
+  <div class="entry"><div class="when">2018 – 2023</div><div><b>Doctor en Medicina y Cirugía</b><span>Universidad Latina de Panamá.</span></div></div>
+  <div class="entry"><div class="when">2024</div><div><b>Oracle ONE, programación inicial</b><span>Alura y Oracle. JavaScript, HTML5/CSS3 y Git, 62 horas.</span></div></div>
+</div></section>
 
-  <section id="experiencia">
-    <h2>Experiencia</h2>
-    <ol class="timeline">
-      <li>
-        <div class="when">2015 – hoy</div>
-        <b>Fundador y CEO, empresa de logística</b>
-        <span class="d">Coordino aduana, flete y entrega final en los corredores de importación y exportación entre Panamá, China y Estados Unidos. Llevo cuentas en varias monedas, proveedores y una red de clientes en Panamá. Desarrollé la plataforma financiera con IA que automatiza el control de transacciones, las cuentas por cobrar y los reportes del negocio.</span>
-      </li>
-      <li>
-        <div class="when">Abr 2025 – Ene 2026</div>
-        <b>Ventas de energía, remoto</b>
-        <span class="d">Vendí contratos de electricidad residenciales y comerciales a clientes de Texas, todo en inglés, y manejé consultas de facturación, negociaciones y escalamientos en un entorno de alto volumen.</span>
-      </li>
-      <li>
-        <div class="when">2019 – 2021</div>
-        <b>Ventas de materiales de construcción</b>
-        <span class="d">Atendí cuentas de clientes y coordiné la logística de distribución.</span>
-      </li>
-    </ol>
-  </section>
+<section class="row" id="habilidades"><h2>Habilidades</h2><dl class="skills">
+  <div><dt>Programación</dt><dd>Python, JavaScript, Bash</dd></div>
+  <div><dt>Infraestructura</dt><dd>Docker, Linux, VPS, SSH, cron, APIs</dd></div>
+  <div><dt>Hardware</dt><dd>Arduino, Raspberry Pi, PCB y soldadura, redes Ubiquiti. En 2024 diseñé e instalé yo mismo un sistema solar híbrido residencial.</dd></div>
+  <div><dt>Idiomas</dt><dd>Español nativo. Inglés C2 (EF SET, 2023).</dd></div>
+</dl></section>
 
-  <section id="formacion">
-    <h2>Formación</h2>
-    <div class="grid">
-      <div class="card"><small>2018 – 2023</small><b>Doctor en Medicina y Cirugía</b><span>Universidad Latina de Panamá.</span></div>
-      <div class="card"><small>Marzo 2024</small><b>Oracle ONE, programación inicial</b><span>Alura y Oracle. JavaScript, HTML5/CSS3 y Git, 62 horas.</span></div>
-    </div>
-  </section>
+<section class="row" id="proyectos"><h2>Proyectos</h2><ul class="list">
+  <li><small>FINANZAS</small><a href="https://github.com/KleverBatista-max/cuadra">Cuadra</a><span>Finanzas personales que se cuadran solas: concilia bancos panameños, tarjetas, adicionales, facturas y cuentas por cobrar.</span></li>
+  <li><small>EMPRENDEDORES</small><a href="https://github.com/KleverBatista-max/generador-facturas">Generador de facturas</a><span>Facturas, proformas y cotizaciones en PDF. Todo se arma en tu navegador y no guarda clientes ni montos.</span></li>
+  <li><small>SALUD</small><a href="https://github.com/KleverBatista-max/recetario-pdf">Recetario</a><span>Recetas médicas en PDF con pacientes, diagnósticos CIE-10, medicamentos y sello.</span></li>
+  <li><small>UTILIDAD</small><a href="https://github.com/KleverBatista-max/scanner-effect">Scanner Effect</a><span>Efecto de escáner viejo para cualquier foto o PDF, sin subir nada.</span></li>
+</ul></section>
 
-  <section id="habilidades">
-    <h2>Habilidades</h2>
-    <p class="skill-title">Programación e infraestructura</p>
-    <div class="chips"><span class="chip">Python</span><span class="chip">JavaScript</span><span class="chip">Bash</span><span class="chip">Docker</span><span class="chip">Linux</span><span class="chip">VPS</span><span class="chip">SSH</span><span class="chip">Cron</span><span class="chip">APIs</span></div>
-    <p class="skill-title">Hardware</p>
-    <div class="chips"><span class="chip">Arduino</span><span class="chip">Raspberry Pi</span><span class="chip">PCB y soldadura</span><span class="chip">Redes Ubiquiti</span><span class="chip">Energía solar</span></div>
-    <p class="skill-title">Negocio</p>
-    <div class="chips"><span class="chip">Automatización financiera</span><span class="chip">Inventarios</span><span class="chip">Software de logística</span></div>
-    <p>En 2024 diseñé e instalé yo mismo un sistema solar híbrido residencial, con inversor, banco de baterías y paneles. Español nativo, inglés C2.</p>
-  </section>
+<section class="row" id="blog"><h2>Escritos</h2><ul class="list">
+  <li><small>NOVIEMBRE 2026</small><a href="blog/memoria.html">La memoria compartida</a><span>Cómo le di memoria a mi asistente de IA con archivos de texto, y por qué sirve con cualquier otro.</span></li>
+  <li><small>NOVIEMBRE 2026</small><a href="blog/cuadra.html">Cuadra</a><span>Cómo conecté cuatro bancos de Panamá en un solo cuadre diario.</span></li>
+</ul></section>
 
-  <section id="proyectos">
-    <h2>Proyectos</h2>
-    <div class="grid">
-      <a class="card" href="https://github.com/KleverBatista-max/cuadra">
-        <small>Finanzas</small><b>Cuadra</b>
-        <span>Finanzas personales que se cuadran solas: conciliación automática de bancos panameños, tarjetas, adicionales, facturas y cuentas por cobrar. Self-hosted.</span>
-      </a>
-      <a class="card" href="https://github.com/KleverBatista-max/generador-facturas">
-        <small>Emprendedores</small><b>Generador de facturas</b>
-        <span>Facturas, proformas y cotizaciones en PDF. El PDF se arma en tu navegador y no guarda clientes ni montos.</span>
-      </a>
-      <a class="card" href="https://github.com/KleverBatista-max/recetario-pdf">
-        <small>Salud</small><b>Recetario</b>
-        <span>Recetas médicas en PDF (10.5 × 16.5 cm): pacientes, diagnósticos CIE-10, medicamentos y sello. Self-hosted.</span>
-      </a>
-      <a class="card" href="https://github.com/KleverBatista-max/scanner-effect">
-        <small>Utilidad</small><b>Scanner Effect</b>
-        <span>Dale efecto de escáner viejo a cualquier foto o PDF, en tu navegador. Sin servidor ni cuentas: nada se sube.</span>
-      </a>
-    </div>
-  </section>
+<section class="row" id="contacto"><h2>Contacto</h2><dl class="contact">
+  <div><dt>Correo</dt><dd><a href="mailto:johnkleverbatista@gmail.com">johnkleverbatista@gmail.com</a></dd></div>
+  <div><dt>Teléfono</dt><dd><a href="tel:+50767145233">+507 6714-5233</a></dd></div>
+  <div><dt>GitHub</dt><dd><a href="https://github.com/KleverBatista-max">KleverBatista-max</a></dd></div>
+  <div><dt>Ubicación</dt><dd>Ciudad de Panamá</dd></div>
+</dl></section>
 
-  <section id="blog">
-    <h2>Blog</h2>
-    <div class="grid">
-      <a class="card" href="blog/memoria.html">
-        <small>Noviembre 2026</small><b>La memoria compartida</b>
-        <span>Cómo le di memoria a Claude con archivos de texto, y por qué sirve con cualquier otro agente.</span>
-      </a>
-      <a class="card" href="blog/cuadra.html">
-        <small>Noviembre 2026</small><b>Cuadra</b>
-        <span>Cómo conecté cuatro bancos de Panamá en un solo cuadre diario con Claude Code.</span>
-      </a>
-    </div>
-  </section>
-
-  <section id="contacto">
-    <h2>Contacto</h2>
-    <dl class="contact">
-      <div><dt>Correo</dt><dd><a href="mailto:johnkleverbatista@gmail.com">johnkleverbatista@gmail.com</a></dd></div>
-      <div><dt>Teléfono</dt><dd><a href="tel:+50767145233">+507 6714-5233</a></dd></div>
-      <div><dt>GitHub</dt><dd><a href="https://github.com/KleverBatista-max">KleverBatista-max</a></dd></div>
-      <div><dt>Ubicación</dt><dd>Ciudad de Panamá</dd></div>
-    </dl>
-  </section>
-
-  <p class="foot">Hecho en Panamá con Claude Code.</p>
-</main>
-</body>
-</html>
+<div class="foot"><span>© 2026 John Batista</span><span>Panamá</span></div>
+</div></body></html>
