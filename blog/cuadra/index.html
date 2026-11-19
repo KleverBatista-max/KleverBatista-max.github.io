@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cuadra · John Batista</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap">
+<style>
+/* Layout: una columna de lectura de 66ch, con cifras en una franja y un diagrama del flujo. */
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --fg: #16202b;
+  --muted: #5b6978;
+  --line: #dfe4ea;
+  --accent: #0f7b5f;
+  --accent-soft: #e2f3ed;
+  --warn: #9a5b00;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-head: "Space Grotesk", "Inter", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f151c; --surface: #172029; --fg: #e8edf2; --muted: #9aa8b6;
+    --line: #26323e; --accent: #4cc9a2; --accent-soft: #14312a; --warn: #e0a64a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f151c; --surface: #172029; --fg: #e8edf2; --muted: #9aa8b6;
+  --line: #26323e; --accent: #4cc9a2; --accent-soft: #14312a; --warn: #e0a64a;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--font-body); font-size: 18px; line-height: 1.7;
+  padding-block: 48px 80px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+main { max-width: 680px; margin: 0 auto; min-width: 0; }
+.meta { font-size: 14px; color: var(--muted); letter-spacing: .04em; text-transform: uppercase; }
+h1 {
+  font-family: var(--font-head); font-weight: 700; font-size: clamp(34px, 7vw, 52px);
+  line-height: 1.08; letter-spacing: -.02em; margin: 14px 0 20px; text-wrap: balance;
+}
+.lede { font-size: 21px; color: var(--muted); line-height: 1.55; margin: 0 0 8px; text-wrap: pretty; }
+h2 {
+  font-family: var(--font-head); font-weight: 700; font-size: 26px; line-height: 1.25;
+  letter-spacing: -.01em; margin: 56px 0 12px; text-wrap: balance;
+}
+p { margin: 0 0 20px; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+strong { font-weight: 600; }
+code {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: .86em;
+  background: var(--accent-soft); padding: 1px 6px; border-radius: 4px;
+}
+.stats {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px;
+  margin: 36px 0 8px;
+}
+.stat { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+.stat b { display: block; font-family: var(--font-head); font-size: 30px; line-height: 1.1; color: var(--accent); font-variant-numeric: tabular-nums; }
+.stat span { font-size: 14px; color: var(--muted); line-height: 1.35; display: block; margin-top: 4px; }
+.diagram {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+  padding: 16px; margin: 24px 0 28px; overflow-x: auto;
+}
+.diagram figcaption { font-size: 14px; color: var(--muted); margin-top: 8px; }
+blockquote {
+  margin: 28px 0; padding: 4px 0 4px 20px; border-left: 3px solid var(--accent);
+  font-family: var(--font-head); font-size: 22px; line-height: 1.4; text-wrap: balance;
+}
+ul { padding-left: 22px; margin: 0 0 20px; }
+li { margin-bottom: 8px; }
+.trap { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 4px 18px; margin: 20px 0 28px; }
+.trap dt { font-weight: 600; margin-top: 14px; }
+.trap dd { margin: 2px 0 14px; color: var(--muted); font-size: 16px; line-height: 1.55; }
+hr { border: 0; border-top: 1px solid var(--line); margin: 56px 0 24px; }
+.foot { font-size: 15px; color: var(--muted); }
+
+nav.site { max-width: 680px; margin: 0 auto 40px; display: flex; gap: 20px; flex-wrap: wrap; font-size: 15px; font-family: var(--font-head); }
+nav.site a { color: var(--muted); text-decoration: none; }
+nav.site a:first-child { color: var(--fg); font-weight: 700; margin-right: auto; }
+nav.site a:hover, nav.site a[aria-current] { color: var(--accent); }
+</style>
+
+<nav class="site"><a href="../../">John Batista</a><a href="../../#proyectos">Proyectos</a><a href="../" aria-current="page">Blog</a><a href="https://github.com/KleverBatista-max">GitHub</a></nav>
+<main>
+  <div class="meta">Noviembre 2026 · Panamá · Hecho con Claude Code</div>
+  <h1>Cuadra</h1>
+  <p class="lede">Cuadra es la app que hice para que mis cuatro bancos de Panamá me cuadren solos. Tengo cuentas y tarjetas en todos, y mi familia usa extensiones de mis tarjetas. Cada mes me preguntaba lo mismo: ¿cuánto gasté, quién me debe y por qué no me cuadran los números?</p>
+
+  <div class="stats" aria-label="Cifras del sistema">
+    <div class="stat"><b>4</b><span>bancos leídos cada día</span></div>
+    <div class="stat"><b>2</b><span>lecturas diarias, 10:00 y 18:30</span></div>
+    <div class="stat"><b>71</b><span>pruebas automáticas</span></div>
+    <div class="stat"><b>0</b><span>movimientos escritos a mano</span></div>
+  </div>
+
+  <h2>El problema</h2>
+  <p>En Panamá no existe open banking para personas. Si quieres ver tus movimientos de cuatro bancos juntos, no hay API. Hay cuatro portales web distintos, cada uno con su login, su manera de mostrar los datos y sus rarezas.</p>
+  <p>Mi caso se complicaba por las tarjetas. Soy el titular de varias y otras personas de mi familia tienen extensiones. Lo que gastan en esas extensiones es una deuda conmigo. Entonces no me bastaba con saber cuánto gasté. Necesitaba saber de quién era cada compra, qué ya me pagaron y qué faltaba por cobrar.</p>
+
+  <h2>Primer intento: un bot de WhatsApp</h2>
+  <p>La primera versión fue un bot de WhatsApp sobre OpenClaw. Leía los correos de aviso de cada banco, me escribía por WhatsApp para preguntar de quién era cada gasto y yo respondía con un número del 1 al 7.</p>
+  <p>Funcionó a medias. El modelo pequeño que usaba inventaba cosas. Me decía que un comando había fallado cuando no había fallado. Terminé quitándole el modelo a todo el flujo importante y dejando una máquina de estados sin IA para las respuestas. Aprendí que, en un sistema de dinero, un modelo que adivina es un problema, no una ayuda.</p>
+  <p>Había otro límite. Los correos de aviso son parciales. No traen todos los movimientos ni los saldos reales. Para cuadrar de verdad había que entrar a los portales.</p>
+
+  <h2>La versión que quedó</h2>
+  <p>Rehice todo con Claude Code. Yo explicaba cómo funciona mi plata y Claude escribía, probaba y corregía el código en un servidor pequeño. Le puse Cuadra porque su trabajo es que las cuentas cuadren. Tiene dos piezas.</p>
+
+  <figure class="diagram">
+    <pre class="mermaid">
+flowchart LR
+  A[4 portales bancarios] -->|10:00 y 18:30| B[Lector con navegador]
+  B --> C[Conciliación]
+  D[QR de facturas DGI] --> C
+  C --> E[Cuadra: inicio, tarjetas, por cobrar]
+  C -->|no cuadra| F[Aviso]
+    </pre>
+    <figcaption>El lector trae lo que dice el banco. La conciliación lo compara con lo que Cuadra tiene anotado.</figcaption>
+  </figure>
+
+  <p><strong>El lector.</strong> Un navegador automatizado entra a los cuatro bancos dos veces al día, lee saldos y movimientos y guarda los datos. No muevo plata desde ahí. Solo mira.</p>
+  <p><strong>La app.</strong> Muestra las tarjetas con su corte y los días que faltan para pagar, las cuentas, los movimientos y lo que me deben. Se parece a una app de banca, porque quería abrirla y entenderla sin pensar.</p>
+
+  <h2>La regla que más me costó entender</h2>
+  <blockquote>Manda la banca en línea.</blockquote>
+  <p>Cuando lo que anota Cuadra y lo que dice el portal del banco no coinciden, el portal gana. Parece obvio, pero me tomó varias vueltas. Hay compras que el banco muestra primero como «en tránsito» y días después como cargo definitivo. Si la app trata las dos cosas como dos compras, el gasto sale duplicado.</p>
+  <p>Cada día el sistema hace un cuadre: deuda más disponible más tránsito tiene que dar el límite de la tarjeta. Si no da, me avisa. El aviso me sirvió más de una vez para descubrir un error mío.</p>
+
+  <h2>Las facturas no mueven plata</h2>
+  <p>Para declarar necesito las facturas, y en Panamá casi todas traen un QR de la DGI. Escaneo el QR y la app guarda la factura en Drive con un nombre ordenado. Después busca la transacción del banco que le corresponde: mismo monto, tres días de margen.</p>
+  <p>Una factura nunca crea una transacción. Los saldos los mueven solo los movimientos reales del banco. Esa separación evitó muchos líos de contabilidad.</p>
+
+  <h2>Lo que me enseñó cada banco</h2>
+  <p>Si haces algo parecido, estas son las trampas que me encontré. Cada banco tiene la suya.</p>
+  <dl class="trap">
+    <dt>Un banco con protección anti-bots en la portada</dt>
+    <dd>La solución fue entrar directo a la banca digital y no pasar por la página principal.</dd>
+    <dt>Otro con preguntas de seguridad que rotan</dt>
+    <dd>Hay que guardar las respuestas de todas las preguntas posibles y escoger la correcta según lo que aparezca.</dd>
+    <dt>Uno con una tarjeta que es un interruptor</dt>
+    <dd>Si haces clic sobre la tarjeta, la activas o la desactivas. El lector solo pasa el cursor por encima.</dd>
+    <dt>Uno que avisa de «sesiones activas»</dt>
+    <dd>Hay que confirmar el aviso antes de ver los saldos.</dd>
+  </dl>
+
+  <h2>Un sistema que se vigila solo</h2>
+  <p>Lo que más tranquilidad me da no es la pantalla bonita. Es que el sistema se revisa solo.</p>
+  <ul>
+    <li><strong>71 pruebas</strong> con casos reales. Un candado en git impide guardar cambios si alguna falla.</li>
+    <li><strong>Avisos propios</strong>: si una lectura falla o un cuadre no da, la app lo dice.</li>
+    <li><strong>Respaldo diario</strong> y un manual completo, probado en un servidor nuevo, para poder mudar todo en un comando.</li>
+  </ul>
+
+  <h2>Lo que aprendí trabajando con Claude Code</h2>
+  <ul>
+    <li><strong>Entender antes de inventar reglas.</strong> Un día Claude agregó una regla para excluir transferencias entre mis cuentas. Estaba mal. La plata da vueltas entre mis tarjetas y el total cuadra solo. Revertimos la regla y quedó como regla de la casa: primero entender lo que pasa, después tocar el código.</li>
+    <li><strong>Lo que no se anota se olvida.</strong> Cada decisión mía quedó escrita en notas que Claude lee al empezar. Así no repito lo mismo en cada sesión.</li>
+    <li><strong>Lo hecho a mano suele ser a propósito.</strong> Si algo se ve raro, primero se pregunta. Casi siempre lo cambié yo por una razón.</li>
+    <li><strong>Menos pantalla, más automático.</strong> Probé cosas como una nota del iPhone para anotar deudas. Se pisaba con los abonos automáticos y la saqué. Hoy lo que me deben sale solo de los movimientos.</li>
+  </ul>
+
+  <h2>Lo que sigue</h2>
+  <p>Quiero que Cuadra sugiera de quién es cada transferencia que llega, aprendiendo de las anteriores, y un resumen diario corto con alertas cuando el gasto se salga del patrón. Cuando esté probado lo cuento aquí.</p>
+
+  <hr>
+  <p class="foot">Hecho en Panamá con Claude Code. Los bancos no tienen API para personas, así que cada uno tuvo que aprenderse a mano.</p>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"default")});</script>
+</html>
