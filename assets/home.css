@@ -192,3 +192,6 @@ h2.huge { font-size: clamp(64px, 15vw, 190px); line-height: .9; letter-spacing: 
 @media (prefers-reduced-motion: reduce) { .fx .panel .inner { transform: none; } .marquee .track { transform: none !important; } }
 html, body { overflow-x: clip; }
 @media (max-width: 720px) { #inicio { flex-wrap: wrap; align-content: flex-start; } #inicio .facts { width: 100%; } }
+
+/* el bloque de datos (2015 / 2024 / C2) nunca debe pisar los botones, ni en pantallas bajitas */
+@media (min-width: 721px) { section#inicio { padding-bottom: 150px; } }
