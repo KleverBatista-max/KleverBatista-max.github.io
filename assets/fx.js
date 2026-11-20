@@ -37,7 +37,23 @@
   function prog() { var h = root.scrollHeight - innerHeight; bar.style.transform = 'scaleX(' + (h > 0 ? Math.min(1, scrollY / h) : 0) + ')'; }
   addEventListener('scroll', prog, { passive: true }); prog();
 
-  if (reduce) return;
+  if (reduce) {
+    /* con «reducir movimiento»: el secreto «jk» existe, pero en versión suave (sin destello ni colores girando) */
+    var cb = '';
+    addEventListener('keydown', function (e) {
+      if (e.target.closest && e.target.closest('input, textarea')) return;
+      cb = (cb + (e.key || '').toLowerCase()).slice(-2);
+      if (cb !== 'jk') return; cb = '';
+      for (var i = 0; i < 14; i++) (function (i) {
+        setTimeout(function () {
+          var s = seal('rain-calm'); s.style.left = (Math.random() * 100) + 'vw';
+          s.style.setProperty('--d', (3.2 + Math.random() * 2).toFixed(2) + 's'); s.style.setProperty('--z', (.5 + Math.random() * .6).toFixed(2));
+          doc.body.appendChild(s); setTimeout(s.remove.bind(s), 5600);
+        }, i * 200);
+      })(i);
+    });
+    return;
+  }
 
   /* ---------- grano ---------- */
   var grain = doc.createElement('div'); grain.className = 'grain'; grain.setAttribute('aria-hidden', 'true'); doc.body.appendChild(grain);

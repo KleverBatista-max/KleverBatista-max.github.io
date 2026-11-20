@@ -73,3 +73,9 @@ main[lang=en] { display: none; }
 .intro-on { overflow: hidden; }
 
 @media (prefers-reduced-motion: reduce) { .grain, .cur-dot, .cur-ring, .intro, .stamp, .rain, .flash { display: none !important; } .lang.flip { animation: none; } }
+
+/* versión suave del secreto «jk» (para quien tiene «reducir movimiento»): sellos que bajan despacio, sin destello */
+.rain-calm { position: fixed; top: -160px; z-index: 55; margin-left: -70px; width: 140px; height: 140px; pointer-events: none; transform: scale(var(--z)); animation: raincalm var(--d) ease-in forwards; }
+.rain-calm img { position: absolute; inset: 0; width: 100%; height: 100%; filter: invert(1); }
+.rain-calm i { position: absolute; width: 13%; height: 13%; border-radius: 50%; background: var(--accent); left: 72%; top: 64%; }
+@keyframes raincalm { to { transform: translateY(calc(100vh + 320px)) scale(var(--z)); opacity: .15; } }
