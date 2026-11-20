@@ -19,40 +19,46 @@
 <main class="post" lang="es">
   <div class="meta">Noviembre 2026 · Panamá</div>
   <h1>Recuperar impuestos en automático</h1>
-  <p class="lede">Uno de mis primeros proyectos. Comprar en Estados Unidos y enviar por un freight forwarder a Panamá permite pedir el reembolso del impuesto de ventas, pero hacerlo a mano para decenas de pedidos es eterno. Así que automaticé cada paso.</p>
+  <p class="lede">Uno de mis primeros proyectos nació de un glitch y de un carnaval. Estaba sin un real y quería ir; terminé escribiendo una macro que me devolvió un buen billete.</p>
 
-  <h2>El problema</h2>
-  <p>Por cada pedido hay que juntar el número de guía y el tracking, armar un documento y mandar un correo pidiendo el reembolso. Repetido por cada pedido de Amazon y de eBay, es un trabajo que nadie quiere hacer.</p>
+  <h2>El glitch</h2>
+  <p>En mi empresa de carga, CJK Cargo, los clientes compraban en Amazon y recibíamos los paquetes en nuestra bodega de Florida para traerlos a Panamá. Amazon les cobraba el impuesto de ventas de Florida, el 7 %, aunque el paquete nunca se quedaba allá. Descubrimos que, con un certificado de exportación, uno podía escribirle a Amazon, demostrarle que el paquete había sido exportado y pedir que le devolvieran ese impuesto.</p>
+
+  <h2>El carnaval</h2>
+  <p>En Panamá los carnavales son todos los años, y yo estaba limpio, sin un centavo para carnavalear. A mí no me gusta mucho el carnaval, pero estaba recién saliendo con la que hoy es mi esposa y quería ir. Así que usé el glitch: me puse a hacer un macro que generara el documento de cada paquete que había pedido en mi cuenta de Amazon, y después lo hice igual para eBay, que eran las tiendas donde más se podía. Me rasqué un buen billete. Y me fui a carnavalear.</p>
 
   <h2>Las tres piezas</h2>
   <ul>
     <li><strong>Un bot de Selenium</strong> que abre el historial de pedidos de Amazon en mi propio Chrome, pulsa «Track package» en cada uno y junta los tracking IDs.</li>
-    <li><strong>Macros de Excel</strong>: una hoja de datos, una hoja con el documento de cada pedido y una de correos. Una macro exporta la hoja a PDF con el nombre de una celda, otra lo repite para todos los pedidos, y otra abre en Outlook un correo por pedido con el PDF adjunto.</li>
+    <li><strong>Macros de Excel</strong>: una hoja de datos, una hoja con el documento de cada pedido y una de correos. Una macro exporta la hoja a PDF con el nombre de una celda, otra lo repite para todos los pedidos, y otra abre en Outlook un correo por pedido con el PDF adjunto pidiendo el reembolso.</li>
     <li><strong>Atajos de AutoHotkey</strong> para los pasos repetitivos.</li>
   </ul>
 
   <h2>Lo que aprendí</h2>
-  <p>Fue mi primera vez uniendo un navegador automatizado, Excel y el correo en una sola cadena. Hoy lo haría distinto, pero esa cadena es la misma idea de todo lo que vino después: si algo se repite, que lo haga una máquina. Los libros de Excel no los publico porque tienen datos personales, pero las macros están como texto en el repositorio <a href="https://github.com/KleverBatista-max/tax-refund-automation">tax-refund-automation</a>.</p>
+  <p>Fue mi primera cadena de automatización: un navegador automatizado, Excel y el correo trabajando juntos. Hoy lo haría distinto, pero es la misma idea de todo lo que vino después: si algo se repite, que lo haga una máquina. Los libros de Excel no los publico porque tienen datos personales, pero las macros están como texto en el repositorio <a href="https://github.com/KleverBatista-max/tax-refund-automation">tax-refund-automation</a>.</p>
   <hr>
   <p class="foot">Hecho en Panamá.</p>
 </main>
 <main class="post" lang="en">
   <div class="meta">November 2026 · Panama</div>
   <h1>Recovering taxes automatically</h1>
-  <p class="lede">One of my first projects. Buying in the US and shipping through a freight forwarder to Panama lets you ask for the sales tax back, but doing it by hand for dozens of orders takes forever. So I automated every step.</p>
+  <p class="lede">One of my first projects was born from a glitch and a carnival. I was broke and wanted to go; I ended up writing a macro that got me a nice chunk of money back.</p>
 
-  <h2>The problem</h2>
-  <p>For each order you have to gather the waybill number and tracking, build a document and send an email asking for the refund. Repeated for every Amazon and eBay order, it's work nobody wants to do.</p>
+  <h2>The glitch</h2>
+  <p>At my cargo company, CJK Cargo, customers bought on Amazon and we received the packages at our Florida warehouse to bring them to Panama. Amazon charged them Florida sales tax, 7%, even though the package never stayed there. We found that with an export certificate you could write to Amazon, prove the package had been exported and ask for that tax back.</p>
+
+  <h2>The carnival</h2>
+  <p>In Panama carnival happens every year, and I was flat broke with nothing to carnival with. I'm not really a carnival guy, but I had just started dating the woman who is now my wife and I wanted to go. So I used the glitch: I built a macro that generated the document for each package I had ordered on my Amazon account, and then did the same for eBay, which were the stores where it worked best. I made a nice chunk of money. And I went to carnival.</p>
 
   <h2>The three pieces</h2>
   <ul>
     <li><strong>A Selenium bot</strong> that opens the Amazon order history in my own Chrome, clicks "Track package" on each one and collects the tracking IDs.</li>
-    <li><strong>Excel macros</strong>: a data sheet, a sheet with each order's document and a mailer sheet. One macro exports the sheet to PDF named after a cell, another repeats it for every order, and another opens an Outlook email per order with the PDF attached.</li>
+    <li><strong>Excel macros</strong>: a data sheet, a sheet with each order's document and a mailer sheet. One macro exports the sheet to PDF named after a cell, another repeats it for every order, and another opens an Outlook email per order with the PDF attached, asking for the refund.</li>
     <li><strong>AutoHotkey shortcuts</strong> for the repetitive steps.</li>
   </ul>
 
   <h2>What I learned</h2>
-  <p>It was my first time chaining an automated browser, Excel and email together. I'd do it differently today, but that chain is the same idea as everything that came after: if something repeats, let a machine do it. I don't publish the Excel workbooks because they hold personal data, but the macros are plain text in the <a href="https://github.com/KleverBatista-max/tax-refund-automation">tax-refund-automation</a> repository.</p>
+  <p>It was my first automation chain: an automated browser, Excel and email working together. I'd do it differently today, but it's the same idea as everything that came after: if something repeats, let a machine do it. I don't publish the Excel workbooks because they hold personal data, but the macros are plain text in the <a href="https://github.com/KleverBatista-max/tax-refund-automation">tax-refund-automation</a> repository.</p>
   <hr>
   <p class="foot">Made in Panama.</p>
 </main>
