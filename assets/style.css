@@ -115,3 +115,7 @@ pre.code code { background: none; padding: 0; font-size: inherit; }
 .post blockquote { position: relative; }
 .fx .post blockquote.in { animation: quote .9s cubic-bezier(.2,.7,.2,1); }
 @keyframes quote { from { letter-spacing: .08em; filter: blur(6px); } }
+
+/* texto largo justificado */
+.post p, .post li { text-align: justify; text-justify: inter-word; hyphens: auto; -webkit-hyphens: auto; }
+.post .lede { text-align: left; }
