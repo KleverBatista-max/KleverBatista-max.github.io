@@ -195,3 +195,11 @@ html, body { overflow-x: clip; }
 
 /* el bloque de datos (2015 / 2024 / C2) nunca debe pisar los botones, ni en pantallas bajitas */
 @media (min-width: 721px) { section#inicio { padding-bottom: 150px; } }
+
+/* datos de «Sobre mí» (2015 / 2024) */
+.stats { display: flex; flex-wrap: wrap; gap: 36px; margin-top: 30px; }
+.stats .fact + .fact { padding-left: 36px; border-left: 1px solid var(--line); }
+@media (max-width: 720px) { .stats { gap: 24px; } .stats .fact + .fact { padding-left: 24px; } }
+
+/* texto largo justificado, con guiones para que no queden huecos */
+.cols p, .tl p, .post p, .post li { text-align: justify; text-justify: inter-word; hyphens: auto; -webkit-hyphens: auto; }
