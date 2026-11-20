@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es" data-en-title="Impuestos en automático · John Batista"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Impuestos en automático · John Batista</title>
+<meta name="description" content="Mis primeros proyectos: un bot, macros de Excel y atajos para recuperar impuestos de ventas.">
+<meta name="theme-color" content="#0f1418">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../assets/icon-192.png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="../assets/fx.css">
+<script>try{var l=localStorage.getItem('lang')||((navigator.language||'es').slice(0,2)==='es'?'es':'en');document.documentElement.lang=l;document.documentElement.classList.add('l-'+l)}catch(e){}</script>
+</head>
+<body><div class="page">
+<div class="bar"><a class="brand" href="../" aria-label="JK, inicio"><img class="seal" src="../assets/logo.png" alt="" width="30" height="30"></a><button class="lang" type="button" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span><span data-l="en">EN</span></button></div>
+<main class="post" lang="es">
+  <div class="meta">Noviembre 2026 · Panamá</div>
+  <h1>Recuperar impuestos en automático</h1>
+  <p class="lede">Uno de mis primeros proyectos. Comprar en Estados Unidos y enviar por un freight forwarder a Panamá permite pedir el reembolso del impuesto de ventas, pero hacerlo a mano para decenas de pedidos es eterno. Así que automaticé cada paso.</p>
+
+  <h2>El problema</h2>
+  <p>Por cada pedido hay que juntar el número de guía y el tracking, armar un documento y mandar un correo pidiendo el reembolso. Repetido por cada pedido de Amazon y de eBay, es un trabajo que nadie quiere hacer.</p>
+
+  <h2>Las tres piezas</h2>
+  <ul>
+    <li><strong>Un bot de Selenium</strong> que abre el historial de pedidos de Amazon en mi propio Chrome, pulsa «Track package» en cada uno y junta los tracking IDs.</li>
+    <li><strong>Macros de Excel</strong>: una hoja de datos, una hoja con el documento de cada pedido y una de correos. Una macro exporta la hoja a PDF con el nombre de una celda, otra lo repite para todos los pedidos, y otra abre en Outlook un correo por pedido con el PDF adjunto.</li>
+    <li><strong>Atajos de AutoHotkey</strong> para los pasos repetitivos.</li>
+  </ul>
+
+  <h2>Lo que aprendí</h2>
+  <p>Fue mi primera vez uniendo un navegador automatizado, Excel y el correo en una sola cadena. Hoy lo haría distinto, pero esa cadena es la misma idea de todo lo que vino después: si algo se repite, que lo haga una máquina. Los libros de Excel no los publico porque tienen datos personales, pero las macros están como texto en el repositorio <a href="https://github.com/KleverBatista-max/tax-refund-automation">tax-refund-automation</a>.</p>
+  <hr>
+  <p class="foot">Hecho en Panamá.</p>
+</main>
+<main class="post" lang="en">
+  <div class="meta">November 2026 · Panama</div>
+  <h1>Recovering taxes automatically</h1>
+  <p class="lede">One of my first projects. Buying in the US and shipping through a freight forwarder to Panama lets you ask for the sales tax back, but doing it by hand for dozens of orders takes forever. So I automated every step.</p>
+
+  <h2>The problem</h2>
+  <p>For each order you have to gather the waybill number and tracking, build a document and send an email asking for the refund. Repeated for every Amazon and eBay order, it's work nobody wants to do.</p>
+
+  <h2>The three pieces</h2>
+  <ul>
+    <li><strong>A Selenium bot</strong> that opens the Amazon order history in my own Chrome, clicks "Track package" on each one and collects the tracking IDs.</li>
+    <li><strong>Excel macros</strong>: a data sheet, a sheet with each order's document and a mailer sheet. One macro exports the sheet to PDF named after a cell, another repeats it for every order, and another opens an Outlook email per order with the PDF attached.</li>
+    <li><strong>AutoHotkey shortcuts</strong> for the repetitive steps.</li>
+  </ul>
+
+  <h2>What I learned</h2>
+  <p>It was my first time chaining an automated browser, Excel and email together. I'd do it differently today, but that chain is the same idea as everything that came after: if something repeats, let a machine do it. I don't publish the Excel workbooks because they hold personal data, but the macros are plain text in the <a href="https://github.com/KleverBatista-max/tax-refund-automation">tax-refund-automation</a> repository.</p>
+  <hr>
+  <p class="foot">Made in Panama.</p>
+</main>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:false,theme:(matchMedia("(prefers-color-scheme: light)").matches?"default":"dark"),themeVariables:{fontFamily:"Inter, Arial, sans-serif"}});</script>
+<script src="../assets/fx.js"></script>
+</body></html>
