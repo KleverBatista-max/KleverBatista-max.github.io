@@ -115,8 +115,11 @@
   /* ---------- velocidad del scroll: inclina, acelera el sello y la cinta ---------- */
   var lastY = scrollY, vel = 0, ang = 0;
   var ring = doc.querySelector('.seal-ring'), art = doc.querySelector('.seal-art');
-  var track = doc.querySelector('.marquee .track'), mx = 0, half = 0;
-  if (track) { track.innerHTML += track.innerHTML + track.innerHTML; half = track.scrollWidth / 3; addEventListener('resize', function () { half = track.scrollWidth / 3; }); }
+  var tracks = [].slice.call(doc.querySelectorAll('.marquee .track')), TD = [-1, 1, -1], TS = [1.1, 0.8, 1.5];
+  var tm = tracks.map(function () { return { x: 0, half: 0 }; });
+  function measure() { tracks.forEach(function (t, i) { tm[i].half = t.scrollWidth / 3; if (TD[i] > 0 && tm[i].x === 0) tm[i].x = -tm[i].half; }); }
+  tracks.forEach(function (t) { t.innerHTML += t.innerHTML + t.innerHTML; });
+  measure(); addEventListener('resize', measure);
   var px = 0, py = 0, tx = 0, ty = 0;
   addEventListener('pointermove', function (e) { tx = e.clientX / innerWidth - .5; ty = e.clientY / innerHeight - .5; }, { passive: true });
   (function loop() {
@@ -131,7 +134,7 @@
       art.style.setProperty('--px', (px * -40).toFixed(1) + 'px'); art.style.setProperty('--py', (py * -30 - sy * .18).toFixed(1) + 'px');
       art.style.setProperty('--jx', (px * 26).toFixed(1) + 'px'); art.style.setProperty('--jy', (py * 18).toFixed(1) + 'px');
     }
-    if (track && half) { mx -= 1.1 + Math.abs(vel) * .6; if (mx <= -half) mx += half; track.style.transform = 'translateX(' + mx.toFixed(1) + 'px) skewX(' + (-sk * 3).toFixed(1) + 'deg)'; }
+    tracks.forEach(function (t, i) { var m = tm[i]; if (!m.half) return; var dir = TD[i % TD.length], sp = (TS[i % TS.length] + Math.abs(vel) * .6) * dir; m.x += sp; if (dir < 0 && m.x <= -m.half) m.x += m.half; if (dir > 0 && m.x >= 0) m.x -= m.half; t.style.transform = 'translateX(' + m.x.toFixed(1) + 'px) skewX(' + (-sk * 3).toFixed(1) + 'deg)'; });
     requestAnimationFrame(loop);
   })();
 

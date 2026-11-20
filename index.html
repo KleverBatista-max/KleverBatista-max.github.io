@@ -13,8 +13,8 @@
 <link rel="manifest" href="site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="assets/home.css">
-<link rel="stylesheet" href="assets/fx.css">
+<link rel="stylesheet" href="assets/home.css?v=20">
+<link rel="stylesheet" href="assets/fx.css?v=20">
 <script>try{var l=localStorage.getItem('lang')||((navigator.language||'es').slice(0,2)==='es'?'es':'en');document.documentElement.lang=l;document.documentElement.classList.add('l-'+l)}catch(e){}</script>
 </head>
 <body>
@@ -37,16 +37,17 @@
   </div>
   <div class="facts"><div class="inner">
     <div class="fact"><b><span class="count" data-to="2015" data-from="1990">2015</span></b><span data-en="founded my logistics company">fundé mi empresa de logística</span></div>
-    <div class="fact"><b><span class="count" data-to="4" data-from="0">4</span> <span data-en="banks">bancos</span></b><span data-en="reconciling themselves every day">cuadrando solos cada día</span></div>
     <div class="fact"><b>2024</b><span data-en="my own solar system, designed and installed">mi propio sistema solar, diseñado e instalado</span></div>
     <div class="fact"><b>C2</b><span data-en="English, EF SET">inglés, EF SET</span></div>
   </div></div>
   <p class="hint" aria-hidden="true" data-en="click anywhere ✦">haz clic donde sea ✦</p>
 </section>
 
-<div class="marquee" aria-hidden="true"><div class="track">
-  <span>PYTHON</span><i>✦</i><span>CRON</span><i>✦</i><span data-en="SERVERS">SERVIDORES</span><i>✦</i><span data-en="MEDICINE">MEDICINA</span><i>✦</i><span data-en="LOGISTICS">LOGÍSTICA</span><i>✦</i><span data-en="SOLAR ENERGY">ENERGÍA SOLAR</span><i>✦</i><span>ESP32</span><i>✦</i><span>HOME ASSISTANT</span><i>✦</i><span data-en="AUTOMATE EVERYTHING">AUTOMATIZAR TODO</span><i>✦</i><span>PANAMÁ</span><i>✦</i>
-</div></div>
+<div class="marquee" aria-hidden="true">
+  <div class="row r1"><div class="track"><span>PYTHON</span><i>✦</i><span>JAVASCRIPT</span><i>✦</i><span>BASH</span><i>✦</i><span>DOCKER</span><i>✦</i><span>LINUX</span><i>✦</i><span>CRON</span><i>✦</i><span>SSH</span><i>✦</i><span>VPS</span><i>✦</i><span>APIS</span><i>✦</i><span>SELENIUM</span><i>✦</i><span>GIT</span><i>✦</i><span>TAILSCALE</span><i>✦</i><span>SQLITE</span><i>✦</i><span>HTML</span><i>✦</i><span>CSS</span><i>✦</i><span>VBA</span><i>✦</i><span>AUTOHOTKEY</span><i>✦</i><span data-en="ENCRYPTED BACKUPS">RESPALDOS CIFRADOS</span><i>✦</i><span data-en="SERVERS">SERVIDORES</span><i>✦</i><span data-en="AUTOMATE EVERYTHING">AUTOMATIZAR TODO</span><i>✦</i></div></div>
+  <div class="row r2"><div class="track"><span>ESP32</span><i>✦</i><span>ESPHOME</span><i>✦</i><span>ARDUINO</span><i>✦</i><span>RASPBERRY PI</span><i>✦</i><span>HOME ASSISTANT</span><i>✦</i><span>MODBUS</span><i>✦</i><span>RS485</span><i>✦</i><span>ZIGBEE</span><i>✦</i><span>MQTT</span><i>✦</i><span>BROADLINK</span><i>✦</i><span>PCB</span><i>✦</i><span>UBIQUITI</span><i>✦</i><span>FUSION 360</span><i>✦</i><span>AUTOCAD</span><i>✦</i><span data-en="3D PRINTING">IMPRESIÓN 3D</span><i>✦</i><span data-en="SOLAR ENERGY">ENERGÍA SOLAR</span><i>✦</i><span data-en="INVERTERS">INVERSORES</span><i>✦</i><span data-en="BATTERIES">BATERÍAS</span><i>✦</i><span data-en="SENSORS">SENSORES</span><i>✦</i><span data-en="RELAYS">RELÉS</span><i>✦</i></div></div>
+  <div class="row r3"><div class="track"><span data-en="MEDICINE">MEDICINA</span><i>✦</i><span data-en="LOGISTICS">LOGÍSTICA</span><i>✦</i><span data-en="CUSTOMS">ADUANA</span><i>✦</i><span data-en="FREIGHT">CARGA</span><i>✦</i><span data-en="INVOICES">FACTURAS</span><i>✦</i><span data-en="FINANCE">FINANZAS</span><i>✦</i><span data-en="PRESCRIPTIONS">RECETAS</span><i>✦</i><span>CIE-10</span><i>✦</i><span data-en="BANKS">BANCOS</span><i>✦</i><span data-en="RECEIVABLES">CUENTAS POR COBRAR</span><i>✦</i><span data-en="ENGLISH C2">INGLÉS C2</span><i>✦</i><span data-en="ENTREPRENEURSHIP">EMPRENDER</span><i>✦</i><span data-en="LAZY ON PURPOSE">VAGO A PROPÓSITO</span><i>✦</i><span data-en="BUILT ONCE">LO HAGO UNA VEZ</span><i>✦</i><span data-en="PANAMA">PANAMÁ</span><i>✦</i><span>EXCEL</span><i>✦</i><span>OUTLOOK</span><i>✦</i><span>AMAZON</span><i>✦</i><span>EBAY</span><i>✦</i><span>YAPPY</span><i>✦</i></div></div>
+</div>
 
 <section class="panel" id="sobre">
   <div class="inner">
@@ -148,6 +149,6 @@
   panels.forEach(function (p) { io.observe(p); });
 })();
 </script>
-<script src="assets/fx.js"></script>
+<script src="assets/fx.js?v=20"></script>
 </body>
 </html>
