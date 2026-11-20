@@ -194,7 +194,7 @@ html, body { overflow-x: clip; }
 @media (max-width: 720px) { #inicio { flex-wrap: wrap; align-content: flex-start; } #inicio .facts { width: 100%; } }
 
 /* el bloque de datos (2015 / 2024 / C2) nunca debe pisar los botones, ni en pantallas bajitas */
-@media (min-width: 721px) { section#inicio { padding-bottom: 150px; } }
+.hero-fact { margin-top: 34px; }
 
 /* datos de «Sobre mí» (2015 / 2024) */
 .stats { display: flex; flex-wrap: wrap; gap: 36px; margin-top: 30px; }
