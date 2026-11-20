@@ -36,6 +36,9 @@
   <h2>Predecir el sol</h2>
   <p>El controlador no enfría a ciegas. Home Assistant usa mi ubicación, el clima y la orientación de cada grupo de paneles (inclinación y ángulo) para calcular cuánto sol falta hoy y cuánta potencia debería haber ahora. Con eso, una variable simple, <em>«alcanza a cargar hoy»</em>, dice si el sol que queda cubre la energía que le falta a la batería. El aire solo se adelanta a enfriar cuando el pronóstico lo respalda o cuando el sol ya está pagando la carga.</p>
 
+  <h2>Un arranque escalonado</h2>
+  <p>Lo que más me gustó construir fue el «Aire Pro». El aire nunca salta de golpe a la temperatura más fría: arranca en 26 °C y baja por etapas (25, 24… hasta 20 °C) a medida que el cuarto se enfría de verdad, con los códigos infrarrojos del Broadlink. Así el compresor no pega un pico de consumo, que es justo lo que no quiero cuando la energía viene de una batería. El controlador solar solo deja bajar la etapa si la batería se está cargando con excedente real y el pronóstico dice que el día todavía alcanza; si la batería empieza a descargarse, se frena, avisa y al final apaga. Un Echo Dot anuncia cada etapa. Una pinza de corriente en el aire mide cuánto consume y se integra a kWh, así que quedó el registro de cuánto gastaba en cada etapa. Ese aire lleva apagado desde enero, así que los datos recientes están vacíos.</p>
+
   <h2>Lo demás de la casa</h2>
   <p>Hay también tableros de relés con interruptores físicos que siguen funcionando sin Home Assistant, luces por salida y puesta del sol, una protección para la bomba de agua del refrigerador y un reinicio automático del router si se cae el internet.</p>
 
@@ -73,6 +76,9 @@
 
   <h2>Predicting the sun</h2>
   <p>The controller doesn't cool blindly. Home Assistant uses my location, the weather and the orientation of each group of panels (tilt and angle) to work out how much sun is left today and how much power there should be right now. With that, a simple variable, <em>"will it charge today"</em>, says whether the remaining sun covers what the battery still needs. The A/C only pre-cools when the forecast backs it up or when the sun is already paying for the load.</p>
+
+  <h2>A staged start</h2>
+  <p>What I enjoyed building most was "Aire Pro". The A/C never jumps straight to its coldest setting: it starts at 26 °C and steps down (25, 24… down to 20 °C) as the room really cools, using the Broadlink's infrared codes. That way the compressor doesn't spike its consumption, which is exactly what I don't want when the energy comes from a battery. The solar controller only lets the stage go lower if the battery is charging with real surplus and the forecast says the day can still cover it; if the battery starts discharging, it holds, warns and finally switches off. An Echo Dot announces each stage. A current clamp on the A/C measures how much it draws and integrates it to kWh, so there is a record of what it used at each stage. That A/C has been off since January, so recent data is empty.</p>
 
   <h2>The rest of the house</h2>
   <p>There are also relay boards with physical switches that keep working without Home Assistant, lights at sunrise and sunset, a protection for the fridge's water pump and an automatic router reboot when the internet goes down.</p>
