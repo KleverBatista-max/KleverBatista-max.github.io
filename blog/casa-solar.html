@@ -33,6 +33,14 @@
   <h2>Home Assistant: la lógica</h2>
   <p>La lógica pasó a Home Assistant y se volvió un controlador de verdad: una clasificación del estado solar (noche, amanecer, transición, sol firme), escalones de temperatura de 26 a 20 °C, un modo defensivo al amanecer, aviso y apagado si la batería se descarga, anulación manual y entrega de control al atardecer. Otra automatización carga una Bluetti solo cuando sobra energía de verdad.</p>
 
+  <h2>El firmware de los ESP32: ESPHome</h2>
+  <p>El código que va dentro de cada ESP32 se llama <strong>firmware</strong> y lo escribí con <strong>ESPHome</strong>: un archivo de configuración en YAML que se compila y se «inyecta» al chip. Son cuatro: uno lee el inversor, otro mide el aire acondicionado y los otros dos manejan los relés del cuarto y del patio.</p>
+  <ul>
+    <li><strong>El del inversor</strong> usa un componente que escribí yo en C++, <code>modbus_sniffer</code>. Solo escucha el bus RS485 a 9600 baudios, valida cada trama con su CRC y empareja cada petición con su respuesta para saber qué registro es cuál. <a href="https://github.com/KleverBatista-max/solar-inverter-modbus-monitor">Código y explicación</a>.</li>
+    <li><strong>El del aire</strong> lleva una pinza de corriente que calcula los watts que consume y un sensor de temperatura DS18B20 en el cuarto. <a href="https://github.com/KleverBatista-max/solar-ac-controller">Código</a>.</li>
+    <li><strong>Los de los relés</strong> funcionan aunque se caiga Home Assistant o el Wi‑Fi: el interruptor de la pared conmuta el relé dentro del propio chip. <a href="https://github.com/KleverBatista-max/house-relay-controllers">Código</a>.</li>
+  </ul>
+
   <h2>Predecir el sol</h2>
   <p>El controlador no enfría a ciegas. Home Assistant usa mi ubicación, el clima y la orientación de cada grupo de paneles (inclinación y ángulo) para calcular cuánto sol falta hoy y cuánta potencia debería haber ahora. Con eso, una variable simple, <em>«alcanza a cargar hoy»</em>, dice si el sol que queda cubre la energía que le falta a la batería. El aire solo se adelanta a enfriar cuando el pronóstico lo respalda o cuando el sol ya está pagando la carga.</p>
 
@@ -73,6 +81,14 @@
 
   <h2>Home Assistant: the logic</h2>
   <p>The logic moved to Home Assistant and became a real controller: a solar-state classifier (night, dawn, transition, firm sun), temperature steps from 26 to 20 °C, a defensive dawn mode, warning and shut-off if the battery drains, manual override and hand-off at sunset. Another automation charges a Bluetti only when there is real surplus.</p>
+
+  <h2>The ESP32 firmware: ESPHome</h2>
+  <p>The code that runs inside each ESP32 is called <strong>firmware</strong>, and I wrote it with <strong>ESPHome</strong>: a YAML configuration file that gets compiled and "flashed" onto the chip. There are four: one reads the inverter, another measures the air conditioner and the other two drive the bedroom and yard relays.</p>
+  <ul>
+    <li><strong>The inverter one</strong> uses a C++ component I wrote, <code>modbus_sniffer</code>. It only listens to the RS485 bus at 9600 baud, validates each frame with its CRC and pairs each request with its response to know which register is which. <a href="https://github.com/KleverBatista-max/solar-inverter-modbus-monitor">Code and explanation</a>.</li>
+    <li><strong>The A/C one</strong> has a current clamp that works out the watts it draws and a DS18B20 temperature probe in the room. <a href="https://github.com/KleverBatista-max/solar-ac-controller">Code</a>.</li>
+    <li><strong>The relay ones</strong> keep working even if Home Assistant or the Wi‑Fi goes down: the wall switch toggles the relay inside the chip itself. <a href="https://github.com/KleverBatista-max/house-relay-controllers">Code</a>.</li>
+  </ul>
 
   <h2>Predicting the sun</h2>
   <p>The controller doesn't cool blindly. Home Assistant uses my location, the weather and the orientation of each group of panels (tilt and angle) to work out how much sun is left today and how much power there should be right now. With that, a simple variable, <em>"will it charge today"</em>, says whether the remaining sun covers what the battery still needs. The A/C only pre-cools when the forecast backs it up or when the sun is already paying for the load.</p>
