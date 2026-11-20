@@ -104,3 +104,14 @@ pre.code code { background: none; padding: 0; font-size: inherit; }
 .bar .brand:hover img { transform: rotate(180deg); }
 .list a { transition: color .2s; }
 .list li { transition: padding-left .25s, opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
+
+/* encabezado mínimo JK. (19 nov 2026) */
+.bar .brand:hover { text-decoration: none; color: var(--ink); }
+.bar { position: sticky; top: 0; z-index: 20; background: rgb(17 22 26 / .86); backdrop-filter: blur(10px); margin: 0 calc(-1 * max(20px, env(safe-area-inset-left, 0px))); padding-inline: max(20px, env(safe-area-inset-left, 0px)); }
+.post h1 { background: linear-gradient(100deg, var(--ink) 40%, var(--accent) 50%, var(--ink) 60%) 0 0 / 300% 100% text; -webkit-background-clip: text; color: transparent; }
+.fx .post h1 { animation: sheen 5s ease-in-out 1s infinite; }
+@keyframes sheen { 0%, 60% { background-position: 100% 0; } 100% { background-position: 0% 0; } }
+.stat { transition: transform .4s cubic-bezier(.2,.7,.2,1); }
+.post blockquote { position: relative; }
+.fx .post blockquote.in { animation: quote .9s cubic-bezier(.2,.7,.2,1); }
+@keyframes quote { from { letter-spacing: .08em; filter: blur(6px); } }

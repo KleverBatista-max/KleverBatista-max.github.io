@@ -15,7 +15,7 @@ a { color: inherit; }
 a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
 .top { position: fixed; inset: 0 0 auto 0; z-index: 20; height: 64px; display: flex; align-items: center; gap: 28px; padding: 0 max(24px, env(safe-area-inset-left,0px)); background: rgb(15 20 24 / .82); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
-.top .brand { display: flex; align-items: center; gap: 12px; margin-right: auto; text-decoration: none; font-family: var(--head); font-weight: 700; font-size: 20px; letter-spacing: -.01em; }
+.top .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--head); font-weight: 700; font-size: 20px; letter-spacing: -.01em; }
 .top .brand img { width: 34px; height: 34px; filter: invert(1); }
 .top nav { display: flex; gap: 28px; font-size: 15px; }
 .top nav a { text-decoration: none; color: var(--mute); }
@@ -104,7 +104,7 @@ h2 { font-family: var(--head); font-weight: 700; font-size: clamp(34px, 5.5vw, 6
 #inicio::before { display: none; }
 .seal-art { position: absolute; right: -6vw; top: 50%; width: min(80vh, 64vw); aspect-ratio: 1; margin-top: calc(min(80vh, 64vw) / -2); z-index: 0; pointer-events: none; opacity: .2; transform: translate3d(var(--px,0), var(--py,0), 0); transition: transform .5s cubic-bezier(.2,.7,.2,1); }
 .seal-art img { position: absolute; inset: 0; width: 100%; height: 100%; filter: invert(1); }
-.seal-ring { animation: spin 90s linear infinite; }
+.seal-ring { will-change: transform; }
 .seal-jk { transform: translate3d(var(--jx,0), var(--jy,0), 0); transition: transform .6s cubic-bezier(.2,.7,.2,1); }
 @keyframes spin { to { transform: rotate(360deg); } }
 .fx .seal-art { animation: sealin 1.6s cubic-bezier(.2,.7,.2,1) both; }
@@ -140,3 +140,48 @@ h2 { font-family: var(--head); font-weight: 700; font-size: clamp(34px, 5.5vw, 6
 .panel { background-size: 140% 140%, 140% 140%, auto; animation: drift 22s ease-in-out infinite alternate; }
 @keyframes drift { from { background-position: 0% 0%, 100% 100%, 0 0; } to { background-position: 30% 20%, 70% 80%, 0 0; } }
 @media (prefers-reduced-motion: reduce) { .seal-ring, .panel, .btn.main::after, .label::before { animation: none !important; } .seal-art { transition: none; } }
+
+/* ---------- Más piquete (19 nov 2026) ---------- */
+.fx .panel .inner { transform: skewY(var(--skew, 0deg)); will-change: transform; }
+.panel::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: radial-gradient(420px circle at var(--mx, -999px) var(--my, -999px), rgb(111 208 200 / .13), transparent 70%); }
+#inicio h1 b { color: var(--ink); }
+#inicio h1 b::after { content: "."; color: var(--accent); }
+.hint { position: absolute; right: max(24px, 4vw); bottom: 40px; z-index: 2; margin: 0; font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--mute); opacity: 0; }
+.fx .hint { animation: hint 2.6s ease-in-out 2.4s infinite; }
+@keyframes hint { 0%, 100% { opacity: 0; transform: translateY(6px); } 30%, 70% { opacity: .9; transform: none; } }
+@media (max-width: 720px) { .hint { display: none; } }
+
+.marquee { position: relative; z-index: 3; overflow: hidden; padding: 22px 0; background: var(--accent); color: #0b1215; transform: rotate(-2deg) scale(1.04); margin: -28px 0; border-block: 2px solid #0b1215; }
+.marquee .track { display: flex; gap: 28px; width: max-content; align-items: center; white-space: nowrap; will-change: transform; }
+.marquee span { font-family: var(--head); font-weight: 700; font-size: clamp(30px, 6vw, 64px); letter-spacing: -.03em; line-height: 1; }
+.marquee span:nth-of-type(even) { color: transparent; -webkit-text-stroke: 1.5px #0b1215; }
+.marquee i { font-style: normal; font-size: clamp(20px, 3vw, 34px); }
+html:not(.fx) .marquee .track { animation: none; }
+
+h2.huge { font-size: clamp(64px, 15vw, 190px); line-height: .9; letter-spacing: -.06em; }
+.scramble { font-variant-ligatures: none; }
+
+.glitch { position: relative; display: inline-block; }
+.glitch::before, .glitch::after { content: attr(data-text); position: absolute; inset: 0; opacity: 0; pointer-events: none; }
+.fx .big a.item:hover .glitch::before { opacity: .85; color: #ff3d6e; animation: g1 .35s steps(2) infinite; }
+.fx .big a.item:hover .glitch::after { opacity: .85; color: #3dfff0; animation: g2 .35s steps(2) infinite; }
+@keyframes g1 { 0% { clip-path: inset(10% 0 60% 0); transform: translate(-4px, -1px); } 50% { clip-path: inset(55% 0 12% 0); transform: translate(4px, 1px); } 100% { clip-path: inset(30% 0 40% 0); transform: translate(-2px, 2px); } }
+@keyframes g2 { 0% { clip-path: inset(60% 0 8% 0); transform: translate(4px, 1px); } 50% { clip-path: inset(8% 0 70% 0); transform: translate(-4px, -2px); } 100% { clip-path: inset(40% 0 30% 0); transform: translate(3px, -1px); } }
+.big a.item { position: relative; }
+.big a.item::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgb(111 208 200 / .12), transparent); transform: scaleX(0); transform-origin: left; transition: transform .45s cubic-bezier(.2,.7,.2,1); }
+.big a.item:hover::before { transform: scaleX(1); }
+.big a.item:hover .go { transform: translateX(14px) rotate(-45deg); }
+
+.skills > div { padding: 22px; border: 1px solid var(--line); background: rgb(238 242 244 / .03); transition: transform .4s cubic-bezier(.2,.7,.2,1), border-color .3s; transform-style: preserve-3d; position: relative; overflow: hidden; }
+.skills > div:hover { border-color: var(--accent); }
+.skills > div::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(260px circle at var(--gx, 50%) var(--gy, 50%), rgb(111 208 200 / .2), transparent 70%); opacity: 0; transition: opacity .3s; }
+.skills > div:hover::after { opacity: 1; }
+
+.mag, .lang { will-change: transform; }
+.contact a { transition: padding-left .3s cubic-bezier(.2,.7,.2,1); }
+.contact a:hover { padding-left: 16px; }
+.egg { opacity: .55; }
+@media (hover: none) { .egg { display: none; } }
+@media (prefers-reduced-motion: reduce) { .fx .panel .inner { transform: none; } .marquee .track { transform: none !important; } }
+html, body { overflow-x: clip; }
+@media (max-width: 720px) { #inicio { flex-wrap: wrap; align-content: flex-start; } #inicio .facts { width: 100%; } }

@@ -1,16 +1,22 @@
 <!doctype html>
-<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="es" data-en-title="Cuadra · John Batista"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cuadra · John Batista</title>
 <meta name="description" content="Cómo conecté cuatro bancos de Panamá en un solo cuadre diario.">
-<link rel="icon" type="image/png" href="../assets/favicon.png">
+<meta name="theme-color" content="#0f1418">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../assets/icon-192.png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="../assets/fx.css">
+<script>try{var l=localStorage.getItem('lang')||((navigator.language||'es').slice(0,2)==='es'?'es':'en');document.documentElement.lang=l;document.documentElement.classList.add('l-'+l)}catch(e){}</script>
 </head>
 <body><div class="page">
-<div class="bar"><a class="brand" href="../"><img class="seal" src="../assets/logo.png" alt="" width="30" height="30">John Batista</a>
-<a href="../#experiencia">Experiencia</a><a href="../#proyectos">Proyectos</a><a href="../blog/" aria-current="page">Blog</a><a href="../#contacto">Contacto</a></div>
-<main class="post">
+<div class="bar"><a class="brand" href="../" aria-label="JK, inicio"><img class="seal" src="../assets/logo.png" alt="" width="30" height="30"><span class="jk">JK<i>.</i></span></a><button class="lang" type="button" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span><span data-l="en">EN</span></button></div>
+<main class="post" lang="es">
   <div class="meta">Noviembre 2026 · Panamá</div>
   <h1>Cuadra</h1>
   <p class="lede">Cuadra es la app que hice para que mis cuatro bancos de Panamá me cuadren solos. Tengo cuentas y tarjetas en todos, y mi familia usa extensiones de mis tarjetas. Cada mes me preguntaba lo mismo: ¿cuánto gasté, quién me debe y por qué no me cuadran los números?</p>
@@ -27,12 +33,11 @@
   <p>Mi caso se complicaba por las tarjetas. Soy el titular de varias y otras personas de mi familia tienen extensiones. Lo que gastan en esas extensiones es una deuda conmigo. Entonces no me bastaba con saber cuánto gasté. Necesitaba saber de quién era cada compra, qué ya me pagaron y qué faltaba por cobrar.</p>
 
   <h2>Primer intento: un bot de WhatsApp</h2>
-  <p>La primera versión fue un bot de WhatsApp sobre OpenClaw. Leía los correos de aviso de cada banco, me escribía por WhatsApp para preguntar de quién era cada gasto y yo respondía con un número del 1 al 7.</p>
-  <p>Funcionó a medias. El modelo pequeño que usaba inventaba cosas. Me decía que un comando había fallado cuando no había fallado. Terminé quitándole el modelo a todo el flujo importante y dejando una máquina de estados sin IA para las respuestas. Aprendí que, en un sistema de dinero, un modelo que adivina es un problema, no una ayuda.</p>
-  <p>Había otro límite. Los correos de aviso son parciales. No traen todos los movimientos ni los saldos reales. Para cuadrar de verdad había que entrar a los portales.</p>
+  <p>La primera versión fue un bot de WhatsApp. Leía los correos de aviso de cada banco, me escribía por WhatsApp para preguntar de quién era cada gasto y yo respondía con un número del 1 al 7.</p>
+  <p>Funcionó a medias. Los correos de aviso son parciales. No traen todos los movimientos ni los saldos reales. Para cuadrar de verdad había que entrar a los portales.</p>
 
   <h2>La versión que quedó</h2>
-  <p>Rehice todo con un asistente de código con IA. Yo explicaba cómo funciona mi plata y él escribía, probaba y corregía el código en un servidor pequeño. Le puse Cuadra porque su trabajo es que las cuentas cuadren. Tiene dos piezas.</p>
+  <p>Lo rehice desde cero en un servidor pequeño, con reglas claras y pruebas para cada caso real. En un sistema de dinero nada se adivina. Le puse Cuadra porque su trabajo es que las cuentas cuadren. Tiene dos piezas.</p>
 
   <figure class="diagram">
     <pre class="mermaid">
@@ -79,10 +84,10 @@ flowchart LR
     <li><strong>Respaldo diario</strong> y un manual completo, probado en un servidor nuevo, para poder mudar todo en un comando.</li>
   </ul>
 
-  <h2>Lo que aprendí trabajando con un asistente de IA</h2>
+  <h2>Lo que aprendí construyéndolo</h2>
   <ul>
-    <li><strong>Entender antes de inventar reglas.</strong> Un día el asistente agregó una regla para excluir transferencias entre mis cuentas. Estaba mal. La plata da vueltas entre mis tarjetas y el total cuadra solo. Revertimos la regla y quedó como regla de la casa: primero entender lo que pasa, después tocar el código.</li>
-    <li><strong>Lo que no se anota se olvida.</strong> Cada decisión mía quedó escrita en notas que el asistente lee al empezar. Así no repito lo mismo en cada sesión.</li>
+    <li><strong>Entender antes de inventar reglas.</strong> Un día agregué una regla para excluir transferencias entre mis cuentas. Estaba mal. La plata da vueltas entre mis tarjetas y el total cuadra solo. Quité la regla y quedó como regla de la casa: primero entender lo que pasa, después tocar el código.</li>
+    <li><strong>Lo que no se anota se olvida.</strong> Cada decisión quedó escrita en un manual. Así nada depende de mi memoria y cualquiera puede retomar el sistema.</li>
     <li><strong>Lo hecho a mano suele ser a propósito.</strong> Si algo se ve raro, primero se pregunta. Casi siempre lo cambié yo por una razón.</li>
     <li><strong>Menos pantalla, más automático.</strong> Probé cosas como una nota del iPhone para anotar deudas. Se pisaba con los abonos automáticos y la saqué. Hoy lo que me deben sale solo de los movimientos.</li>
   </ul>
@@ -93,8 +98,90 @@ flowchart LR
   <hr>
   <p class="foot">Hecho en Panamá. Los bancos no tienen API para personas, así que cada uno tuvo que aprenderse a mano.</p>
 </main>
+<main class="post" lang="en">
+  <div class="meta">November 2026 · Panama</div>
+  <h1>Cuadra</h1>
+  <p class="lede">Cuadra is the app I built so my four Panamanian banks reconcile themselves. I have accounts and cards at all of them, and my family uses extensions of my cards. Every month I asked myself the same thing: how much did I spend, who owes me, and why don't my numbers add up?</p>
+
+  <div class="stats" aria-label="System figures">
+    <div class="stat"><b>4</b><span>banks read every day</span></div>
+    <div class="stat"><b>2</b><span>daily reads, 10:00 and 18:30</span></div>
+    <div class="stat"><b>71</b><span>automated tests</span></div>
+    <div class="stat"><b>0</b><span>transactions typed by hand</span></div>
+  </div>
+
+  <h2>The problem</h2>
+  <p>Panama has no open banking for individuals. If you want to see your transactions from four banks together, there's no API. There are four different web portals, each with its own login, its own way of showing data and its own quirks.</p>
+  <p>My case got harder because of the cards. I'm the primary holder of several, and other people in my family have extensions. What they spend on those extensions is a debt to me. So knowing how much I spent wasn't enough. I needed to know whose each purchase was, what had already been paid back and what was still owed.</p>
+
+  <h2>First attempt: a WhatsApp bot</h2>
+  <p>The first version was a WhatsApp bot. It read each bank's alert emails, messaged me on WhatsApp to ask whose each expense was, and I answered with a number from 1 to 7.</p>
+  <p>It half worked. Alert emails are partial. They don't include every transaction or the real balances. To truly reconcile, you had to go into the portals.</p>
+
+  <h2>The version that stuck</h2>
+  <p>I rebuilt it from scratch on a small server, with clear rules and tests for every real case. In a money system, nothing is guessed. I named it Cuadra, Spanish for "it adds up", because that's its job. It has two parts.</p>
+
+  <figure class="diagram">
+    <pre class="mermaid">
+flowchart LR
+  A[4 bank portals] -->|10:00 and 18:30| B[Browser reader]
+  B --> C[Reconciliation]
+  D[DGI invoice QR codes] --> C
+  C --> E[Cuadra: home, cards, receivables]
+  C -->|doesn't add up| F[Alert]
+    </pre>
+    <figcaption>The reader brings what the bank says. Reconciliation compares it with what Cuadra has on record.</figcaption>
+  </figure>
+
+  <p><strong>The reader.</strong> An automated browser logs into the four banks twice a day, reads balances and transactions and saves the data. I don't move money from there. It only looks.</p>
+  <p><strong>The app.</strong> It shows the cards with their statement date and the days left to pay, the accounts, the transactions and what I'm owed. It looks like a banking app, because I wanted to open it and understand it without thinking.</p>
+
+  <h2>The rule that took me longest to understand</h2>
+  <blockquote>Online banking rules.</blockquote>
+  <p>When what Cuadra has recorded and what the bank's portal says don't match, the portal wins. It sounds obvious, but it took me several rounds. Some purchases show up first as "in transit" and days later as a final charge. If the app treats them as two purchases, the expense is counted twice.</p>
+  <p>Every day the system runs a check: debt plus available plus in-transit has to equal the card's limit. If it doesn't, it warns me. That warning helped me catch my own mistakes more than once.</p>
+
+  <h2>Invoices don't move money</h2>
+  <p>I need invoices for my taxes, and in Panama almost all of them carry a QR code from the DGI, the tax authority. I scan the QR and the app saves the invoice to Drive with a tidy name. Then it looks for the matching bank transaction: same amount, three days of margin.</p>
+  <p>An invoice never creates a transaction. Only real bank movements change balances. That separation saved me a lot of accounting headaches.</p>
+
+  <h2>What each bank taught me</h2>
+  <p>If you build something similar, these are the traps I found. Every bank has its own.</p>
+  <dl class="trap">
+    <dt>A bank with anti-bot protection on its home page</dt>
+    <dd>The fix was to go straight to online banking and skip the main page.</dd>
+    <dt>Another with rotating security questions</dt>
+    <dd>You have to store answers for every possible question and pick the right one based on what appears.</dd>
+    <dt>One whose card is a switch</dt>
+    <dd>If you click the card, you turn it on or off. The reader only hovers over it.</dd>
+    <dt>One that warns about "active sessions"</dt>
+    <dd>You have to confirm the warning before you can see the balances.</dd>
+  </dl>
+
+  <h2>A system that watches itself</h2>
+  <p>What gives me the most peace of mind isn't the pretty screen. It's that the system checks itself.</p>
+  <ul>
+    <li><strong>71 tests</strong> with real cases. A git lock blocks saving changes if any of them fails.</li>
+    <li><strong>Its own alerts</strong>: if a read fails or a check doesn't add up, the app says so.</li>
+    <li><strong>Daily backup</strong> and a complete manual, tested on a fresh server, so everything can move with one command.</li>
+  </ul>
+
+  <h2>What I learned building it</h2>
+  <ul>
+    <li><strong>Understand before inventing rules.</strong> One day I added a rule to exclude transfers between my accounts. It was wrong. Money moves around between my cards and the total adds up on its own. I removed it and it became a house rule: first understand what's happening, then touch the code.</li>
+    <li><strong>What isn't written down gets forgotten.</strong> Every decision was written into a manual. That way nothing depends on my memory and anyone can pick the system up.</li>
+    <li><strong>What was done by hand is usually on purpose.</strong> If something looks odd, ask first. Almost always I changed it myself for a reason.</li>
+    <li><strong>Less screen, more automatic.</strong> I tried things like an iPhone note to track debts. It clashed with automatic payments and I dropped it. Today what I'm owed comes straight from the transactions.</li>
+  </ul>
+
+  <h2>What's next</h2>
+  <p>I want Cuadra to suggest who each incoming transfer is from, learning from past ones, plus a short daily summary with alerts when spending breaks the pattern. Once it's proven, I'll write about it here.</p>
+
+  <hr>
+  <p class="foot">Made in Panama. The banks have no API for individuals, so each one had to be learned by hand.</p>
+</main>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
-<script>mermaid.initialize({startOnLoad:true,theme:(matchMedia("(prefers-color-scheme: light)").matches?"default":"dark"),themeVariables:{fontFamily:"Inter, Arial, sans-serif"}});</script>
+<script>mermaid.initialize({startOnLoad:false,theme:(matchMedia("(prefers-color-scheme: light)").matches?"default":"dark"),themeVariables:{fontFamily:"Inter, Arial, sans-serif"}});</script>
 <script src="../assets/fx.js"></script>
 </body></html>

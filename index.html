@@ -1,21 +1,26 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" data-en-title="John Batista · Systems builder">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>John Batista</title>
-<meta name="description" content="Constructor de sistemas con título de Doctor en Medicina. Apps de finanzas, facturas y recetas, en Panamá.">
-<link rel="icon" type="image/png" href="assets/favicon.png">
+<meta name="description" content="Constructor de sistemas con título de Doctor en Medicina. Apps de finanzas, facturas y recetas, en Panamá. · Systems builder and medical doctor in Panama.">
+<meta name="theme-color" content="#0f1418">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="assets/home.css">
+<link rel="stylesheet" href="assets/fx.css">
+<script>try{var l=localStorage.getItem('lang')||((navigator.language||'es').slice(0,2)==='es'?'es':'en');document.documentElement.lang=l;document.documentElement.classList.add('l-'+l)}catch(e){}</script>
 </head>
 <body>
 <header class="top">
-  <a class="brand" href="#inicio"><img src="assets/logo.png" alt="" width="34" height="34">John Batista</a>
-  <nav>
-    <a href="#sobre">Sobre mí</a><a href="#experiencia">Experiencia</a><a href="#proyectos">Proyectos</a><a href="#escritos">Escritos</a><a href="#contacto">Contacto</a>
-  </nav>
+  <a class="brand" href="#inicio" aria-label="JK, inicio"><img src="assets/logo.png" alt="" width="34" height="34"><span class="jk">JK<i>.</i></span></a>
+  <button class="lang" type="button" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span><span data-l="en">EN</span></button>
 </header>
 <div class="dots" aria-hidden="true">
   <a href="#inicio" class="on"></a><a href="#sobre"></a><a href="#experiencia"></a><a href="#proyectos"></a><a href="#escritos"></a><a href="#contacto"></a>
@@ -25,92 +30,97 @@
 <section class="panel" id="inicio">
   <div class="seal-art" aria-hidden="true"><img class="seal-ring" src="assets/seal-ring.png" alt=""><img class="seal-jk" src="assets/seal-jk.png" alt=""></div>
   <div class="inner">
-    <span class="label">Constructor de sistemas</span>
-    <h1><span>Hola,</span><b>soy John Batista</b></h1>
-    <p class="tag">Hago sistemas que hacen solos el trabajo aburrido: finanzas, facturas y recetas. Doctor en Medicina y empresario desde los 16 años.</p>
-    <div class="btns"><a class="btn main" href="#contacto">Contactar</a><a class="btn" href="#proyectos">Explorar →</a></div>
+    <span class="label" data-en="Systems builder">Constructor de sistemas</span>
+    <h1><span data-en="Hi,">Hola,</span><b class="scramble" data-en="I'm John Batista">soy John Batista</b></h1>
+    <p class="tag" data-en="I build systems that do the boring work on their own: finances, invoices and prescriptions. Medical doctor and entrepreneur since 16.">Hago sistemas que hacen solos el trabajo aburrido: finanzas, facturas y recetas. Doctor en Medicina y empresario desde los 16 años.</p>
+    <div class="btns"><a class="btn main mag" href="#contacto" data-en="Get in touch">Contactar</a><a class="btn mag" href="#proyectos" data-en="Explore →">Explorar →</a></div>
   </div>
   <div class="facts"><div class="inner">
-    <div class="fact"><b>2015</b><span>fundé mi empresa de logística</span></div>
-    <div class="fact"><b>4 bancos</b><span>cuadrando solos cada día</span></div>
-    <div class="fact"><b>C2</b><span>inglés, EF SET</span></div>
+    <div class="fact"><b><span class="count" data-to="2015" data-from="1990">2015</span></b><span data-en="founded my logistics company">fundé mi empresa de logística</span></div>
+    <div class="fact"><b><span class="count" data-to="4" data-from="0">4</span> <span data-en="banks">bancos</span></b><span data-en="reconciling themselves every day">cuadrando solos cada día</span></div>
+    <div class="fact"><b>C2</b><span data-en="English, EF SET">inglés, EF SET</span></div>
   </div></div>
+  <p class="hint" aria-hidden="true" data-en="click anywhere ✦">haz clic donde sea ✦</p>
 </section>
+
+<div class="marquee" aria-hidden="true"><div class="track">
+  <span>PYTHON</span><i>✦</i><span>LINUX</span><i>✦</i><span data-en="MEDICINE">MEDICINA</span><i>✦</i><span>DOCKER</span><i>✦</i><span data-en="LOGISTICS">LOGÍSTICA</span><i>✦</i><span>JAVASCRIPT</span><i>✦</i><span data-en="SOLAR ENERGY">ENERGÍA SOLAR</span><i>✦</i><span>PANAMÁ</span><i>✦</i>
+</div></div>
 
 <section class="panel" id="sobre">
   <div class="inner">
-    <span class="label">Sobre mí</span>
-    <h2>Aprendí construyendo.</h2>
+    <span class="label" data-en="About me">Sobre mí</span>
+    <h2 class="scramble" data-en="I learned by building.">Aprendí construyendo.</h2>
     <div class="cols">
       <div>
-        <p>Soy emprendedor y tecnólogo. A los 16 años fundé una empresa de logística registrada que mueve carga entre Panamá, China y Estados Unidos.</p>
-        <p>Aprendí solo Python, Docker, administración de servidores Linux, sistemas embebidos y energía renovable. En 2024 diseñé e instalé yo mismo un sistema solar híbrido en mi casa.</p>
+        <p data-en="I'm an entrepreneur and technologist. At 16 I founded a registered logistics company that moves cargo between Panama, China and the United States.">Soy emprendedor y tecnólogo. A los 16 años fundé una empresa de logística registrada que mueve carga entre Panamá, China y Estados Unidos.</p>
+        <p data-en="I taught myself Python, Docker, Linux server administration, embedded systems and renewable energy. In 2024 I designed and installed a hybrid solar system at my own home.">Aprendí solo Python, Docker, administración de servidores Linux, sistemas embebidos y energía renovable. En 2024 diseñé e instalé yo mismo un sistema solar híbrido en mi casa.</p>
       </div>
       <div class="side">
-        <h3>Formación</h3>
-        <div><b>Doctor en Medicina y Cirugía</b><span>Universidad Latina de Panamá, 2018 – 2023</span></div>
-        <div><b>Oracle ONE, programación</b><span>Alura y Oracle, 2024. JavaScript, HTML, CSS y Git</span></div>
-        <div><b>Idiomas</b><span>Español nativo. Inglés C2 (EF SET)</span></div>
+        <h3 data-en="Education">Formación</h3>
+        <div><b data-en="Doctor of Medicine and Surgery">Doctor en Medicina y Cirugía</b><span data-en="Universidad Latina de Panamá, 2018 – 2023">Universidad Latina de Panamá, 2018 – 2023</span></div>
+        <div><b data-en="Oracle ONE, programming">Oracle ONE, programación</b><span data-en="Alura and Oracle, 2024. JavaScript, HTML, CSS and Git">Alura y Oracle, 2024. JavaScript, HTML, CSS y Git</span></div>
+        <div><b data-en="Languages">Idiomas</b><span data-en="Native Spanish. English C2 (EF SET)">Español nativo. Inglés C2 (EF SET)</span></div>
       </div>
     </div>
     <div class="skills">
-      <div><h3>Programación</h3><p>Python, JavaScript, Bash</p></div>
-      <div><h3>Infraestructura</h3><p>Docker, Linux, VPS, SSH, cron, APIs</p></div>
-      <div><h3>Hardware</h3><p>Arduino, Raspberry Pi, PCB, redes Ubiquiti, energía solar</p></div>
+      <div class="tilt"><h3 data-en="Programming">Programación</h3><p>Python, JavaScript, Bash</p></div>
+      <div class="tilt"><h3 data-en="Infrastructure">Infraestructura</h3><p>Docker, Linux, VPS, SSH, cron, APIs</p></div>
+      <div class="tilt"><h3>Hardware</h3><p data-en="Arduino, Raspberry Pi, PCB, Ubiquiti networks, solar energy">Arduino, Raspberry Pi, PCB, redes Ubiquiti, energía solar</p></div>
     </div>
   </div>
 </section>
 
 <section class="panel" id="experiencia">
   <div class="inner">
-    <span class="label">Experiencia</span>
-    <h2>Del puerto a los servidores.</h2>
+    <span class="label" data-en="Experience">Experiencia</span>
+    <h2 class="scramble" data-en="From the port to the servers.">Del puerto a los servidores.</h2>
     <div class="tl">
-      <div class="e"><div class="w">2015 – hoy</div><div><b>Fundador y CEO, empresa de logística</b><p>Aduana, flete y entrega final entre Panamá, China y Estados Unidos. Cuentas en varias monedas, proveedores y una red de clientes. Desarrollé la plataforma financiera que automatiza transacciones, cuentas por cobrar y reportes.</p></div></div>
-      <div class="e"><div class="w">2025 – 2026</div><div><b>Ventas de energía, remoto</b><p>Contratos de electricidad para clientes de Texas, todo en inglés, con facturación, negociación y escalamientos en alto volumen.</p></div></div>
-      <div class="e"><div class="w">2019 – 2021</div><div><b>Ventas de materiales de construcción</b><p>Cuentas de clientes y logística de distribución.</p></div></div>
+      <div class="e"><div class="w" data-en="2015 – today">2015 – hoy</div><div><b data-en="Founder and CEO, logistics company">Fundador y CEO, empresa de logística</b><p data-en="Customs, freight and last-mile delivery between Panama, China and the United States. Multi-currency accounts, suppliers and a client network. I built the financial platform that automates transactions, receivables and reports.">Aduana, flete y entrega final entre Panamá, China y Estados Unidos. Cuentas en varias monedas, proveedores y una red de clientes. Desarrollé la plataforma financiera que automatiza transacciones, cuentas por cobrar y reportes.</p></div></div>
+      <div class="e"><div class="w">2025 – 2026</div><div><b data-en="Energy sales, remote">Ventas de energía, remoto</b><p data-en="Electricity contracts for Texas customers, entirely in English, with billing, negotiation and escalations at high volume.">Contratos de electricidad para clientes de Texas, todo en inglés, con facturación, negociación y escalamientos en alto volumen.</p></div></div>
+      <div class="e"><div class="w">2019 – 2021</div><div><b data-en="Construction materials sales">Ventas de materiales de construcción</b><p data-en="Client accounts and distribution logistics.">Cuentas de clientes y logística de distribución.</p></div></div>
     </div>
   </div>
 </section>
 
 <section class="panel" id="proyectos">
   <div class="inner">
-    <span class="label">Proyectos</span>
-    <h2>Cuatro herramientas, cuatro historias.</h2>
+    <span class="label" data-en="Projects">Proyectos</span>
+    <h2 class="scramble" data-en="Four tools, four stories.">Cuatro herramientas, cuatro historias.</h2>
     <div class="big">
-      <a class="item" href="blog/cuadra.html"><span class="k">FINANZAS</span><span class="t">Cuadra</span><span class="go">→</span><span class="d">Mis cuatro bancos de Panamá cuadrando solos, con tarjetas, facturas y cuentas por cobrar.</span></a>
-      <a class="item" href="blog/recetario.html"><span class="k">SALUD</span><span class="t">Recetario</span><span class="go">→</span><span class="d">Recetas médicas en PDF con diagnóstico CIE-10, más rápidas que a mano.</span></a>
-      <a class="item" href="blog/facturas.html"><span class="k">NEGOCIO</span><span class="t">Generador de facturas</span><span class="go">→</span><span class="d">Facturas, proformas y cotizaciones sin guardar los datos de tus clientes.</span></a>
-      <a class="item" href="blog/scanner.html"><span class="k">UTILIDAD</span><span class="t">Scanner Effect</span><span class="go">→</span><span class="d">Efecto de escáner viejo para cualquier foto o PDF, sin subir nada.</span></a>
+      <a class="item" href="blog/cuadra.html"><span class="k" data-en="FINANCE">FINANZAS</span><span class="t glitch" data-text="Cuadra">Cuadra</span><span class="go">→</span><span class="d" data-en="My four Panamanian banks reconciling themselves, with cards, invoices and receivables.">Mis cuatro bancos de Panamá cuadrando solos, con tarjetas, facturas y cuentas por cobrar.</span></a>
+      <a class="item" href="blog/recetario.html"><span class="k" data-en="HEALTH">SALUD</span><span class="t glitch" data-text="Recetario" data-en="Prescription pad">Recetario</span><span class="go">→</span><span class="d" data-en="Medical prescriptions as PDF with ICD-10 diagnosis, faster than writing by hand.">Recetas médicas en PDF con diagnóstico CIE-10, más rápidas que a mano.</span></a>
+      <a class="item" href="blog/facturas.html"><span class="k" data-en="BUSINESS">NEGOCIO</span><span class="t glitch" data-text="Generador de facturas" data-en="Invoice generator">Generador de facturas</span><span class="go">→</span><span class="d" data-en="Invoices, pro formas and quotes without storing your clients' data.">Facturas, proformas y cotizaciones sin guardar los datos de tus clientes.</span></a>
+      <a class="item" href="blog/scanner.html"><span class="k" data-en="UTILITY">UTILIDAD</span><span class="t glitch" data-text="Scanner Effect">Scanner Effect</span><span class="go">→</span><span class="d" data-en="An old-scanner look for any photo or PDF, without uploading anything.">Efecto de escáner viejo para cualquier foto o PDF, sin subir nada.</span></a>
     </div>
-    <p class="code">El código es privado. ¿Quieres una demostración? <a href="#contacto">Escríbeme</a>.</p>
+    <p class="code" data-en='The code is private. Want a demo? <a href="#contacto">Write to me</a>.'>El código es privado. ¿Quieres una demostración? <a href="#contacto">Escríbeme</a>.</p>
   </div>
 </section>
 
 <section class="panel" id="escritos">
   <div class="inner">
-    <span class="label">Escritos</span>
-    <h2>Lo que salió bien y lo que no.</h2>
+    <span class="label" data-en="Writing">Escritos</span>
+    <h2 class="scramble" data-en="What went right and what didn't.">Lo que salió bien y lo que no.</h2>
     <div class="big">
-      <a class="item" href="blog/memoria.html"><span class="k">NOV 2026</span><span class="t">La memoria compartida</span><span class="go">→</span><span class="d">Cómo le di memoria a mi asistente de IA con archivos de texto.</span></a>
-      <a class="item" href="blog/recetario.html"><span class="k">NOV 2026</span><span class="t">Recetario</span><span class="go">→</span><span class="d">Por qué ningún dato clínico se escribe de memoria.</span></a>
-      <a class="item" href="blog/cuadra.html"><span class="k">NOV 2026</span><span class="t">Cuadra</span><span class="go">→</span><span class="d">Cuatro bancos, una sola cuenta que cuadra.</span></a>
+      <a class="item" href="blog/recetario.html"><span class="k">NOV 2026</span><span class="t glitch" data-text="Recetario" data-en="Prescription pad">Recetario</span><span class="go">→</span><span class="d" data-en="Why no clinical data is ever written from memory.">Por qué ningún dato clínico se escribe de memoria.</span></a>
+      <a class="item" href="blog/facturas.html"><span class="k">NOV 2026</span><span class="t glitch" data-text="Generador de facturas" data-en="Invoice generator">Generador de facturas</span><span class="go">→</span><span class="d" data-en="What you don't store can't leak.">Lo que no guardas no se puede filtrar.</span></a>
+      <a class="item" href="blog/cuadra.html"><span class="k">NOV 2026</span><span class="t glitch" data-text="Cuadra">Cuadra</span><span class="go">→</span><span class="d" data-en="Four banks, one account that adds up.">Cuatro bancos, una sola cuenta que cuadra.</span></a>
     </div>
-    <p class="code"><a href="blog/">Ver todos los escritos →</a></p>
+    <p class="code"><a href="blog/" data-en="See all writing →">Ver todos los escritos →</a></p>
   </div>
 </section>
 
 <section class="panel" id="contacto">
   <div class="inner">
-    <span class="label">Contacto</span>
-    <h2>Hablemos.</h2>
+    <span class="label" data-en="Contact">Contacto</span>
+    <h2 class="huge scramble" data-en="Let's talk.">Hablemos.</h2>
     <dl class="contact">
-      <a href="mailto:johnkleverbatista@gmail.com"><dt>Correo</dt><dd>johnkleverbatista@gmail.com</dd></a>
-      <a href="tel:+50767145233"><dt>Teléfono</dt><dd>+507 6714-5233</dd></a>
-      <a href="https://github.com/KleverBatista-max"><dt>GitHub</dt><dd>KleverBatista-max</dd></a>
-      <div><dt>Ubicación</dt><dd>Ciudad de Panamá</dd></div>
+      <a class="mag-row" href="mailto:johnkleverbatista@gmail.com"><dt data-en="Email">Correo</dt><dd>johnkleverbatista@gmail.com</dd></a>
+      <a class="mag-row" href="tel:+50767145233"><dt data-en="Phone">Teléfono</dt><dd>+507 6714-5233</dd></a>
+      <a class="mag-row" href="https://github.com/KleverBatista-max"><dt>GitHub</dt><dd>KleverBatista-max</dd></a>
+      <div><dt data-en="Location">Ubicación</dt><dd data-en="Panama City">Ciudad de Panamá</dd></div>
     </dl>
-    <p class="foot">© 2026 John Batista</p>
+    <p class="foot">© 2026 John Batista <span class="egg" data-en="· psst: type “jk”">· psst: escribe «jk»</span></p>
   </div>
 </section>
 </main>

@@ -1,16 +1,22 @@
 <!doctype html>
-<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="es" data-en-title="Prescription pad · John Batista"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Recetario · John Batista</title>
 <meta name="description" content="La historia de una receta médica en PDF que se completa casi sola, y de por qué ningún dato clínico se escribe de memoria.">
-<link rel="icon" type="image/png" href="../assets/favicon.png">
+<meta name="theme-color" content="#0f1418">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../assets/icon-192.png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="../assets/fx.css">
+<script>try{var l=localStorage.getItem('lang')||((navigator.language||'es').slice(0,2)==='es'?'es':'en');document.documentElement.lang=l;document.documentElement.classList.add('l-'+l)}catch(e){}</script>
 </head>
 <body><div class="page">
-<div class="bar"><a class="brand" href="../"><img class="seal" src="../assets/logo.png" alt="" width="30" height="30">John Batista</a>
-<a href="../#experiencia">Experiencia</a><a href="../#proyectos">Proyectos</a><a href="../blog/" aria-current="page">Blog</a><a href="../#contacto">Contacto</a></div>
-<main class="post">
+<div class="bar"><a class="brand" href="../" aria-label="JK, inicio"><img class="seal" src="../assets/logo.png" alt="" width="30" height="30"><span class="jk">JK<i>.</i></span></a><button class="lang" type="button" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span><span data-l="en">EN</span></button></div>
+<main class="post" lang="es">
   <div class="meta">Noviembre 2026 · Panamá</div>
   <h1>Recetario</h1>
   <p class="lede">Una receta médica en PDF que se completa casi sola, más rápida que escribirla a mano. Lo construí en dos días con un grupo de médicos probándolo, y casi todo lo que aprendí fue sobre datos.</p>
@@ -25,12 +31,12 @@
   <p>Por eso probé y quité un botón que mostraba información de referencia del formulario de medicamentos de la Caja de Seguro Social. Los médicos ya saben lo que recetan, y un texto de más solo estorba.</p>
 
   <h2>La lección más importante: nada de datos clínicos de memoria</h2>
-  <p>En el primer día, mi asistente de IA llenó el catálogo con 43 medicamentos con sus dosis, escritos de memoria. Se veían razonables y estaban completos. Los borré todos.</p>
+  <p>En el primer día, el catálogo arrancó con 43 medicamentos con sus dosis, escritos de memoria. Se veían razonables y estaban completos. Los borré todos.</p>
   <p>Un dato clínico inventado, aunque sea casi correcto, es peligroso en una receta. Desde entonces la regla es: <strong>todo dato tiene una fuente</strong>, y lo que no tiene fuente se borra y se agrega a mano.</p>
   <p>Estas son las fuentes reales con las que trabaja hoy:</p>
   <ul>
     <li><strong>Diagnósticos:</strong> la clasificación CIE-10 en español, unos 14 mil códigos.</li>
-    <li><strong>Medicamentos:</strong> CIMA, el registro de la agencia española de medicamentos (principio activo, concentración y forma), unido al registro de medicamentos del Minsa de Panamá, con marcas comerciales. Entre los dos forman un catálogo de unos 9,700 nombres, con inyectables y vitaminas, y con las marcas, porque el médico a veces receta la marca.</li>
+    <li><strong>Medicamentos:</strong> CIMA, el registro de la agencia española de medicamentos (principio activo, concentración y forma), unido al registro de medicamentos del Minsa de Panamá, con marcas comerciales. Entre los dos forman un catálogo de unos 10 mil nombres, con inyectables y vitaminas, y con las marcas, porque el médico a veces receta la marca.</li>
     <li><strong>Dosis y pautas:</strong> formularios oficiales (Panamá 2007, Uruguay 2012, Costa Rica 2008) y fichas técnicas. Lo que no está en una fuente no se inventa.</li>
     <li><strong>Relación diagnóstico ↔ medicamento:</strong> Wikidata, que es de uso libre, más lo que cada médico va recetando.</li>
   </ul>
@@ -55,7 +61,7 @@ flowchart LR
   <p>También hay cuidados que parecen pequeños. Una receta sin indicación o sin cantidad lanza un aviso. Los números se normalizan (<code>.5</code> pasa a <code>0.5</code> y <code>5.0</code> a <code>5</code>) y se usan siempre UI, mcg y mL, como recomiendan ISMP y FDA. Los antibióticos arrancan con una duración de 7 días por norma, salvo que la fuente indique otra.</p>
 
   <h2>La frecuencia, rediseñada</h2>
-  <p>El campo que más tiempo me tomó fue el de «cada cuánto». Terminó siendo «Cada [N] [horas, días, semanas, meses o años]» o «Dosis única», más «Durante [N] [días, semanas o meses]». Con eso la indicación y la cantidad a dispensar se calculan solas: «1 tab VO c/6 h x 5 días» y «Disp: 20 tabletas». Un esquema por fases, como el del fluconazol en candidiasis recurrente, también cabe en la misma receta.</p>
+  <p>El campo que más tiempo me tomó fue el de «cada cuánto». Terminó siendo «Cada [N] [horas, días, semanas, meses o años]» o «Dosis única», más «Durante [N] [días, semanas o meses]». Con eso la indicación y la cantidad a dispensar se calculan solas: «1 tab VO c/6 h x 5 días» y «Disp: 20 tabletas». Un esquema por fases, como el del fluconazol en candidiasis recurrente, también cabe en la misma receta. Los óvulos y las cremas vaginales salen por vía vaginal, con aplicador y un tubo a dispensar.</p>
 
   <h2>Probarlo con colegas</h2>
   <p>Lo puse a prueba con un grupo de médicos amigos. Les expliqué lo esencial: agiliza el diagnóstico y la posología, el diagnóstico sale con código para los seguros, el sello digitalizado es opcional, y los datos se quedan en el dispositivo. Un panel de administrador me deja aprobar o descartar los medicamentos y diagnósticos nuevos que proponen los usuarios (solo los nombres) y quitar relaciones mal aprendidas.</p>
@@ -67,8 +73,65 @@ flowchart LR
   <hr>
   <p class="foot">Hecho en Panamá.</p>
 </main>
+<main class="post" lang="en">
+  <div class="meta">November 2026 · Panama</div>
+  <h1>Prescription pad</h1>
+  <p class="lede">A medical prescription as a PDF that almost fills itself, faster than writing it by hand. I built it in two days with a group of doctors testing it, and almost everything I learned was about data.</p>
+
+  <h2>The problem</h2>
+  <p>A proper prescription carries the patient's name, the diagnosis with its ICD-10 code, each drug with its strength and form, the frequency, the duration and the quantity to dispense. Writing all that by hand is slow. And for private insurance, the diagnosis should carry its code.</p>
+  <p>I wanted to type only the patient's name, pick the diagnosis, load my stamp and print. Everything else should fill itself, in a 10.5 × 16.5 cm format.</p>
+
+  <h2>The rule that guided everything</h2>
+  <blockquote>If it doesn't save keystrokes, it goes.</blockquote>
+  <p>That's the product philosophy. The pad has to be faster than writing by hand, and one tap has to complete a drug line. Before adding any feature I ask whether it saves keystrokes. If it only adds text, it doesn't get in.</p>
+  <p>That's why I tried and removed a button that showed reference information from the Social Security drug formulary. Doctors already know what they prescribe, and extra text only gets in the way.</p>
+
+  <h2>The most important lesson: no clinical data from memory</h2>
+  <p>On the first day, the catalog started with 43 drugs and their doses, written from memory. They looked reasonable and complete. I deleted them all.</p>
+  <p>An invented clinical fact, even an almost-correct one, is dangerous on a prescription. Since then the rule is: <strong>every piece of data has a source</strong>, and whatever has no source is deleted and added by hand.</p>
+  <p>These are the real sources it works with today:</p>
+  <ul>
+    <li><strong>Diagnoses:</strong> the ICD-10 classification in Spanish, about 14 thousand codes.</li>
+    <li><strong>Drugs:</strong> CIMA, the Spanish medicines agency registry (active ingredient, strength and form), merged with Panama's Ministry of Health drug registry, including brand names. Together they make a catalog of about 10 thousand names, with injectables and vitamins, and with brands, because doctors sometimes prescribe the brand.</li>
+    <li><strong>Doses and regimens:</strong> official formularies (Panama 2007, Uruguay 2012, Costa Rica 2008) and product data sheets. What isn't in a source isn't made up.</li>
+    <li><strong>Diagnosis ↔ drug links:</strong> Wikidata, which is free to use, plus what each doctor prescribes over time.</li>
+  </ul>
+  <p>There's an honest limit. Panama's formulary is from 2007 and doesn't include, for example, flu antivirals. In those cases the app invents nothing, and the gap is filled by other sources or by what it learns from each doctor.</p>
+  <p>A less obvious decision: the 14-thousand-code diagnosis catalog <strong>isn't shipped with the app</strong>, because its source has no license that allows it. The app downloads it separately, from the original source.</p>
+
+  <h2>An architecture built for privacy</h2>
+  <p>In the first version, the server stored patients, prescriptions and stamps. Then I had an idea that changed the design: the server shouldn't store any of that.</p>
+  <figure class="diagram">
+    <pre class="mermaid">
+flowchart LR
+  N[Doctor's browser<br/>patients, stamp, history] -->|only diagnosis and active ingredient, anonymous| S[Server<br/>catalogs and correlations]
+  S -->|suggestions| N
+    </pre>
+    <figcaption>Patient data never leaves the doctor's device.</figcaption>
+  </figure>
+  <p>Today patients, the stamp and the history live in each doctor's browser, with a downloadable backup. When a prescription is printed, the only thing that reaches the server is the anonymous link between a diagnosis and an active ingredient. With those links, the app learns what gets prescribed for what, without ever knowing for whom.</p>
+  <p>The limit is the same as in my other tools: data lives per device, and if the browser is cleared without a backup, it's lost.</p>
+
+  <h2>Humble suggestions</h2>
+  <p>Given a diagnosis, the app proposes drugs, and given a drug it proposes diagnoses. Those suggestions start collapsed, and I called them "Suggested drugs" and "Suggested diagnoses", not "recommended". It's a wording detail with a reason: doctors ignore anything that sounds like an order.</p>
+  <p>There are also cares that seem small. A prescription without directions or quantity raises a warning. Numbers are normalized (<code>.5</code> becomes <code>0.5</code> and <code>5.0</code> becomes <code>5</code>) and IU, mcg and mL are always used, as ISMP and the FDA recommend. Antibiotics start with a 7-day duration by default, unless the source says otherwise.</p>
+
+  <h2>Frequency, redesigned</h2>
+  <p>The field that took me the longest was "how often". It ended up as "Every [N] [hours, days, weeks, months or years]" or "Single dose", plus "For [N] [days, weeks or months]". With that, the directions and the quantity to dispense calculate themselves: "1 tab PO q6h x 5 days" and "Disp: 20 tablets". A phased regimen, like fluconazole for recurrent candidiasis, fits on the same prescription. Vaginal ovules and creams come out by the vaginal route, with an applicator and a tube to dispense.</p>
+
+  <h2>Testing it with colleagues</h2>
+  <p>I put it to the test with a group of doctor friends. I explained the essentials: it speeds up diagnosis and dosing, the diagnosis comes with a code for insurers, the digitized stamp is optional, and the data stays on the device. An admin panel lets me approve or discard new drugs and diagnoses proposed by users (names only) and remove links learned wrong.</p>
+  <p>A practical fact: all of this runs on about 5 MB of memory and almost no CPU on the server. It costs the same as not having it.</p>
+
+  <h2>What's next</h2>
+  <p>Still missing: prescription pads, more regimen coverage from a source the doctor chooses, and tapping strength and form directly on screen.</p>
+  <p>The code is private. If you'd like to use it in your practice or see a demo, <a href="../index.html#contacto">write to me</a>.</p>
+  <hr>
+  <p class="foot">Made in Panama.</p>
+</main>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
-<script>mermaid.initialize({startOnLoad:true,theme:(matchMedia("(prefers-color-scheme: light)").matches?"default":"dark"),themeVariables:{fontFamily:"Inter, Arial, sans-serif"}});</script>
+<script>mermaid.initialize({startOnLoad:false,theme:(matchMedia("(prefers-color-scheme: light)").matches?"default":"dark"),themeVariables:{fontFamily:"Inter, Arial, sans-serif"}});</script>
 <script src="../assets/fx.js"></script>
 </body></html>

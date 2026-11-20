@@ -1,16 +1,22 @@
 <!doctype html>
-<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="es" data-en-title="Invoice generator · John Batista"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Generador de facturas · John Batista</title>
 <meta name="description" content="Cómo hice un generador de facturas que no guarda los datos de tus clientes.">
-<link rel="icon" type="image/png" href="../assets/favicon.png">
+<meta name="theme-color" content="#0f1418">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../assets/icon-192.png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="../assets/fx.css">
+<script>try{var l=localStorage.getItem('lang')||((navigator.language||'es').slice(0,2)==='es'?'es':'en');document.documentElement.lang=l;document.documentElement.classList.add('l-'+l)}catch(e){}</script>
 </head>
 <body><div class="page">
-<div class="bar"><a class="brand" href="../"><img class="seal" src="../assets/logo.png" alt="" width="30" height="30">John Batista</a>
-<a href="../#experiencia">Experiencia</a><a href="../#proyectos">Proyectos</a><a href="../blog/" aria-current="page">Blog</a><a href="../#contacto">Contacto</a></div>
-<main class="post">
+<div class="bar"><a class="brand" href="../" aria-label="JK, inicio"><img class="seal" src="../assets/logo.png" alt="" width="30" height="30"><span class="jk">JK<i>.</i></span></a><button class="lang" type="button" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span><span data-l="en">EN</span></button></div>
+<main class="post" lang="es">
   <div class="meta">Noviembre 2026 · Panamá</div>
   <h1>Generador de facturas</h1>
   <p class="lede">Una factura debería tomar un minuto y no dejar rastro de tus clientes en ningún servidor. Así nació esta herramienta, que primero hice para mi propia empresa.</p>
@@ -53,8 +59,51 @@
   <hr>
   <p class="foot">Hecho en Panamá.</p>
 </main>
+<main class="post" lang="en">
+  <div class="meta">November 2026 · Panama</div>
+  <h1>Invoice generator</h1>
+  <p class="lede">An invoice should take a minute and leave no trace of your clients on any server. That's how this tool was born, first for my own company.</p>
+
+  <h2>The problem</h2>
+  <p>My logistics company needs to issue invoices, pro formas and quotes. I wanted something simple: type the data, see the invoice and download the PDF. And I didn't want my clients' data to live on someone else's server.</p>
+
+  <h2>The first version: for my company</h2>
+  <p>The first version ran on my own server, behind the same login as my other tools and with my company's logo. It solved my case and nothing else. Later I decided to make a generic version so any entrepreneur could use it.</p>
+
+  <h2>The decision that changed everything: no data on the server</h2>
+  <p>To turn it into something others could use, the biggest change was about privacy. The PDF is built <strong>in the browser</strong>, with the jsPDF library. The server never receives the clients, the items or the amounts.</p>
+  <p>So what does the server keep? Just one thing: the list of invoice numbers already used, so they don't repeat. Everything else lives in the user's browser: business details, logo, payment terms and history.</p>
+  <blockquote>What you don't store can't leak.</blockquote>
+  <p>That decision also made the work simpler. With no client database there's nothing to back up, protect or explain in a privacy policy.</p>
+  <p>The cost is real and the tool itself warns about it: each device has its own history, and if you clear your browser data, it's gone.</p>
+
+  <h2>Only what you use shows up</h2>
+  <p>The design rule I enjoyed most was this one: a field you don't use appears neither on screen nor in the PDF. Discount, tax, shipping and "paid" are optional buttons ("+ Discount", "+ Tax"). If you don't touch them, the invoice stays clean.</p>
+  <ul>
+    <li><strong>You define the tax.</strong> In Panama it's ITBMS, in other countries VAT or IGV. You set the name and the rate.</li>
+    <li><strong>The invoice number is automatic</strong> (for example <code>INV20261116</code>, and <code>INV20261116-2</code> if there's another one that day), but you can type it by hand.</li>
+    <li><strong>It works in Spanish and English.</strong></li>
+    <li><strong>Multiple pages</strong>, with repeated header and page numbers, for long orders.</li>
+    <li><strong>History in the browser</strong>: open a previous invoice, edit it, duplicate it with a new number or delete it.</li>
+  </ul>
+
+  <h2>The formula for every small tool</h2>
+  <p>When I finished this one, I noticed I had a repeatable recipe for every mini app I make:</p>
+  <ul>
+    <li>A private version on my server, with my logo and my login.</li>
+    <li>A generic version, with its own logo and none of my data.</li>
+    <li>Everything is processed in the browser and the history never leaves it.</li>
+  </ul>
+  <p>The generic version is a separate copy that shares no history with my company's. Before publishing each change, I check that no name, registration number or phone slipped in. That review is boring, and it's the one that prevents problems.</p>
+
+  <h2>How it's used</h2>
+  <p>It opens in the browser, with a password, and there's nothing to install. It works the same on a computer and on a phone.</p>
+  <p>The code is private. If you'd like to use it in your business or see a demo, <a href="../index.html#contacto">write to me</a>.</p>
+  <hr>
+  <p class="foot">Made in Panama.</p>
+</main>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
-<script>mermaid.initialize({startOnLoad:true,theme:(matchMedia("(prefers-color-scheme: light)").matches?"default":"dark"),themeVariables:{fontFamily:"Inter, Arial, sans-serif"}});</script>
+<script>mermaid.initialize({startOnLoad:false,theme:(matchMedia("(prefers-color-scheme: light)").matches?"default":"dark"),themeVariables:{fontFamily:"Inter, Arial, sans-serif"}});</script>
 <script src="../assets/fx.js"></script>
 </body></html>
