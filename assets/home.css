@@ -142,7 +142,7 @@ h2 { font-family: var(--head); font-weight: 700; font-size: clamp(34px, 5.5vw, 6
 @media (prefers-reduced-motion: reduce) { .seal-ring, .panel, .btn.main::after, .label::before { animation: none !important; } .seal-art { transition: none; } }
 
 /* ---------- Más piquete (19 nov 2026) ---------- */
-.fx .panel .inner { transform: skewY(var(--skew, 0deg)); will-change: transform; }
+
 .panel::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: radial-gradient(420px circle at var(--mx, -999px) var(--my, -999px), rgb(111 208 200 / .13), transparent 70%); }
 #inicio h1 b { color: var(--ink); }
 #inicio h1 b::after { content: "."; color: var(--accent); }

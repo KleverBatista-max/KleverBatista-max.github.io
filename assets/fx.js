@@ -142,7 +142,6 @@
     var y = scrollY, d = y - lastY; lastY = y;
     vel += (d - vel) * .18;
     var sk = Math.max(-4, Math.min(4, vel * .12));
-    root.style.setProperty('--skew', sk.toFixed(2) + 'deg');
     if (ring) { ang += .06 + Math.abs(vel) * .35; ring.style.transform = 'rotate(' + ang.toFixed(2) + 'deg)'; }
     px += (tx - px) * .08; py += (ty - py) * .08;
     if (art) {
@@ -150,7 +149,7 @@
       art.style.setProperty('--px', (px * -40).toFixed(1) + 'px'); art.style.setProperty('--py', (py * -30 - sy * .18).toFixed(1) + 'px');
       art.style.setProperty('--jx', (px * 26).toFixed(1) + 'px'); art.style.setProperty('--jy', (py * 18).toFixed(1) + 'px');
     }
-    tracks.forEach(function (t, i) { var m = tm[i]; if (!m.half) return; var dir = TD[i % TD.length], sp = (TS[i % TS.length] + Math.abs(vel) * .6) * dir; m.x += sp; if (dir < 0 && m.x <= -m.half) m.x += m.half; if (dir > 0 && m.x >= 0) m.x -= m.half; t.style.transform = 'translateX(' + m.x.toFixed(1) + 'px) skewX(' + (-sk * 3).toFixed(1) + 'deg)'; });
+    tracks.forEach(function (t, i) { var m = tm[i]; if (!m.half) return; var dir = TD[i % TD.length], sp = (TS[i % TS.length] + Math.abs(vel) * .6) * dir; m.x += sp; if (dir < 0 && m.x <= -m.half) m.x += m.half; if (dir > 0 && m.x >= 0) m.x -= m.half; t.style.transform = 'translateX(' + m.x.toFixed(1) + 'px)'; });
     requestAnimationFrame(loop);
   })();
 
@@ -202,6 +201,7 @@
   doc.addEventListener('click', function (e) {
     if (e.target.closest('a, button, input, select, textarea, label, pre, code, .mermaid')) return;
     if (getSelection && String(getSelection()).length) return;
+    if (!e.target.closest('#inicio')) return;   /* el sello JK solo en el encabezado */
     stamp(e.clientX, e.clientY + scrollY);
   });
 
