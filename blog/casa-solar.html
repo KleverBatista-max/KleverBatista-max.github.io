@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="es" data-en-title="Casa solar · John Batista"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casa solar · John Batista</title>
+<meta name="description" content="Cómo automaticé una casa con paneles solares: ESP32, Home Assistant y un aire que se enfría con el sol.">
+<meta name="theme-color" content="#0f1418">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../assets/icon-192.png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="../assets/fx.css">
+<script>try{var l=localStorage.getItem('lang')||((navigator.language||'es').slice(0,2)==='es'?'es':'en');document.documentElement.lang=l;document.documentElement.classList.add('l-'+l)}catch(e){}</script>
+</head>
+<body><div class="page">
+<div class="bar"><a class="brand" href="../" aria-label="JK, inicio"><img class="seal" src="../assets/logo.png" alt="" width="30" height="30"></a><button class="lang" type="button" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span><span data-l="en">EN</span></button></div>
+<main class="post" lang="es">
+  <div class="meta">Noviembre 2026 · Panamá</div>
+  <h1>La casa solar</h1>
+  <p class="lede">Compramos paneles solares para dejar de pagar luz. Lo difícil no fue instalarlos: fue que la casa los aprovechara sola. Esta es la historia de ese sistema, que construí yo, pieza por pieza.</p>
+
+  <h2>La idea</h2>
+  <p>Con un inversor híbrido y una batería, la energía del sol se gasta mejor de día. El aire acondicionado es el mayor consumidor, así que la idea fue <strong>enfriar el cuarto mientras hay sol</strong> para no gastar la batería de noche. Para eso la casa tenía que saber, en tiempo real, cuánta energía sobraba.</p>
+
+  <h2>Primera versión: una Raspberry Pi</h2>
+  <p>Una Raspberry con un adaptador USB‑RS485 leía el inversor por Modbus y un Broadlink mandaba códigos infrarrojos al aire según el excedente. Funcionaba, pero era un solo script con reglas fijas. Los registros muestran un defecto real: a veces el porcentaje de batería se leía como 0 y el aire se apagaba y prendía cada pocos segundos. Ahí aprendí a promediar lecturas y a no confiar en un solo dato.</p>
+
+  <h2>El sniffer: escuchar sin molestar</h2>
+  <p>El proveedor del inversor me pasó la tabla de registros Modbus, que viene en chino y es casi imposible de encontrar. Con ella armé un ESP32 que <strong>escucha el bus RS485 sin hablar</strong>, con un componente propio de ESPHome, y publica batería, paneles, cargas y red a Home Assistant. Como ese documento ayuda a cualquiera con un inversor parecido, lo publiqué junto al código.</p>
+
+  <h2>Home Assistant: la lógica</h2>
+  <p>La lógica pasó a Home Assistant y se volvió un controlador de verdad: una clasificación del estado solar (noche, amanecer, transición, sol firme), escalones de temperatura de 26 a 20 °C, un modo defensivo al amanecer, aviso y apagado si la batería se descarga, anulación manual y entrega de control al atardecer. Otra automatización carga una Bluetti solo cuando sobra energía de verdad.</p>
+
+  <h2>Lo demás de la casa</h2>
+  <p>Hay también tableros de relés con interruptores físicos que siguen funcionando sin Home Assistant, luces por salida y puesta del sol, una protección para la bomba de agua del refrigerador y un reinicio automático del router si se cae el internet.</p>
+
+  <h2>Cada pieza en su repo</h2>
+  <p>Son proyectos distintos que se llaman entre sí a través de Home Assistant, así que cada uno tiene su propio repositorio:</p>
+  <ul>
+    <li><a href="https://github.com/KleverBatista-max/solar-inverter-modbus-monitor">Monitor Modbus del inversor</a>: el ESP32, los sensores y los manuales.</li>
+    <li><a href="https://github.com/KleverBatista-max/solar-ac-controller">Controlador solar del aire</a>: enfría con el excedente.</li>
+    <li><a href="https://github.com/KleverBatista-max/bluetti-solar-charger">Cargador solar de la Bluetti</a>.</li>
+    <li><a href="https://github.com/KleverBatista-max/house-relay-controllers">Controladores de la casa</a>: relés, luces, bomba y router.</li>
+    <li><a href="https://github.com/KleverBatista-max/solar-home-overview">El mapa</a> que explica cómo encajan.</li>
+  </ul>
+
+  <h2>Respaldo y lo que viene</h2>
+  <p>Todo se respalda cifrado, cada día, en la nube, por si el equipo falla. Esta historia está incompleta: voy a ampliarla con el historial de mis conversaciones de diseño y con los proyectos que vinieron antes.</p>
+  <hr>
+  <p class="foot">Hecho en Panamá.</p>
+</main>
+<main class="post" lang="en">
+  <div class="meta">November 2026 · Panama</div>
+  <h1>The solar house</h1>
+  <p class="lede">We bought solar panels to stop paying for electricity. The hard part wasn't installing them: it was making the house use them on its own. This is the story of that system, which I built piece by piece.</p>
+
+  <h2>The idea</h2>
+  <p>With a hybrid inverter and a battery, sunlight is best used during the day. The air conditioner is the biggest load, so the idea was to <strong>cool the room while the sun is out</strong> and not drain the battery at night. For that, the house had to know in real time how much energy was left over.</p>
+
+  <h2>First version: a Raspberry Pi</h2>
+  <p>A Raspberry Pi with a USB‑RS485 adapter read the inverter over Modbus and a Broadlink sent infrared codes to the A/C based on the surplus. It worked, but it was a single script with fixed rules. The logs show a real flaw: sometimes the battery percentage was read as 0 and the A/C switched off and on every few seconds. That's where I learned to average readings and not trust a single data point.</p>
+
+  <h2>The sniffer: listen without disturbing</h2>
+  <p>The inverter supplier gave me the Modbus register table, which is in Chinese and nearly impossible to find. With it I built an ESP32 that <strong>listens to the RS485 bus without talking</strong>, using a custom ESPHome component, and publishes battery, panels, loads and grid to Home Assistant. Since that document helps anyone with a similar inverter, I published it next to the code.</p>
+
+  <h2>Home Assistant: the logic</h2>
+  <p>The logic moved to Home Assistant and became a real controller: a solar-state classifier (night, dawn, transition, firm sun), temperature steps from 26 to 20 °C, a defensive dawn mode, warning and shut-off if the battery drains, manual override and hand-off at sunset. Another automation charges a Bluetti only when there is real surplus.</p>
+
+  <h2>The rest of the house</h2>
+  <p>There are also relay boards with physical switches that keep working without Home Assistant, lights at sunrise and sunset, a protection for the fridge's water pump and an automatic router reboot when the internet goes down.</p>
+
+  <h2>Each piece in its own repo</h2>
+  <p>They are different projects that call each other through Home Assistant, so each has its own repository:</p>
+  <ul>
+    <li><a href="https://github.com/KleverBatista-max/solar-inverter-modbus-monitor">Inverter Modbus monitor</a>: the ESP32, the sensors and the manuals.</li>
+    <li><a href="https://github.com/KleverBatista-max/solar-ac-controller">Solar A/C controller</a>: cools with the surplus.</li>
+    <li><a href="https://github.com/KleverBatista-max/bluetti-solar-charger">Bluetti solar charger</a>.</li>
+    <li><a href="https://github.com/KleverBatista-max/house-relay-controllers">House controllers</a>: relays, lights, pump and router.</li>
+    <li><a href="https://github.com/KleverBatista-max/solar-home-overview">The map</a> that explains how they fit.</li>
+  </ul>
+
+  <h2>Backup and what's next</h2>
+  <p>Everything is backed up, encrypted, to the cloud every day, in case the hardware fails. This story is incomplete: I'll expand it with the history of my design conversations and the projects that came before.</p>
+  <hr>
+  <p class="foot">Made in Panama.</p>
+</main>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:false,theme:(matchMedia("(prefers-color-scheme: light)").matches?"default":"dark"),themeVariables:{fontFamily:"Inter, Arial, sans-serif"}});</script>
+<script src="../assets/fx.js"></script>
+</body></html>
