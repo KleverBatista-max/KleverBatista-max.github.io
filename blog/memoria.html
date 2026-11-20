@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es" data-en-title="La memoria compartida · John Batista"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La memoria compartida · John Batista</title>
+<meta name="description" content="Cómo le di memoria a mi asistente de IA con simples archivos de texto.">
+<meta name="theme-color" content="#0f1418">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../assets/icon-192.png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="../assets/fx.css">
+<script>try{var l=localStorage.getItem('lang')||((navigator.language||'es').slice(0,2)==='es'?'es':'en');document.documentElement.lang=l;document.documentElement.classList.add('l-'+l)}catch(e){}</script>
+</head>
+<body><div class="page">
+<div class="bar"><a class="brand" href="../" aria-label="JK, inicio"><img class="seal" src="../assets/logo.png" alt="" width="30" height="30"></a><button class="lang" type="button" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span><span data-l="en">EN</span></button></div>
+<main class="post" lang="es">
+  <div class="meta">Noviembre 2026 · Panamá</div>
+  <h1>La memoria compartida</h1>
+  <p class="lede">Un asistente de IA olvida todo al cerrar la conversación. Yo me cansé de repetirle quién soy y cómo trabajo, así que le di memoria con lo más simple que existe: archivos de texto.</p>
+
+  <h2>El problema</h2>
+  <p>Cada sesión empezaba de cero: las mismas explicaciones, los mismos errores. Y yo trabajo en varias computadoras, así que la memoria tenía que viajar conmigo.</p>
+
+  <h2>Cómo funciona</h2>
+  <ul>
+    <li><strong>Una carpeta de archivos de texto.</strong> Cada recuerdo es un archivo con un solo dato: quién soy, cómo prefiero que me trabaje, el estado de un proyecto o dónde encontrar algo.</li>
+    <li><strong>Un índice.</strong> Un archivo corto lista todos los recuerdos con una línea cada uno, y el asistente lo lee al empezar cada sesión.</li>
+    <li><strong>Cuatro tipos:</strong> sobre mí, correcciones y preferencias, proyectos en curso y referencias a dónde buscar.</li>
+    <li><strong>Sincronizada con Git.</strong> La carpeta es un repositorio privado y unos ganchos la sincronizan entre mi Mac y mi PC con Windows, así que las dos computadoras recuerdan lo mismo.</li>
+  </ul>
+
+  <h2>Reglas que me pusieron a salvo</h2>
+  <ul>
+    <li><strong>Nunca guardar contraseñas ni claves</strong> en la memoria.</li>
+    <li><strong>Un recuerdo se verifica antes de usarlo.</strong> Si dice que existe un archivo o una función, se comprueba que siga existiendo.</li>
+    <li><strong>Lo equivocado se borra.</strong> Una memoria incorrecta es peor que ninguna.</li>
+    <li><strong>No se guarda lo que ya está en el código</strong> ni en el historial de Git.</li>
+  </ul>
+
+  <h2>Por qué me gusta</h2>
+  <p>Es la misma pereza productiva de siempre: explicar algo una vez y que no haya que volver a hacerlo. Y por ser texto plano, la puedo leer, corregir y respaldar como cualquier otro archivo. Esta misma página y las historias de los proyectos salieron en buena parte de ella. El repositorio es privado porque guarda datos míos.</p>
+  <hr>
+  <p class="foot">Hecho en Panamá.</p>
+</main>
+<main class="post" lang="en">
+  <div class="meta">November 2026 · Panama</div>
+  <h1>The shared memory</h1>
+  <p class="lede">An AI assistant forgets everything when the conversation closes. I got tired of repeating who I am and how I work, so I gave it memory with the simplest thing there is: text files.</p>
+
+  <h2>The problem</h2>
+  <p>Every session started from zero: the same explanations, the same mistakes. And I work on several computers, so the memory had to travel with me.</p>
+
+  <h2>How it works</h2>
+  <ul>
+    <li><strong>A folder of text files.</strong> Each memory is a file with a single fact: who I am, how I prefer to be worked with, the state of a project or where to find something.</li>
+    <li><strong>An index.</strong> A short file lists every memory with one line each, and the assistant reads it at the start of every session.</li>
+    <li><strong>Four types:</strong> about me, corrections and preferences, ongoing projects and pointers to where to look.</li>
+    <li><strong>Synced with Git.</strong> The folder is a private repository and a few hooks sync it between my Mac and my Windows PC, so both computers remember the same things.</li>
+  </ul>
+
+  <h2>Rules that kept me safe</h2>
+  <ul>
+    <li><strong>Never store passwords or keys</strong> in the memory.</li>
+    <li><strong>A memory is verified before it is used.</strong> If it says a file or function exists, check that it still does.</li>
+    <li><strong>Wrong things get deleted.</strong> An incorrect memory is worse than none.</li>
+    <li><strong>Don't store what is already in the code</strong> or in the Git history.</li>
+  </ul>
+
+  <h2>Why I like it</h2>
+  <p>It's the same productive laziness as always: explain something once and never again. And being plain text, I can read, fix and back it up like any other file. This very site and the project stories came largely out of it. The repository is private because it holds personal data.</p>
+  <hr>
+  <p class="foot">Made in Panama.</p>
+</main>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:false,theme:(matchMedia("(prefers-color-scheme: light)").matches?"default":"dark"),themeVariables:{fontFamily:"Inter, Arial, sans-serif"}});</script>
+<script src="../assets/fx.js"></script>
+</body></html>
