@@ -50,7 +50,17 @@
   <h2>Lo demás de la casa</h2>
   <p>Hay también tableros de relés con interruptores físicos que siguen funcionando sin Home Assistant, luces por salida y puesta del sol, una protección para la bomba de agua del refrigerador y un reinicio automático del router si se cae el internet.</p>
 
-  <h2>Cada pieza en su repo</h2>
+    <h2>La historia, en fechas</h2>
+  <ul>
+    <li><strong>Enero de 2026: la Raspberry.</strong> En tres días (del 19 al 21) pasé de «¿cómo leo el inversor?» a un script que lo leía por USB con Modbus y mandaba códigos infrarrojos al aire. Lo que costó: el cron lanzaba varias copias del mismo script a la vez, así que añadí un archivo de candado; el porcentaje de batería marcaba 0 de vez en cuando, así que filtré las lecturas falsas; y limité los cambios del aire a uno cada diez minutos. La regla que me quedó: primero estabilidad, después inteligencia.</li>
+    <li><strong>Finales de enero: ¿Python o Home Assistant?</strong> Busqué un medidor fácil de integrar para saber cuánto consumía el aire y comparé seguir en Python contra pasar todo a Home Assistant. Me quedé con Home Assistant.</li>
+    <li><strong>Del 20 al 22 de febrero: el ESP32.</strong> Al principio el sniffer solo leía ceros: el ESP32 y el inversor tienen que compartir tierra para que la lectura sea válida. Cuando un ESP32 quedaba fuera de línea, la salida era recuperarlo por USB o por aire (OTA). Con el aire apagado, la pinza de corriente marcaba unos 57 W de puro ruido eléctrico; lo resolví calibrando de forma lineal y forzando a cero cualquier corriente menor de 0.2 A.</li>
+    <li><strong>22 y 23 de febrero: Home Assistant y Alexa.</strong> Home Assistant corría entonces en una máquina virtual dentro de una PC con Ubuntu; para que Alexa lo viera tuve que sacarlo a la red de la casa (modo puente) en vez de dejarlo en la red interna de la máquina virtual. Hoy corre en una Raspberry Pi 4. Ese mismo día MPPT1 y MPPT2 mostraban números sin sentido: eran registros mal decodificados.</li>
+    <li><strong>Marzo: el controlador crece.</strong> De unas pocas automatizaciones sueltas pasé a un controlador con versiones numeradas. Entre el 5 de marzo y el 1 de abril escribí decenas de versiones: «V1», «Final», «PRO»… hasta <strong>A/C SSC v5.8.4</strong>. Cada una nació de un día en que la casa hizo algo raro: un aire que se apagaba por una nube, un amanecer en el que el sol todavía no alcanzaba, un candado que no hacía nada.</li>
+    <li><strong>Finales de marzo y abril: predecir y depurar.</strong> Sensores de «cuántas horas me dura la batería con este consumo», «cuántos kWh faltan para el objetivo» y el pronóstico solar que queda hoy, y un sensor de depuración que me explica por qué el controlador decidió lo que decidió.</li>
+  </ul>
+
+<h2>Cada pieza en su repo</h2>
   <p>Son proyectos distintos que se llaman entre sí a través de Home Assistant, así que cada uno tiene su propio repositorio:</p>
   <ul>
     <li><a href="https://github.com/KleverBatista-max/solar-inverter-modbus-monitor">Monitor Modbus del inversor</a>: el ESP32, los sensores y los manuales.</li>
@@ -61,7 +71,7 @@
   </ul>
 
   <h2>Respaldo y lo que viene</h2>
-  <p>Todo se respalda cifrado, cada día, en la nube, por si el equipo falla. Esta historia está incompleta: voy a ampliarla con el historial de mis conversaciones de diseño y con los proyectos que vinieron antes.</p>
+  <p>Todo se respalda cifrado, cada día, en la nube, por si el equipo falla. Lo que me queda pendiente: una plantilla del controlador avisa cada tres minutos de que falta declarar una variable (<code>descarga_warn</code>); quiero que el sistema ajuste solo, cada día, los dos umbrales de descarga; y reconectar Alexa, cuyas cookies de Amazon vencieron.</p>
   <hr>
   <p class="foot">Hecho en Panamá.</p>
 </main>
@@ -99,7 +109,17 @@
   <h2>The rest of the house</h2>
   <p>There are also relay boards with physical switches that keep working without Home Assistant, lights at sunrise and sunset, a protection for the fridge's water pump and an automatic router reboot when the internet goes down.</p>
 
-  <h2>Each piece in its own repo</h2>
+    <h2>The story, by date</h2>
+  <ul>
+    <li><strong>January 2026: the Raspberry.</strong> In three days (the 19th to the 21st) I went from "how do I read the inverter?" to a script that read it over USB with Modbus and sent infrared codes to the A/C. What it cost: cron launched several copies of the same script at once, so I added a lock file; the battery percentage read 0 now and then, so I filtered the false readings; and I limited A/C changes to one every ten minutes. The rule I kept: stability first, intelligence after.</li>
+    <li><strong>Late January: Python or Home Assistant?</strong> I looked for a meter that was easy to integrate to know how much the A/C drew, and compared staying in Python with moving everything to Home Assistant. I went with Home Assistant.</li>
+    <li><strong>February 20th to 22nd: the ESP32.</strong> At first the sniffer only read zeros: the ESP32 and the inverter must share a ground for the reading to be valid. When an ESP32 went offline, the way back was recovering it over USB or over the air (OTA). With the A/C off, the current clamp read about 57 W of pure electrical noise; I fixed it with a linear calibration and by forcing any current under 0.2 A to zero.</li>
+    <li><strong>February 22nd and 23rd: Home Assistant and Alexa.</strong> Home Assistant was then running in a virtual machine inside a PC with Ubuntu; for Alexa to see it I had to move it onto the house network (bridge mode) instead of the virtual machine's internal one. Today it runs on a Raspberry Pi 4. That same day MPPT1 and MPPT2 showed meaningless numbers: the registers were being decoded wrong.</li>
+    <li><strong>March: the controller grows.</strong> From a few loose automations I went to a controller with numbered versions. Between March 5th and April 1st I wrote dozens of versions: "V1", "Final", "PRO"… up to <strong>A/C SSC v5.8.4</strong>. Each one was born from a day when the house did something odd: an A/C that switched off because of a cloud, a sunrise where the sun wasn't strong enough yet, a lock that did nothing.</li>
+    <li><strong>Late March and April: predicting and debugging.</strong> Sensors for "how many hours the battery lasts at this consumption", "how many kWh are missing to reach the target" and the solar forecast left today, plus a debug sensor that explains why the controller decided what it decided.</li>
+  </ul>
+
+<h2>Each piece in its own repo</h2>
   <p>They are different projects that call each other through Home Assistant, so each has its own repository:</p>
   <ul>
     <li><a href="https://github.com/KleverBatista-max/solar-inverter-modbus-monitor">Inverter Modbus monitor</a>: the ESP32, the sensors and the manuals.</li>
@@ -110,7 +130,7 @@
   </ul>
 
   <h2>Backup and what's next</h2>
-  <p>Everything is backed up, encrypted, to the cloud every day, in case the hardware fails. This story is incomplete: I'll expand it with the history of my design conversations and the projects that came before.</p>
+  <p>Everything is backed up, encrypted, to the cloud every day, in case the hardware fails. What's still pending: one controller template warns every three minutes that a variable is missing (<code>descarga_warn</code>); I want the system to adjust the two discharge thresholds by itself every day; and to reconnect Alexa, whose Amazon cookies expired.</p>
   <hr>
   <p class="foot">Made in Panama.</p>
 </main>
