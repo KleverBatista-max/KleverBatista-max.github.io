@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="es" data-en-title="Reclamos · John Batista"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reclamos · John Batista</title>
+<meta name="description" content="Una página para armar y enviar reclamos de seguro médico desde el teléfono: formulario, recetas y facturas en tres PDF.">
+<meta name="theme-color" content="#0f1418">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../assets/icon-192.png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="../assets/fx.css">
+<script>try{var l=localStorage.getItem('lang')||((navigator.language||'es').slice(0,2)==='es'?'es':'en');document.documentElement.lang=l;document.documentElement.classList.add('l-'+l)}catch(e){}</script>
+</head>
+<body><div class="page">
+<div class="bar"><a class="brand" href="../" aria-label="JK, inicio"><img class="seal" src="../assets/logo.png" alt="" width="30" height="30"></a><button class="lang" type="button" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span><span data-l="en">EN</span></button></div>
+<main class="post" lang="es">
+  <div class="meta">Noviembre 2026 · Panamá</div>
+  <h1>Reclamos: un formulario de seguro que se llena desde el teléfono</h1>
+  <p class="lede">Cada reclamo a mi seguro médico pedía lo mismo: llenar un formulario, adjuntar las recetas y las facturas, convertirlo todo a PDF y mandarlo por correo en el orden correcto. Lo hacía desde el teléfono con tres apps distintas y siempre se me olvidaba algo. Lo convertí en una sola página.</p>
+
+  <h2>El problema</h2>
+  <p>Un reclamo no es un documento: son tres. Hay un formulario, una orden y el paquete de facturas, y cada uno va en su propio PDF. Además, la receta tenía que parecer una hoja escaneada, no una foto torcida. Cada vez era armar y renombrar archivos a mano, y un error se pagaba con una devolución y semanas de espera.</p>
+
+  <h2>Una página para el iPhone</h2>
+  <p>Subo las fotos o los PDF de las recetas y de las facturas, lleno el formulario una sola vez y la página genera los tres PDF. Después los manda por correo, o me baja un ZIP si prefiero revisarlos antes. Todo el recorrido cabe en una pantalla de teléfono.</p>
+
+  <h2>La receta como hoja escaneada</h2>
+  <p>La receta sale en blanco y negro, sobre una hoja A4, en un recuadro de 10.5 × 16.5 cm en la esquina, como si la hubieran pasado por un escáner. Es el mismo tamaño de las recetas de mi <a href="recetario.html">Recetario</a>, así que lo que sale de una app entra limpio en la otra.</p>
+
+  <h2>Los PDF se arman en el navegador</h2>
+  <p>La interfaz es un solo archivo, y los PDF se leen y se arman en el propio navegador con <code>pdf.js</code> y <code>pdf-lib</code>. El servidor es un programa de Python sin dependencias que hace dos cosas: comprobar quién eres y enviar el correo. Menos piezas, menos que se pueda romper.</p>
+
+  <h2>Pensado para que nadie pueda usarlo mal</h2>
+  <ul>
+    <li><strong>Entra con el mismo usuario y clave de <a href="cuadra.html">Cuadra</a></strong> y solo dos personas están permitidas.</li>
+    <li><strong>La dirección de destino está fija en el servidor</strong>, no en la página. Aunque alguien cambiara la página, no podría mandar un correo a otro lado.</li>
+    <li><strong>La contraseña del correo</strong> se guarda en el servidor con permisos restringidos y nunca se devuelve a la página.</li>
+    <li><strong>Un modo de prueba</strong> arma el correo pero no lo envía, para ensayar sin riesgo.</li>
+  </ul>
+
+  <h2>Lo que me falta</h2>
+  <p>El filtro de blanco y negro de esta página tiene un defecto que ya corregí en <a href="scanner.html">Scanner Effect</a> (una zona oscura grande se queda blanca) y todavía no lo traje aquí. Y la restauración completa del servicio en un servidor nuevo está escrita, pero no la he ensayado.</p>
+
+  <h2>Lo que aprendí</h2>
+  <ul>
+    <li><strong>Reusar lo que ya existe.</strong> Entrar con la clave de Cuadra me ahorró un sistema de usuarios nuevo.</li>
+    <li><strong>Fijar lo que no debe cambiar.</strong> Una dirección de destino escrita en el servidor elimina toda una clase de errores.</li>
+    <li><strong>Un solo camino feliz.</strong> Subir, llenar, enviar. Todo lo demás vive en un engranaje aparte.</li>
+  </ul>
+
+  <p>El código de esta herramienta es privado. Si necesitas algo parecido para tu seguro, <a href="../#contacto">escríbeme</a>.</p>
+  <hr>
+  <p class="foot">Hecho en Panamá.</p>
+</main>
+<main class="post" lang="en">
+  <div class="meta">November 2026 · Panama</div>
+  <h1>Claims: an insurance form you fill from your phone</h1>
+  <p class="lede">Every claim to my health insurer asked for the same thing: fill in a form, attach the prescriptions and the invoices, turn it all into PDFs and e-mail it in the right order. I did it from my phone with three different apps and I always forgot something. I turned it into a single page.</p>
+
+  <h2>The problem</h2>
+  <p>A claim isn't one document: it's three. There is a form, an order and the invoice pack, and each goes in its own PDF. On top of that, the prescription had to look like a scanned sheet, not a crooked photo. Every time it meant building and renaming files by hand, and a mistake cost a rejection and weeks of waiting.</p>
+
+  <h2>A page for the iPhone</h2>
+  <p>I upload the photos or PDFs of the prescriptions and invoices, fill in the form once and the page generates the three PDFs. Then it e-mails them, or gives me a ZIP if I'd rather check them first. The whole journey fits on a phone screen.</p>
+
+  <h2>The prescription as a scanned sheet</h2>
+  <p>The prescription comes out in black and white, on an A4 sheet, in a 10.5 × 16.5 cm box in the corner, as if it had been through a scanner. It's the same size as the prescriptions of my <a href="recetario.html">prescription pad</a>, so what comes out of one app drops cleanly into the other.</p>
+
+  <h2>The PDFs are built in the browser</h2>
+  <p>The interface is a single file, and the PDFs are read and assembled in the browser itself with <code>pdf.js</code> and <code>pdf-lib</code>. The server is a Python program with no dependencies that does two things: check who you are and send the e-mail. Fewer pieces, fewer things to break.</p>
+
+  <h2>Built so nobody can misuse it</h2>
+  <ul>
+    <li><strong>It signs in with the same username and password as <a href="cuadra.html">Cuadra</a></strong> and only two people are allowed.</li>
+    <li><strong>The destination address is fixed on the server</strong>, not on the page. Even if someone altered the page, they couldn't send an e-mail anywhere else.</li>
+    <li><strong>The e-mail password</strong> is stored on the server with restricted permissions and is never sent back to the page.</li>
+    <li><strong>A test mode</strong> builds the e-mail but doesn't send it, so I can rehearse safely.</li>
+  </ul>
+
+  <h2>What's missing</h2>
+  <p>This page's black-and-white filter has a flaw that I already fixed in <a href="scanner.html">Scanner Effect</a> (a large dark area stays white) and I haven't brought it back here yet. And restoring the whole service on a new server is written down but I haven't rehearsed it.</p>
+
+  <h2>What I learned</h2>
+  <ul>
+    <li><strong>Reuse what already exists.</strong> Signing in with Cuadra's password saved me a new user system.</li>
+    <li><strong>Pin down what mustn't change.</strong> A destination address written into the server removes a whole class of mistakes.</li>
+    <li><strong>One happy path.</strong> Upload, fill in, send. Everything else lives behind a gear icon.</li>
+  </ul>
+
+  <p>This tool's code is private. If you need something like it for your insurer, <a href="../#contacto">write to me</a>.</p>
+  <hr>
+  <p class="foot">Made in Panama.</p>
+</main>
+</div>
+<script src="../assets/fx.js"></script>
+</body></html>
