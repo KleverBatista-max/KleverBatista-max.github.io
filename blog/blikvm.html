@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="es" data-en-title="BliKVM · John Batista"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BliKVM · John Batista</title>
+<meta name="description" content="Un KVM por IP que vigila y maneja un PC remoto: compara la pantalla con una referencia y lee texto con OCR.">
+<meta name="theme-color" content="#0f1418">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../assets/icon-192.png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="../assets/fx.css">
+<script>try{var l=localStorage.getItem('lang')||((navigator.language||'es').slice(0,2)==='es'?'es':'en');document.documentElement.lang=l;document.documentElement.classList.add('l-'+l)}catch(e){}</script>
+</head>
+<body><div class="page">
+<div class="bar"><a class="brand" href="../" aria-label="JK, inicio"><img class="seal" src="../assets/logo.png" alt="" width="30" height="30"></a><button class="lang" type="button" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span><span data-l="en">EN</span></button></div>
+<main class="post" lang="es">
+  <div class="meta">Noviembre 2026 · Panamá</div>
+  <h1>BliKVM: vigilar y manejar un PC remoto</h1>
+  <p class="lede">Un BliKVM es un KVM por IP: una cajita con una Raspberry Pi que se conecta al video, al USB y al teclado y ratón de otra computadora, y te deja verla y manejarla por la red como si estuvieras sentado frente a ella. Lo usé para que un PC remoto estuviera en el estado correcto cada mañana sin que yo tuviera que tocarlo.</p>
+
+  <h2>Primer problema: la hora</h2>
+  <p>Lo primero que falló fue lo más tonto: el BliKVM no conservaba la hora al reiniciarse y volvía a 1970. Lo arreglé con un servicio de systemd que sincroniza con <code>ntpdate</code> al arrancar y escribe el resultado en el reloj de hardware. La trampa: como el aparato estaba en mi red Tailscale, usaba el DNS de Tailscale y la sincronización fallaba; el script tuvo que usar un DNS público.</p>
+
+  <h2>Hablarle a la API</h2>
+  <p>El BliKVM tiene una API web. Con un inicio de sesión que devuelve un token se puede pedir una captura de la pantalla remota (<code>/api/video/screenshot</code>), mover el ratón y hacer clic (<code>/api/mouse/event</code>) y escribir texto en el teclado remoto (<code>/api/hid/paste</code>). Mi primer script entraba, hacía clic en un botón y, dos segundos después, en otro, en coordenadas fijas.</p>
+
+  <h2>¿Está la pantalla como debe?</h2>
+  <p>Hacer clic a ciegas es frágil: si la pantalla remota no es la que esperas, el clic cae donde no debe. Así que antes de actuar quería saber si la pantalla era la correcta. Comparar la captura completa con una de referencia no sirve: un cursor que parpadea o un reloj bastan para que «cambie». Lo resolví comparando por <strong>regiones</strong>: elijo unas zonas (un cuadro de login, una barra de título) y en cada una calculo un SSIM por bloques descartando los dos peores, una correlación de histograma de color y qué fracción de píxeles cambió. Si cambió más del 1.5 % la región falla sin discusión. Una región pasa con un puntaje de 0.72 y la pantalla es la correcta si pasa la mayoría. También busco la zona con un margen de ±3 píxeles, porque la captura no siempre cae al píxel exacto.</p>
+
+  <h2>Leer texto con OCR</h2>
+  <p>A veces la referencia visual no basta: lo que importa es que aparezca una palabra. Con Tesseract leo una región de la pantalla (la agrando al doble, la paso a gris, subo el contraste y la binarizo) y compruebo si el texto esperado está. Si no está, el script termina con error y ejecuta lo que yo le diga. Yo encendía una bombilla inteligente como luz de aviso.</p>
+
+  <h2>Todos los días, solo</h2>
+  <p>Un cron de lunes a viernes lanzaba cada mañana la comparación y, unos minutos después, la revisión por OCR, y dejaba el resultado en un log.</p>
+
+  <h2>Lo que dejé fuera a propósito</h2>
+  <p>Llegué a armar un «trabajador» que leía un Gmail y ejecutaba un script cuando el asunto decía <code>RUN:</code> seguido de su nombre. Funcionaba, pero es una puerta abierta: cualquiera que pueda escribirme un correo podría ejecutar cosas en la Raspberry. No lo publiqué; si lo retomo, será con una lista de scripts permitidos y de remitentes.</p>
+
+  <h2>Lo que perdí y lo que aprendí</h2>
+  <p>Un día borré la Raspberry sin tener copia. Sobrevivieron mis registros de todo lo que fui escribiendo y con ellos reconstruí el proyecto. Aproveché para hacerlo bien: el cliente de la API, el comparador y el OCR son ahora un kit limpio, con las credenciales fuera del código y 15 pruebas que corren sin el aparato, contra un BliKVM falso que imita la API. Aprendí dos cosas: que la copia de seguridad se hace antes, y que una prueba que solo pasa no demuestra nada. Por eso rompí el código a propósito para comprobar que las pruebas fallaban.</p>
+
+  <h2>El código</h2>
+  <p><a href="https://github.com/KleverBatista-max/blikvm-remote-automation">blikvm-remote-automation</a>, con licencia MIT. Desde la reconstrucción no lo he vuelto a correr contra un BliKVM real, y el README lo dice.</p>
+  <hr>
+  <p class="foot">Hecho en Panamá.</p>
+</main>
+<main class="post" lang="en">
+  <div class="meta">November 2026 · Panama</div>
+  <h1>BliKVM: watching and driving a remote PC</h1>
+  <p class="lede">A BliKVM is a KVM over IP: a small box with a Raspberry Pi that plugs into another computer's video, USB and keyboard/mouse, and lets you see and control it over the network as if you were sitting in front of it. I used it so a remote PC would be in the right state every morning without me touching it.</p>
+
+  <h2>First problem: the clock</h2>
+  <p>The first thing to break was the silliest: the BliKVM didn't keep the time across reboots and went back to 1970. I fixed it with a systemd service that syncs with <code>ntpdate</code> at boot and writes the result to the hardware clock. The catch: because the device was on my Tailscale network it used Tailscale's DNS and the sync failed, so the script had to use a public DNS.</p>
+
+  <h2>Talking to the API</h2>
+  <p>The BliKVM has a web API. After a login that returns a token you can ask for a screenshot of the remote screen (<code>/api/video/screenshot</code>), move the mouse and click (<code>/api/mouse/event</code>) and type on the remote keyboard (<code>/api/hid/paste</code>). My first script logged in, clicked a button and, two seconds later, another one, at fixed coordinates.</p>
+
+  <h2>Is the screen the way it should be?</h2>
+  <p>Clicking blindly is fragile: if the remote screen isn't the one you expect, the click lands where it shouldn't. So before acting I wanted to know whether the screen was the right one. Comparing the whole screenshot with a reference doesn't work: a blinking cursor or a clock is enough to make it "change". I solved it by comparing <strong>regions</strong>: I pick a few zones (a login box, a title bar) and for each one I compute a block-wise SSIM that drops the two worst blocks, a colour-histogram correlation and the fraction of pixels that changed. If more than 1.5 % changed, the region fails, no argument. A region passes with a score of 0.72 and the screen is the right one if most regions pass. I also search the zone within ±3 pixels, because the capture doesn't always land on the exact pixel.</p>
+
+  <h2>Reading text with OCR</h2>
+  <p>Sometimes the visual reference isn't enough: what matters is that a word shows up. With Tesseract I read a region of the screen (doubled in size, converted to grey, contrast boosted and thresholded) and check whether the expected text is there. If it isn't, the script exits with an error and runs whatever I tell it to. I used to switch on a smart bulb as a warning light.</p>
+
+  <h2>Every day, on its own</h2>
+  <p>A weekday cron job ran the comparison every morning and, a few minutes later, the OCR check, and left the result in a log.</p>
+
+  <h2>What I left out on purpose</h2>
+  <p>I once built a "worker" that read a Gmail inbox and ran a script when the subject said <code>RUN:</code> followed by its name. It worked, but it is an open door: anyone who can e-mail me could run things on the Raspberry. I didn't publish it; if I pick it up again it will have a list of allowed scripts and senders.</p>
+
+  <h2>What I lost and what I learned</h2>
+  <p>One day I wiped the Raspberry without a backup. My logs of everything I had written survived, and I rebuilt the project from them. I took the chance to do it properly: the API client, the comparison and the OCR are now a clean kit, with credentials kept out of the code and 15 tests that run without the device, against a fake BliKVM that imitates the API. I learned two things: the backup is made beforehand, and a test that only ever passes proves nothing. That's why I broke the code on purpose to check that the tests failed.</p>
+
+  <h2>The code</h2>
+  <p><a href="https://github.com/KleverBatista-max/blikvm-remote-automation">blikvm-remote-automation</a>, MIT licensed. I haven't run it against a real BliKVM since the rebuild, and the README says so.</p>
+  <hr>
+  <p class="foot">Made in Panama.</p>
+</main>
+</div>
+<script src="../assets/fx.js"></script>
+</body></html>
