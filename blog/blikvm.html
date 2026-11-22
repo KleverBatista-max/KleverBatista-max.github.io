@@ -27,7 +27,10 @@
   <h2>Hablarle a la API</h2>
   <p>El BliKVM tiene una API web. Con un inicio de sesión que devuelve un token se puede pedir una captura de la pantalla remota (<code>/api/video/screenshot</code>), mover el ratón y hacer clic (<code>/api/mouse/event</code>) y escribir texto en el teclado remoto (<code>/api/hid/paste</code>). Mi primer script entraba, hacía clic en un botón y, dos segundos después, en otro, en coordenadas fijas.</p>
 
-  <h2>¿Está la pantalla como debe?</h2>
+    <h2>De dónde salen las coordenadas</h2>
+  <p>Los clics y las regiones usan píxeles de la captura. Para saber cuáles, saco una captura y le dibujo encima una cuadrícula con las coordenadas escritas cada cien píxeles: leo el centro del botón y listo. Para una región leo la esquina superior izquierda, el ancho y el alto, y recorto esa zona de la referencia y de la pantalla actual, una al lado de la otra, para ver exactamente lo que va a ver el comparador. En mi pantalla de 1920×1080 las coordenadas de la captura coincidían con las del clic. Esa herramienta, <code>calibrate.py</code>, también está en el repo.</p>
+
+<h2>¿Está la pantalla como debe?</h2>
   <p>Hacer clic a ciegas es frágil: si la pantalla remota no es la que esperas, el clic cae donde no debe. Así que antes de actuar quería saber si la pantalla era la correcta. Comparar la captura completa con una de referencia no sirve: un cursor que parpadea o un reloj bastan para que «cambie». Lo resolví comparando por <strong>regiones</strong>: elijo unas zonas (un cuadro de login, una barra de título) y en cada una calculo un SSIM por bloques descartando los dos peores, una correlación de histograma de color y qué fracción de píxeles cambió. Si cambió más del 1.5 % la región falla sin discusión. Una región pasa con un puntaje de 0.72 y la pantalla es la correcta si pasa la mayoría. También busco la zona con un margen de ±3 píxeles, porque la captura no siempre cae al píxel exacto.</p>
 
   <h2>Leer texto con OCR</h2>
@@ -40,7 +43,7 @@
   <p>Llegué a armar un «trabajador» que leía un Gmail y ejecutaba un script cuando el asunto decía <code>RUN:</code> seguido de su nombre. Funcionaba, pero es una puerta abierta: cualquiera que pueda escribirme un correo podría ejecutar cosas en la Raspberry. No lo publiqué; si lo retomo, será con una lista de scripts permitidos y de remitentes.</p>
 
   <h2>Lo que perdí y lo que aprendí</h2>
-  <p>Un día borré la Raspberry sin tener copia. Sobrevivieron mis registros de todo lo que fui escribiendo y con ellos reconstruí el proyecto. Aproveché para hacerlo bien: el cliente de la API, el comparador y el OCR son ahora un kit limpio, con las credenciales fuera del código y 15 pruebas que corren sin el aparato, contra un BliKVM falso que imita la API. Aprendí dos cosas: que la copia de seguridad se hace antes, y que una prueba que solo pasa no demuestra nada. Por eso rompí el código a propósito para comprobar que las pruebas fallaban.</p>
+  <p>Un día borré la Raspberry sin tener copia. Sobrevivieron mis registros de todo lo que fui escribiendo y con ellos reconstruí el proyecto. Aproveché para hacerlo bien: el cliente de la API, el comparador y el OCR son ahora un kit limpio, con las credenciales fuera del código y 23 pruebas que corren sin el aparato, contra un BliKVM falso que imita la API. Aprendí dos cosas: que la copia de seguridad se hace antes, y que una prueba que solo pasa no demuestra nada. Por eso rompí el código a propósito para comprobar que las pruebas fallaban.</p>
 
   <h2>El código</h2>
   <p><a href="https://github.com/KleverBatista-max/blikvm-remote-automation">blikvm-remote-automation</a>, con licencia MIT. Desde la reconstrucción no lo he vuelto a correr contra un BliKVM real, y el README lo dice.</p>
@@ -58,7 +61,10 @@
   <h2>Talking to the API</h2>
   <p>The BliKVM has a web API. After a login that returns a token you can ask for a screenshot of the remote screen (<code>/api/video/screenshot</code>), move the mouse and click (<code>/api/mouse/event</code>) and type on the remote keyboard (<code>/api/hid/paste</code>). My first script logged in, clicked a button and, two seconds later, another one, at fixed coordinates.</p>
 
-  <h2>Is the screen the way it should be?</h2>
+    <h2>Where the coordinates come from</h2>
+  <p>Clicks and regions use pixels of the screenshot. To find them, I take a screenshot and draw a grid over it with the coordinates written every hundred pixels: I read the centre of the button and that's it. For a region I read the top-left corner, the width and the height, and crop that zone from the reference and from the current screen, side by side, to see exactly what the comparison will see. On my 1920×1080 screen the screenshot coordinates matched the click coordinates. That tool, <code>calibrate.py</code>, is in the repo too.</p>
+
+<h2>Is the screen the way it should be?</h2>
   <p>Clicking blindly is fragile: if the remote screen isn't the one you expect, the click lands where it shouldn't. So before acting I wanted to know whether the screen was the right one. Comparing the whole screenshot with a reference doesn't work: a blinking cursor or a clock is enough to make it "change". I solved it by comparing <strong>regions</strong>: I pick a few zones (a login box, a title bar) and for each one I compute a block-wise SSIM that drops the two worst blocks, a colour-histogram correlation and the fraction of pixels that changed. If more than 1.5 % changed, the region fails, no argument. A region passes with a score of 0.72 and the screen is the right one if most regions pass. I also search the zone within ±3 pixels, because the capture doesn't always land on the exact pixel.</p>
 
   <h2>Reading text with OCR</h2>
@@ -71,7 +77,7 @@
   <p>I once built a "worker" that read a Gmail inbox and ran a script when the subject said <code>RUN:</code> followed by its name. It worked, but it is an open door: anyone who can e-mail me could run things on the Raspberry. I didn't publish it; if I pick it up again it will have a list of allowed scripts and senders.</p>
 
   <h2>What I lost and what I learned</h2>
-  <p>One day I wiped the Raspberry without a backup. My logs of everything I had written survived, and I rebuilt the project from them. I took the chance to do it properly: the API client, the comparison and the OCR are now a clean kit, with credentials kept out of the code and 15 tests that run without the device, against a fake BliKVM that imitates the API. I learned two things: the backup is made beforehand, and a test that only ever passes proves nothing. That's why I broke the code on purpose to check that the tests failed.</p>
+  <p>One day I wiped the Raspberry without a backup. My logs of everything I had written survived, and I rebuilt the project from them. I took the chance to do it properly: the API client, the comparison and the OCR are now a clean kit, with credentials kept out of the code and 23 tests that run without the device, against a fake BliKVM that imitates the API. I learned two things: the backup is made beforehand, and a test that only ever passes proves nothing. That's why I broke the code on purpose to check that the tests failed.</p>
 
   <h2>The code</h2>
   <p><a href="https://github.com/KleverBatista-max/blikvm-remote-automation">blikvm-remote-automation</a>, MIT licensed. I haven't run it against a real BliKVM since the rebuild, and the README says so.</p>
