@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="es" data-en-title="Paquetes · John Batista"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paquetes · John Batista</title>
+<meta name="description" content="Una app para recibir paquetes de Estados Unidos, avisar por WhatsApp, entregar y cobrar, sin guardar de más.">
+<meta name="theme-color" content="#0f1418">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../assets/icon-192.png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="../assets/fx.css">
+<script>try{var l=localStorage.getItem('lang')||((navigator.language||'es').slice(0,2)==='es'?'es':'en');document.documentElement.lang=l;document.documentElement.classList.add('l-'+l)}catch(e){}</script>
+</head>
+<body><div class="page">
+<div class="bar"><a class="brand" href="../" aria-label="JK, inicio"><img class="seal" src="../assets/logo.png" alt="" width="30" height="30"></a><button class="lang" type="button" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span><span data-l="en">EN</span></button></div>
+<main class="post" lang="es">
+  <div class="meta">Noviembre 2026 · Panamá</div>
+  <h1>Paquetes: de un Excel a una app que avisa sola</h1>
+  <p class="lede">Tengo un negocio pequeño de paquetería: recibo en Miami las compras de mis clientes y se las entrego en Panamá. Durante meses lo llevé en un Excel. Cuando los paquetes dejaron de caber en una hoja armé una app para recibir, avisar, entregar y cobrar. Lleva pocos días en producción y ya la usa mi familia.</p>
+
+  <h2>El problema</h2>
+  <p>Cada día me hacía las mismas cuatro preguntas: ¿llegó?, ¿de quién es?, ¿ya le avisé?, ¿ya pagó? El Excel las contestaba si yo me acordaba de actualizarlo, y casi nunca lo hacía a tiempo. Quería que la respuesta saliera sola de lo que ya pasaba: una etiqueta que se escanea, un aviso que se manda, una entrega que se marca.</p>
+
+  <h2>Escanear la etiqueta con el teléfono</h2>
+  <p>Lo primero fue leer el código de barras de la etiqueta con la cámara del iPhone, sin instalar nada. La librería que usaba para los códigos QR casi no leía los códigos de barras de etiquetas reales: <strong>0 de 6</strong> en mi primera prueba. En vez de resignarme, cambié el motor por uno compilado a WebAssembly que corre en el propio navegador, y subió a <strong>5 de 6</strong>; la que faltó tenía el código doblado. También aprendí a ignorar lo que no es el paquete: el código que es solo el código postal y los internos de Amazon. Las fotos no se guardan.</p>
+
+  <h2>Leer, nunca escribir, el portal de la empresa de carga</h2>
+  <p>Los paquetes y las facturas ya viven en el portal de la empresa que me los trae. En vez de volver a escribirlos, la app los lee: los paquetes de los últimos 21 días y las facturas, con las líneas de cada una. Dos reglas me ahorraron muchos líos:</p>
+  <ul>
+    <li><strong>La factura es el lote.</strong> Si llega un paquete de una factura, llegan todos; al escanear uno, la app trae el lote completo.</li>
+    <li><strong>El costo se reparte por libra.</strong> Los recargos y sobrecargos de la factura se dividen entre los paquetes según su peso, así que cada paquete sabe cuánto costó de verdad.</li>
+  </ul>
+  <p>Y una regla de convivencia: lo que la app trae nunca pisa lo que yo ya puse a mano, como el cliente de cada paquete.</p>
+
+  <h2>Cinco pasos que el cliente entiende</h2>
+  <p>Cada paquete pasa por <strong>En Miami</strong>, <strong>Llegó a Panamá</strong>, <strong>En camino</strong>, <strong>Listo para entrega</strong> y <strong>Entregado</strong>. El cliente no necesita llamarme: escribe su número de seguimiento en una página pública y ve en qué paso va, sin clave, sin nombres y sin montos, con un límite de consultas por dirección para que nadie la use de más. Si un paquete lleva más de siete días en Miami sin factura, la app me avisa; los envíos marítimos, que tardan de quince a veinte días, no disparan esa alarma y la página lo explica.</p>
+
+  <h2>Un WhatsApp que solo habla</h2>
+  <p>La parte que más pensé no fue técnica, fue de privacidad. El WhatsApp automático <strong>solo envía</strong>: no lee ni contesta mensajes, se conecta unos segundos por cada envío y no deja historial. La foto de la entrega se achica en el teléfono, pasa por un archivo temporal y se borra. Uso un número aparte del mío, porque es un cliente no oficial y WhatsApp podría bloquearlo, y todo se apaga con un solo interruptor. La regla fue clara desde el principio: <em>lo que no se guarda no se puede filtrar</em>.</p>
+
+  <h2>Hecho para equivocarse</h2>
+  <p>«Avisado», «Entregado» y «Cobrado» son casillas por paquete, y se desmarcan con un toque. Quien se equivoca lo corrige en un segundo, sin pedirme permiso. Los precios, el WhatsApp y el respaldo viven en una pantalla de ajustes aparte, para que lo diario quede limpio.</p>
+
+  <h2>Un despliegue con candado</h2>
+  <p>Trabajo desde varias computadoras, y una copia vieja puede pisar un cambio nuevo. Por eso el servidor se niega a instalar si las pruebas fallan o si la copia que subo no trae el sello del último despliegue. Y todo se respalda cada día, de forma que mudarlo a otra máquina sea tan fácil como cambiar la tarjeta de una Raspberry.</p>
+
+  <h2>De aquí salieron dos proyectos más</h2>
+  <p>Junto a la app puse una página para hacer facturas en PDF y un filtro para que las fotos de las facturas parecieran escaneadas. Las dos piezas me gustaron tanto que las convertí en proyectos aparte, sin ningún dato del negocio: el <a href="facturas.html">generador de facturas</a> y el <a href="scanner.html">Scanner Effect</a>.</p>
+
+  <h2>Lo que aprendí</h2>
+  <ul>
+    <li><strong>Medir antes de decidir.</strong> «0 de 6» me dio una razón concreta para cambiar de herramienta, y «5 de 6» una para parar.</li>
+    <li><strong>No guardar lo que no necesito.</strong> Sin historial de WhatsApp, sin fotos, sin cuentas de pago: la app es más simple y no hay nada que cuidar.</li>
+    <li><strong>Que lo que se hace a mano se pueda deshacer.</strong> Las personas se equivocan; el sistema tiene que perdonar.</li>
+  </ul>
+
+  <p>El código de esta app es privado, porque es la herramienta de mi negocio. Si te interesa una demostración o algo parecido para el tuyo, <a href="../#contacto">escríbeme</a>.</p>
+  <hr>
+  <p class="foot">Hecho en Panamá.</p>
+</main>
+<main class="post" lang="en">
+  <div class="meta">November 2026 · Panama</div>
+  <h1>Packages: from a spreadsheet to an app that notifies by itself</h1>
+  <p class="lede">I run a small package-forwarding business: I receive my customers' purchases in Miami and deliver them in Panama. For months I kept it in a spreadsheet. When the packages stopped fitting on a sheet I built an app to receive, notify, deliver and get paid. It has been in production for only a few days and my family already uses it.</p>
+
+  <h2>The problem</h2>
+  <p>Every day I asked myself the same four questions: did it arrive, whose is it, did I tell them, did they pay? The spreadsheet answered them if I remembered to update it, and I almost never did on time. I wanted the answer to come out on its own from what was already happening: a label that gets scanned, a message that gets sent, a delivery that gets ticked.</p>
+
+  <h2>Scanning the label with the phone</h2>
+  <p>First I had to read the label's barcode with the iPhone camera, with nothing to install. The library I used for QR codes barely read the barcodes of real labels: <strong>0 out of 6</strong> in my first test. Instead of settling, I swapped the engine for one compiled to WebAssembly that runs in the browser itself, and it went up to <strong>5 out of 6</strong>; the one it missed had a folded code. I also learned to ignore what isn't the package: the code that is just the ZIP code and Amazon's internal ones. Photos are not stored.</p>
+
+  <h2>Read, never write, the freight company's portal</h2>
+  <p>The packages and invoices already live in the portal of the company that brings them to me. Instead of typing them again, the app reads them: the packages of the last 21 days and the invoices, with each one's lines. Two rules saved me a lot of trouble:</p>
+  <ul>
+    <li><strong>The invoice is the lot.</strong> If one package of an invoice arrives, all of them do; when I scan one, the app brings the whole lot.</li>
+    <li><strong>Cost is split by the pound.</strong> The invoice's surcharges are divided among the packages by weight, so each package knows what it really cost.</li>
+  </ul>
+  <p>And a house rule: what the app pulls in never overwrites what I already entered by hand, such as each package's customer.</p>
+
+  <h2>Five steps the customer understands</h2>
+  <p>Every package goes through <strong>In Miami</strong>, <strong>Arrived in Panama</strong>, <strong>On its way</strong>, <strong>Ready for pickup</strong> and <strong>Delivered</strong>. The customer doesn't need to call me: they type their tracking number on a public page and see which step it is at, with no password, no names and no amounts, and with a query limit per address so nobody abuses it. If a package sits in Miami for more than seven days without an invoice, the app warns me; sea shipments, which take fifteen to twenty days, don't trigger that alarm and the page explains why.</p>
+
+  <h2>A WhatsApp that only talks</h2>
+  <p>The part I thought about most wasn't technical, it was about privacy. The automatic WhatsApp <strong>only sends</strong>: it doesn't read or answer messages, it connects for a few seconds per send and leaves no history. The delivery photo is shrunk on the phone, goes through a temporary file and is deleted. I use a separate number from mine, because it's an unofficial client and WhatsApp could block it, and everything switches off with a single toggle. The rule was clear from the start: <em>what you don't store can't leak</em>.</p>
+
+  <h2>Made to be wrong in</h2>
+  <p>"Notified", "Delivered" and "Paid" are per-package checkboxes, and they un-tick with one tap. Whoever makes a mistake fixes it in a second, without asking me. Prices, WhatsApp and backup live on a separate settings screen, so the daily work stays clean.</p>
+
+  <h2>A deploy with a lock</h2>
+  <p>I work from several computers, and an old copy can overwrite a new change. So the server refuses to install if the tests fail or if the copy I upload doesn't carry the stamp of the last deploy. And everything is backed up every day, so moving it to another machine is as easy as swapping a Raspberry's card.</p>
+
+  <h2>Two more projects came out of it</h2>
+  <p>Next to the app I put a page to make PDF invoices and a filter that makes photos of invoices look scanned. I liked both so much that I turned them into separate projects, with none of the business's data: the <a href="facturas.html">invoice generator</a> and <a href="scanner.html">Scanner Effect</a>.</p>
+
+  <h2>What I learned</h2>
+  <ul>
+    <li><strong>Measure before deciding.</strong> "0 out of 6" gave me a concrete reason to change tools, and "5 out of 6" one to stop.</li>
+    <li><strong>Don't store what I don't need.</strong> No WhatsApp history, no photos, no payment accounts: the app is simpler and there's nothing to guard.</li>
+    <li><strong>What's done by hand should be undoable.</strong> People make mistakes; the system has to forgive.</li>
+  </ul>
+
+  <p>This app's code is private, because it's my business's tool. If you want a demo or something similar for yours, <a href="../#contacto">write to me</a>.</p>
+  <hr>
+  <p class="foot">Made in Panama.</p>
+</main>
+</div>
+<script src="../assets/fx.js"></script>
+</body></html>
