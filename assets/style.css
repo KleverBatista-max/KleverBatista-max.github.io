@@ -119,3 +119,6 @@ pre.code code { background: none; padding: 0; font-size: inherit; }
 /* texto largo justificado */
 .post p, .post li { text-align: justify; text-justify: inter-word; hyphens: auto; -webkit-hyphens: auto; }
 .post .lede { text-align: left; }
+.shot { margin: 24px 0 28px; }
+.shot img { display: block; width: 100%; height: auto; border: 1px solid var(--rule); }
+.shot figcaption { font-size: 14px; color: var(--mute); margin-top: 8px; }
