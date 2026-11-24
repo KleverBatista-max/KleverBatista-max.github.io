@@ -72,6 +72,11 @@ flowchart LR
   <p>Ahí está el problema. Las facturas se acumulan durante meses, entre cientos de compras en varios bancos, y en marzo nadie se acuerda de cuál era de qué compra. Una factura que no aparece es plata que se queda en la mesa. Creo que esto debería importarle a cualquier panameño que declare, y casi nadie lo piensa hasta que ya es tarde. Cuadra no declara por mí ni da asesoría fiscal. Solo se encarga de que en marzo cada factura esté pegada a su compra y guardada, una carpeta por persona y por año.</p>
   <p>Así las pega. Cada factura electrónica trae un QR y un código único, el CUFE, y la DGI deja consultarla con cualquiera de los dos. Escaneo el QR y Cuadra baja la factura de la DGI. A veces todavía no está, porque el comercio puede mandarla al final del día, así que vuelve a buscarla a las 2 horas, al día siguiente, a los 3 días, a los 7 días y a fin de mes. Con la factura en mano busca su compra: el mismo monto exacto, con fecha a más o menos tres días. Si hay una sola candidata, la pega. Si hay varias, desempata por el parecido entre el emisor y el comercio, y si aun así duda no adivina: me lo deja en «Por revisar». Da igual si la factura sale a mi nombre o sin nombre: no la busca por el comprador, la busca por monto, fecha y comercio. La idea es tener todas las facturas a mano y un control de lo que gasto, para que en marzo ya esté todo reunido. Los detalles están en el <a href="https://github.com/KleverBatista-max/cuadra#las-facturas-por-qué-importan-y-cómo-se-pegan">README</a>.</p>
 
+  <figure class="shot">
+    <img src="../assets/cuadra-factura.png" alt="Abrir la compra, escanear el QR de la factura y ver la compra con Factura lista" width="1360" height="892" loading="lazy">
+    <figcaption>Se abre la compra, se escanea el QR y la compra queda con «Factura lista». Datos de demostración inventados.</figcaption>
+  </figure>
+
   <h2>Las facturas no mueven plata</h2>
   <p>Para declarar necesito las facturas, y en Panamá casi todas traen un QR de la DGI. Escaneo el QR y la app guarda la factura en Drive con un nombre ordenado. Después busca la transacción del banco que le corresponde: mismo monto, tres días de margen.</p>
   <p>Una factura nunca crea una transacción. Los saldos los mueven solo los movimientos reales del banco. Esa separación evitó muchos líos de contabilidad.</p>
@@ -99,6 +104,11 @@ flowchart LR
 
     <h2>Cambios a mano, pero con rastro</h2>
   <p>Casi nada se escribe a mano, pero a veces hace falta: en una cena de 30 dólares, 15 son de otra persona. Para eso no hay campos libres. Hay <strong>comandos fijos y probados</strong>: buscar un movimiento, registrar que alguien me debe una parte, registrar un abono, marcar un movimiento y deshacer. Cada uno hace una copia de la base antes de tocar nada y deja en una bitácora qué se pidió y cómo estaba el dato antes y después, así que cualquier cambio se puede deshacer y nunca tengo que adivinar por qué pasó algo. No inventan reglas: usan lo que la app ya tiene, un movimiento normal con una nota. Y los puedo usar desde el teléfono.</p>
+
+  <figure class="shot">
+    <img src="../assets/cuadra-dividir.png" alt="Dividir una cena entre tres y ver el resultado en Por cobrar" width="960" height="892" loading="lazy">
+    <figcaption>Una cuenta dividida entre tres y el resultado en Por cobrar. Datos de demostración inventados.</figcaption>
+  </figure>
 
 <h2>Lo que aprendí construyéndolo</h2>
   <ul>
@@ -176,6 +186,11 @@ flowchart LR
   <p>That's the problem. Invoices pile up over months, among hundreds of purchases across several banks, and by March nobody remembers which one belonged to which purchase. A missing invoice is money left on the table. I think this should matter to any Panamanian who files, and almost nobody thinks about it until it's too late. Cuadra doesn't file for me and gives no tax advice. It just makes sure that in March every invoice is attached to its purchase and stored, one folder per person per year.</p>
   <p>Here is how it attaches them. Each electronic invoice carries a QR and a unique code, the CUFE, and the DGI lets you look it up with either one. I scan the QR and Cuadra downloads the invoice from the DGI. Sometimes it isn't there yet, because the merchant may send it at the end of the day, so it checks again after 2 hours, the next day, after 3 days, after 7 days and at month end. With the invoice in hand it looks for its purchase: the exact same amount, dated within about three days. If there is one candidate, it attaches it. If there are several, it breaks the tie by how much the issuer's name resembles the merchant's, and if it still can't decide it doesn't guess: it leaves it in "To review" for me. It doesn't matter whether the invoice is in my name or has no name: it doesn't look for the buyer, it looks for amount, date and merchant. The idea is to have every invoice at hand and a record of what I spend, so that in March everything is already gathered. The details are in the <a href="https://github.com/KleverBatista-max/cuadra#las-facturas-por-qu%C3%A9-importan-y-c%C3%B3mo-se-pegan">README</a>.</p>
 
+  <figure class="shot">
+    <img src="../assets/cuadra-factura.png" alt="Opening the purchase, scanning the invoice QR and seeing the purchase marked as invoice ready" width="1360" height="892" loading="lazy">
+    <figcaption>Open the purchase, scan the QR, and the purchase shows “Factura lista” (invoice ready). Made-up demo data.</figcaption>
+  </figure>
+
   <h2>Invoices don't move money</h2>
   <p>I need invoices for my taxes, and in Panama almost all of them carry a QR code from the DGI, the tax authority. I scan the QR and the app saves the invoice to Drive with a tidy name. Then it looks for the matching bank transaction: same amount, three days of margin.</p>
   <p>An invoice never creates a transaction. Only real bank movements change balances. That separation saved me a lot of accounting headaches.</p>
@@ -203,6 +218,11 @@ flowchart LR
 
     <h2>Changes by hand, but with a trail</h2>
   <p>Almost nothing is typed by hand, but sometimes it's needed: of a 30-dollar dinner, 15 belong to someone else. For that there are no free-form fields. There are <strong>fixed, tested commands</strong>: find a movement, record that someone owes me a share, record a payment, mark a movement and undo. Each one makes a copy of the database before touching anything and leaves in a log what was asked and how the data looked before and after, so any change can be undone and I never have to guess why something happened. They don't invent rules: they use what the app already has, a normal movement with a note. And I can use them from my phone.</p>
+
+  <figure class="shot">
+    <img src="../assets/cuadra-dividir.png" alt="Splitting a dinner three ways and seeing the result in Receivables" width="960" height="892" loading="lazy">
+    <figcaption>A bill split three ways and the result under Por cobrar (receivables). Made-up demo data.</figcaption>
+  </figure>
 
 <h2>What I learned building it</h2>
   <ul>
